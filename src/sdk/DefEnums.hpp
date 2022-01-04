@@ -52,6 +52,8 @@ enum item_definition_index : int
 	item_cutters,
 	weapon_healthshot,
 	weapon_knife_t = 59,
+	weapon_m4a1_silencer,
+	weapon_usp_silencer,
 	weapon_cz75a = 63,
 	weapon_revolver,
 	weapon_tagrenade = 68,
@@ -86,7 +88,5 @@ enum item_definition_index : int
 	weapon_knife_outdoor,
 	weapon_knife_stiletto,
 	weapon_knife_widowmaker,
-	weapon_knife_skeleton = 525,
-	weapon_m4a1_silencer = 262204,
-	weapon_usp_silencer	
+	weapon_knife_skeleton = 525
 };

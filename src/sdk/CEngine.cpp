@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <array>
 #include <MemMan/MemMan.hpp>
 #include "../helpers/offsets.hpp"
 #include "../settings/globals.hpp"
@@ -11,6 +12,16 @@ bool CEngine::IsConnected()
 bool CEngine::GetSendPackets()
 {
 	return g_Mem->read<bool>(this->addr + offsets::signatures::dwbSendPackets);
+}
+
+char* CEngine::GetGameDirectory()
+{
+	return g_Mem->read<std::array<char, 0x120>>(this->addr + offsets::signatures::dwGameDir).data();
+}
+
+char* CEngine::GetMapDirectory()
+{
+	return g_Mem->read<std::array<char, 0x120>>(this->GetClientState() + offsets::signatures::dwClientState_MapDirectory).data();
 }
 
 int CEngine::GetModelAmbientMin()
@@ -38,22 +49,22 @@ Vector2 CEngine::GetClientState_ViewAngles()
 	return g_Mem->read<Vector2>(this->GetClientState() + offsets::signatures::dwClientState_ViewAngles);
 }
 
-void CEngine::Set(const uintptr_t addr)
+void CEngine::Set(uintptr_t val)
 {
-	this->addr = addr;
+	this->addr = val;
 }
 
-void CEngine::SetModelAmbientMin(const int val)
+void CEngine::SetModelAmbientMin(int val)
 {
 	g_Mem->write<int>(this->addr + offsets::signatures::model_ambient_min, val);
 }
 
-void CEngine::SetSendPackets(const bool val)
+void CEngine::SetSendPackets(bool val)
 {
 	g_Mem->write<bool>(this->addr + offsets::signatures::dwbSendPackets, val);
 }
 
-void CEngine::SetClientState_ViewAngles(const Vector2& val)
+void CEngine::SetClientState_ViewAngles(Vector2& val)
 {
 	g_Mem->write<Vector2>(this->GetClientState() + offsets::signatures::dwClientState_ViewAngles, val);
 }

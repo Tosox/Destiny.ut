@@ -7,14 +7,14 @@ class CClient
 {
 public:
 	bool IsMouseEnabled();
-	GlowStruct_t GetGlowStruct(const int glowIndex);
+	GlowStruct_t GetGlowStruct(int glowIndex);
 	uintptr_t Get();
 	uintptr_t GetLocalPlayer();
 	uintptr_t GetGlowObjectManager();
-	uintptr_t GetEntityFromList(const int i);
+	uintptr_t GetEntityFromList(int i);
 
-	void Set(const uintptr_t addr);
-	void SetGlowStruct(const int glowIndex, const GlowStruct_t& glowStruct);
+	void Set(uintptr_t val);
+	void SetGlowStruct(int glowIndex, GlowStruct_t& glowStruct);
 	void DoForceJump();
 	void DoForceAttack();
 	void DoForceAttack2();

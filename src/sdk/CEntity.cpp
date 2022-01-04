@@ -99,7 +99,7 @@ uintptr_t CEntity::GetBoneMatrix()
 	return g_Mem->read<uintptr_t>(this->addr + offsets::netvars::m_dwBoneMatrix);
 }
 
-Vector3 CEntity::GetBoneById(const int bone)
+Vector3 CEntity::GetBoneById(int bone)
 {
 	uintptr_t bonePtr = this->GetBoneMatrix();
 	Vector3 bonePosition{};
@@ -119,17 +119,17 @@ Vector3 CEntity::GetVelocity()
 	return g_Mem->read<Vector3>(this->addr + offsets::netvars::m_vecVelocity);
 }
 
-void CEntity::Set(const uintptr_t addr)
+void CEntity::Set(uintptr_t val)
 {
-	this->addr = addr;
+	this->addr = val;
 }
 
-void CEntity::SetFlashDuration(const float val)
+void CEntity::SetFlashDuration(float val)
 {
 	g_Mem->write<float>(this->addr + offsets::netvars::m_flFlashDuration, val);
 }
 
-void CEntity::SetSpotted(const bool val)
+void CEntity::SetSpotted(bool val)
 {
 	g_Mem->write<bool>(this->addr + offsets::netvars::m_bSpotted, val);
 }

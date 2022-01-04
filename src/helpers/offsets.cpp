@@ -15,6 +15,7 @@ static void read_value(const nlohmann::json& src, T& dest)
 
 void offsets::InitOffsets()
 {
+	// Check offsets file
 	std::ifstream input_file{ XorStr("offsets.json") };
 	if (!input_file.good())
 		throw std::invalid_argument(XorStr("Invalid offsets.json file"));
@@ -32,9 +33,11 @@ void offsets::InitOffsets()
 	read_value(json[XorStr("signatures")][XorStr("dwForceAttack2")], offsets::signatures::dwForceAttack2);
 	read_value(json[XorStr("signatures")][XorStr("dwbSendPackets")], offsets::signatures::dwbSendPackets);
 	read_value(json[XorStr("signatures")][XorStr("model_ambient_min")], offsets::signatures::model_ambient_min);
+	read_value(json[XorStr("signatures")][XorStr("dwGameDir")], offsets::signatures::dwGameDir);
 	read_value(json[XorStr("signatures")][XorStr("dwClientState")], offsets::signatures::dwClientState);
 	read_value(json[XorStr("signatures")][XorStr("dwClientState_State")], offsets::signatures::dwClientState_State);
 	read_value(json[XorStr("signatures")][XorStr("dwClientState_ViewAngles")], offsets::signatures::dwClientState_ViewAngles);
+	read_value(json[XorStr("signatures")][XorStr("dwClientState_MapDirectory")], offsets::signatures::dwClientState_MapDirectory);
 	read_value(json[XorStr("signatures")][XorStr("m_bDormant")], offsets::signatures::m_bDormant);
 
 	read_value(json[XorStr("netvars")][XorStr("m_bIsDefusing")], offsets::netvars::m_bIsDefusing);

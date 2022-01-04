@@ -15,6 +15,7 @@ struct EntityList_t
 
 void HandleBrightness()
 {
+	// Only change brightness once
 	static float tBrightness = NULL;
 
 	if (tBrightness != g_Options.Visuals.World.Brightness)
@@ -37,6 +38,7 @@ void HandleChams(CEntity& entity)
 	ClrRender_t clrRender{};
 	Color clrRenderColor{};
 
+	// Color player depending on team
 	if (g_LocalPlayer.GetTeamNum() == entity.GetTeamNum())
 	{
 		if (!g_Options.Visuals.Chams.Teammates)
@@ -72,9 +74,10 @@ void HandleGlow(CEntity& entity)
 	GlowStruct_t glowStruct = g_Client.GetGlowStruct(glowIndex);
 	Color glowColor{};
 
+	// Color player depending on different flags
 	if (g_LocalPlayer.GetTeamNum() == entity.GetTeamNum())
 	{
-		if (!g_Options.Visuals.Glow.Teammates)
+		if (g_Options.Visuals.Glow.Teammates)
 			return;
 		glowColor = g_Options.Colors.Glow.Teammates;
 	}
@@ -127,6 +130,4 @@ void Features::Visuals()
 		if (g_Options.Visuals.Chams.Enable)
 			HandleChams(EntityList.entity[i]);
 	}
-
-	Sleep(1);
 }

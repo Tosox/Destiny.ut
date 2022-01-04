@@ -7,6 +7,7 @@
 #include "../menu.hpp"
 #include "../settings/globals.hpp"
 
+// Generate random window name
 std::string Utils::random_string(int length)
 {
     // Init the randomizer
@@ -25,6 +26,16 @@ std::string Utils::random_string(int length)
     std::string str(length, 0);
     std::generate_n(str.begin(), length, randchar);
     return str;
+}
+
+// Convert between char* and wchar_t*
+const wchar_t* Utils::GetWideChar(const char* str)
+{
+    size_t len;
+    const size_t szStr = strlen(str) + 1;
+    wchar_t* wstr = new wchar_t[szStr];
+    mbstowcs_s(&len, wstr, szStr,str, szStr - 1);
+    return wstr;
 }
 
 // Get CS:GO window handle

@@ -7,8 +7,7 @@
 
 #define M_PI 3.14159265358979323846f
 #define UNITS_TO_METERS 0.0254f
-#define PERCENT_TO_FLOAT 100
-#define RCS_RANGE 2
+#define RCS_RANGE 2.0f
 #define KEY_DOWN 0x8000
 #define LOWEST_LOCAL_BONE_INDEX 3
 
@@ -24,18 +23,20 @@ CEntity& ClosestEnemy()
 	float closest = FLT_MAX;
 	int closestIndex = -1;
 
-	static CEntity target{};
 	for (short i = 0; i < (g_Options.Developer.Use32EntityLoop ? 32 : MAX_PLAYERS); ++i)
 	{
-		target.Set(g_Client.GetEntityFromList(i));
+		entity.Set(g_Client.GetEntityFromList(i));
 
-		if (target.Get() == g_LocalPlayer.Get())
+		// Check entity and flags
+		if (g_Client.IsMouseEnabled())
 			continue;
-		if (!target.IsValid()) 
+		if (entity.Get() == g_LocalPlayer.Get())
 			continue;
-		if ((target.GetTeamNum() == g_LocalPlayer.GetTeamNum()) && (!g_Options.Legit.Aimbot.Deathmatch))
+		if (!entity.IsValid())
 			continue;
-		if ((!target.IsSpottedBy(g_LocalPlayer) && (g_Options.Legit.Aimbot.Visible)))
+		if ((entity.GetTeamNum() == g_LocalPlayer.GetTeamNum()) && (!g_Options.Legit.Aimbot.Deathmatch))
+			continue;
+		if ((!entity.IsSpottedBy(g_LocalPlayer) && (g_Options.Legit.Aimbot.Visible)))
 			continue;
 		if ((g_LocalPlayer.GetActiveWeapon().IsSniper()) && (g_Options.Legit.Aimbot.Scoped) && (!g_LocalPlayer.IsScoped()))
 			continue;
@@ -44,7 +45,7 @@ CEntity& ClosestEnemy()
 		if ((!g_LocalPlayer.GetFlags()) && (g_Options.Legit.Aimbot.InAir))
 			continue;
 
-		float distance = g_LocalPlayer.GetOrigin().to(target.GetOrigin()).mag();
+		float distance = g_LocalPlayer.GetOrigin().to(entity.GetOrigin()).mag();
 		if (distance < closest)
 		{
 			closest = distance;
@@ -52,12 +53,13 @@ CEntity& ClosestEnemy()
 		}
 	}
 	
+	// Check if we found a valid target
 	if (closestIndex != -1)
-		target.Set(g_Client.GetEntityFromList(closestIndex));
+		entity.Set(g_Client.GetEntityFromList(closestIndex));
 	else
-		target.Set(NULL);
+		entity.Set(NULL);
 
-	return target;
+	return entity;
 }
 
 void AimAt(Vector3 target)
@@ -66,20 +68,20 @@ void AimAt(Vector3 target)
 	Vector3 deltaVec = myPos.to(target);
 	Vector2 newAngles{};
 
-	newAngles.x = -asin(deltaVec.z / deltaVec.mag()) * (180 / M_PI);
-	newAngles.y = atan2(deltaVec.y, deltaVec.x) * (180 / M_PI);
+	// Calculate new view angles
+	newAngles.x = -asin(deltaVec.z / deltaVec.mag()) * (180.0f / M_PI);
+	newAngles.y = atan2(deltaVec.y, deltaVec.x) * (180.0f / M_PI);
 
-	if (g_Options.Legit.Aimbot.RCS)
-	{
-		newAngles -= g_LocalPlayer.GetAimPunchAngle() * 2.0f;
-		newAngles.NormalizeAngles();
-	}
+	// Add RCS if requested
+	if (g_Options.Legit.RCS.Enable)
+		newAngles -= g_LocalPlayer.GetAimPunchAngle() * (g_Options.Legit.RCS.Amount / 100) * RCS_RANGE;
+
+	// Prevent snapping onto the target
+	newAngles = g_Engine.GetClientState_ViewAngles() + (newAngles - g_Engine.GetClientState_ViewAngles()) / g_Options.Legit.Aimbot.Smoothing;
 
 	newAngles.ClampAngles();
 
-	Vector2 smoothing = g_Engine.GetClientState_ViewAngles() + (newAngles - g_Engine.GetClientState_ViewAngles()) / g_Options.Legit.Aimbot.Smoothing;
-
-	g_Engine.SetClientState_ViewAngles(smoothing);
+	g_Engine.SetClientState_ViewAngles(newAngles);
 }
 
 void Shoot()
@@ -87,36 +89,37 @@ void Shoot()
 	CWeaponEntity weapon = g_LocalPlayer.GetActiveWeapon();
 	float distance = g_LocalPlayer.GetOrigin().to(entity.GetOrigin()).mag() * UNITS_TO_METERS;
 
+	// Decide to shoot if we got the right gun and conditions
 	if ((weapon.IsGun()) && (!g_Options.Legit.Triggerbot.ExcludeGuns))
 	{
 		Sleep(g_Options.Legit.Triggerbot.Delay);
 		g_Client.DoForceAttack();
 	}
-	else if ((weapon.m_iItemDefinitionIndex() == weapon_taser) && (g_Options.Legit.Triggerbot.AutoTaser))
+	else if ((weapon.GetItemId() == weapon_taser) && (g_Options.Legit.Triggerbot.AutoTaser))
 	{
-		if (distance > MAX_TASER_RANGE)
-			return;
-
-		g_Client.DoForceAttack();
+		if (distance <= MAX_TASER_RANGE)
+			g_Client.DoForceAttack();
+		
 	}
 	else if ((weapon.IsKnife()) && (g_Options.Legit.Triggerbot.AutoKnife))
 	{
-		if (distance > MAX_KNIFE_RANGE)
-			return;
-
-		entity.GetHealth() < OPT_HEALTH_BOUND ? g_Client.DoForceAttack2() : g_Client.DoForceAttack();
+		if (distance <= MAX_KNIFE_RANGE)
+			entity.GetHealth() < OPT_HEALTH_BOUND ? g_Client.DoForceAttack2() : g_Client.DoForceAttack();
 	}
 }
 
 bool CheckTriggerbot()
 {
+	// Check if target is a player
 	int crosshairId = g_LocalPlayer.GetCrosshairId();
-
 	if (crosshairId < 1 || crosshairId > MAX_PLAYERS)
 		return false;
 
 	entity.Set(g_Client.GetEntityFromList(crosshairId - 1));
 
+	// Check entity and flags
+	if (g_Client.IsMouseEnabled())
+		return false;
 	if (!entity.IsAlive())
 		return false;
 	if ((entity.GetTeamNum() == g_LocalPlayer.GetTeamNum()) && (!g_Options.Legit.Triggerbot.Deathmatch))
@@ -127,8 +130,6 @@ bool CheckTriggerbot()
 		return false;
 	if ((!g_LocalPlayer.GetFlags()) && (g_Options.Legit.Triggerbot.InAir))
 		return false;
-	if ((!g_LocalPlayer.GetActiveWeapon().IsGun()) && (g_Options.Legit.Triggerbot.AutoKnife) && (g_Options.Legit.Triggerbot.AutoTaser))
-		return false;
 
 	return true;
 }
@@ -138,27 +139,26 @@ void Features::Legit()
 	if (g_Options.Legit.RCS.Enable)
 	{
 		static Vector2 oPunch{};
-		Vector2 nViewAngles{};
 		Vector2 aimPunchAngle = g_LocalPlayer.GetAimPunchAngle();
+		Vector2 nViewAngles{};
 
+		// Check if player shot a specific amount of rounds
 		if (g_LocalPlayer.GetShotsFired() >= g_Options.Developer.RcsShotsTrigger)
 		{
 			Vector2 cViewAngles = g_Engine.GetClientState_ViewAngles();
 
-			nViewAngles = ((cViewAngles + oPunch) - (aimPunchAngle * (g_Options.Legit.RCS.Amount / PERCENT_TO_FLOAT) * RCS_RANGE));
-			oPunch = aimPunchAngle * (g_Options.Legit.RCS.Amount / PERCENT_TO_FLOAT) * RCS_RANGE;
+			// Calculate new view angles
+			nViewAngles = (cViewAngles + oPunch) - (aimPunchAngle * (g_Options.Legit.RCS.Amount / 100) * RCS_RANGE);
 			nViewAngles.NormalizeAngles();
 
 			g_Engine.SetClientState_ViewAngles(nViewAngles);
 		}
-		else
-		{
-			oPunch.Zero();
-		}
+		oPunch = aimPunchAngle * (g_Options.Legit.RCS.Amount / 100) * RCS_RANGE;
 	}
 
 	if (g_Options.Legit.Triggerbot.Enable)
 	{
+		// Check if triggerbot can shoot without user input
 		bool shoot = g_Options.Legit.Triggerbot.AutoFire;
 		if (!g_Options.Legit.Triggerbot.AutoFire)
 		{
@@ -173,6 +173,7 @@ void Features::Legit()
 
 	if (g_Options.Legit.Aimbot.Enable)
 	{
+		// Check if aimbot can shoot without user input
 		bool aim = g_Options.Legit.Aimbot.AutoAim;
 		if (!g_Options.Legit.Aimbot.AutoAim)
 		{
@@ -181,14 +182,13 @@ void Features::Legit()
 
 		if (g_LocalPlayer.GetActiveWeapon().IsGun())
 		{
-			CEntity target = ClosestEnemy();
+			entity = ClosestEnemy();
 
-			if ((aim) && (target.Get() != NULL))
+			if ((aim) && (entity.IsExisting()))
 			{
-				AimAt(target.GetBoneById(g_Options.Legit.Aimbot.TargetBone + LOWEST_LOCAL_BONE_INDEX));
+				Vector3 targetPos = entity.GetBoneById(g_Options.Legit.Aimbot.TargetBone + LOWEST_LOCAL_BONE_INDEX);
+				AimAt(targetPos);
 			}
 		}
 	}
-
-	Sleep(1);
 }

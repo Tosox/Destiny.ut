@@ -169,7 +169,7 @@ struct Vector3
 
 	float mag()
 	{
-		return static_cast<float>(sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2)));
+		return static_cast<float>(sqrt(x * x + y * y + z * z));
 	}
 
 	//

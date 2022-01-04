@@ -1,6 +1,5 @@
 #pragma once
 
-#include <xor/xor.hpp>
 #include "../sdk/Color.hpp"
 
 struct Options
@@ -11,7 +10,6 @@ struct Options
 		{
 			bool Enable = false;
 			bool AutoAim = false;
-			bool RCS = false;
 			bool Deathmatch = false;
 			bool Visible = false;
 			bool Scoped = false;

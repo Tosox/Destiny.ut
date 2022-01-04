@@ -13,9 +13,5 @@ public:
 	Vector2 GetAimPunchAngle();
 	Vector3 GetViewOffset();
 
-	void Set(uintptr_t addr);
 	void SetFov(int val);
-
-private:
-	uintptr_t addr;
 };

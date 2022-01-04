@@ -34,17 +34,7 @@ Vector3 CBaseEntity::GetViewOffset()
 	return g_Mem->read<Vector3>(this->addr + offsets::netvars::m_vecViewOffset);
 }
 
-void CBaseEntity::Set(uintptr_t addr)
-{
-	this->addr = addr;
-}
-
 void CBaseEntity::SetFov(int val)
 {
 	g_Mem->write<int>(this->addr + offsets::netvars::m_iDefaultFOV, val);
 }
-
-//void CBaseENtity::SetViewOffset(Vector3 val)
-//{
-//	g_Mem->write<Vector3>(this->addr + offsets::netvars::m_vecViewOffset, val);
-//}

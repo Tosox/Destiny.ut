@@ -38,7 +38,7 @@ uintptr_t MemMan::getProcess(const wchar_t* proc)
 uintptr_t MemMan::getModule(uintptr_t procId, const wchar_t* modName)
 {
 	HANDLE hModule = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, procId);
-	MODULEENTRY32 mEntry;
+	MODULEENTRY32 mEntry{};
 	mEntry.dwSize = sizeof(mEntry);
 
 	do
@@ -54,7 +54,7 @@ uintptr_t MemMan::getModule(uintptr_t procId, const wchar_t* modName)
 
 uintptr_t MemMan::getAddress(uintptr_t addr, std::vector<uintptr_t> vect)
 {
-	for (unsigned int i = 0; i < vect.size(); i++)
+	for (size_t i = 0; i < vect.size(); ++i)
 	{
 		ReadProcessMemory(handle, (BYTE*)addr, &addr, sizeof(addr), 0);
 		addr += vect[i];

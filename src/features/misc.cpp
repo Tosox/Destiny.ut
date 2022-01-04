@@ -11,7 +11,7 @@ void Features::Misc()
 	{
 		if ((GetAsyncKeyState(VK_SPACE)) && (g_LocalPlayer.GetFlags() & FL_ONGROUND) && (!g_Client.IsMouseEnabled()))
 		{
-			g_Client.DoForceAttack();
+			g_Client.DoForceJump();
 		}
 	}
 	if (g_Options.Misc.Helpers.FakeLag)

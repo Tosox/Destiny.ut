@@ -5,7 +5,7 @@
 class CWeaponEntity
 {
 public:
-	int m_iItemDefinitionIndex();
+	int GetItemId();
 	bool IsSniper();
 	bool IsPistol();
 	bool IsKnife();

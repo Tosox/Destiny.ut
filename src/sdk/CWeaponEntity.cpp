@@ -5,14 +5,14 @@
 #include "../settings/globals.hpp"
 #include "../sdk/DefEnums.hpp"
 
-int CWeaponEntity::m_iItemDefinitionIndex()
+int CWeaponEntity::GetItemId()
 {
 	return g_Mem->read<int>(this->addr + offsets::netvars::m_iItemDefinitionIndex);
 }
 
 bool CWeaponEntity::IsSniper()
 {
-	int id = this->m_iItemDefinitionIndex();
+	int id = this->GetItemId();
 	switch (id)
 	{
 	case weapon_awp:
@@ -27,7 +27,7 @@ bool CWeaponEntity::IsSniper()
 
 bool CWeaponEntity::IsPistol()
 {
-	int id = this->m_iItemDefinitionIndex();
+	int id = this->GetItemId();
 	switch (id)
 	{
 	case weapon_deagle:
@@ -48,7 +48,7 @@ bool CWeaponEntity::IsPistol()
 
 bool CWeaponEntity::IsKnife()
 {
-	int id = this->m_iItemDefinitionIndex();
+	int id = this->GetItemId();
 	switch (id)
 	{
 	case weapon_knifegg:
@@ -82,7 +82,7 @@ bool CWeaponEntity::IsKnife()
 
 bool CWeaponEntity::IsGun()
 {
-	int id = this->m_iItemDefinitionIndex();
+	int id = this->GetItemId();
 	switch (id)
 	{
 	case weapon_deagle:
@@ -117,8 +117,8 @@ bool CWeaponEntity::IsGun()
 	case weapon_ssg08:
 	case weapon_cz75a:
 	case weapon_revolver:
-	case weapon_m4a1_silencer:
 	case weapon_usp_silencer:
+	case weapon_m4a1_silencer:
 		return true;
 	default:
 		return false;
@@ -127,7 +127,7 @@ bool CWeaponEntity::IsGun()
 
 bool CWeaponEntity::IsGrenade()
 {
-	int id = this->m_iItemDefinitionIndex();
+	int id = this->GetItemId();
 	switch (id)
 	{
 	case weapon_hegrenade:

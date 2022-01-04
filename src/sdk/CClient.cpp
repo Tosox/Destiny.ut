@@ -11,7 +11,7 @@ bool CClient::IsMouseEnabled()
 	return !(mouse & 1);
 }
 
-GlowStruct_t CClient::GetGlowStruct(const int glowIndex)
+GlowStruct_t CClient::GetGlowStruct(int glowIndex)
 {
 	return g_Mem->read<GlowStruct_t>(this->GetGlowObjectManager() + (glowIndex * 0x38));
 }
@@ -31,17 +31,17 @@ uintptr_t CClient::GetGlowObjectManager()
 	return g_Mem->read<uintptr_t>(this->addr + offsets::signatures::dwGlowObjectManager);
 }
 
-uintptr_t CClient::GetEntityFromList(const int i)
+uintptr_t CClient::GetEntityFromList(int i)
 {
 	return g_Mem->read<uintptr_t>(this->addr + offsets::signatures::dwEntityList + (i * 0x10));
 }
 
-void CClient::Set(const uintptr_t addr)
+void CClient::Set(uintptr_t val)
 {
-	this->addr = addr;
+	this->addr = val;
 }
 
-void CClient::SetGlowStruct(const int glowIndex, const GlowStruct_t& glowStruct)
+void CClient::SetGlowStruct(int glowIndex, GlowStruct_t& glowStruct)
 {
 	g_Mem->write<GlowStruct_t>(this->GetGlowObjectManager() + (glowIndex * 0x38), glowStruct);
 }

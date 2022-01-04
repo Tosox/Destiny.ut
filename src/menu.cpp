@@ -24,15 +24,17 @@ static const char* bones[6]{ "Pelvic", "Stomach", "Lower Chest", "Upper Chest", 
 
 bool Glfw::GenerateWindow()
 {
-	ShowWindow(GetConsoleWindow(), SW_SHOW);
+	// Use 'SW_SHOW' for debugging
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
 
 	glfwSetErrorCallback(NULL);
 	if (!glfwInit())
 		return false;
 
+	// Create Window
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 	window = glfwCreateWindow(800, 450, XorStr(Utils::random_string(12).c_str()), NULL, NULL);
-	if (window == NULL)
+	if (!window)
 		return false;
 
 	glfwMakeContextCurrent(window);
@@ -47,12 +49,14 @@ bool Glfw::WindowNotClosed()
 
 void Gui::InitImGui()
 {
+	// Set ImGui Flags
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
 	io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
 	io.IniFilename = nullptr;
 	io.LogFilename = nullptr;
 
+	// Preset style
 	ImGuiStyle& style = ImGui::GetStyle();
 	{
 		style.Alpha = 0.75f;
@@ -98,6 +102,7 @@ void Gui::Render()
 
 	glfwPollEvents();
 
+	// Show window on key press
 	if (GetAsyncKeyState(VK_INSERT) & 1)
 	{
 		glfwShowWindow(window);
@@ -110,6 +115,7 @@ void Gui::Render()
 	ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
 	ImGui::SetNextWindowSize(ImVec2(800.0f, 450.0f));
 
+	// Render ImGui
 	ImGui::Begin(XorStr("Destiny.ut"), nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar| ImGuiWindowFlags_NoScrollWithMouse);
 	{
 		ImGui::SetCursorPos(ImVec2(12.5f, 25.0f));
@@ -142,14 +148,13 @@ void Gui::Render()
 					ImGui::Separator();
 					ImGui::Checkbox(XorStr("Enable###AimbotEnable"), &g_Options.Legit.Aimbot.Enable);
 					ImGui::Checkbox(XorStr("Auto Aim###AimbotAutoAim"), &g_Options.Legit.Aimbot.AutoAim);
-					ImGui::Checkbox(XorStr("Recoil Control###AimbotRCS"), &g_Options.Legit.Aimbot.RCS);
 					ImGui::Checkbox(XorStr("Deathmatch###AimbotDeathmatch"), &g_Options.Legit.Aimbot.Deathmatch);
 					ImGui::Checkbox(XorStr("Visible###AimbotVisible"), &g_Options.Legit.Aimbot.Visible);
 					ImGui::Checkbox(XorStr("Scoped###AimbotScoped"), &g_Options.Legit.Aimbot.Scoped);
 					ImGui::Checkbox(XorStr("Flashed###AimbotFlashed"), &g_Options.Legit.Aimbot.Flashed);
 					ImGui::Checkbox(XorStr("In Air###AimbotInAir"), &g_Options.Legit.Aimbot.InAir);
 					ImGui::Combo(XorStr("Target Bone###TargetBone"), &g_Options.Legit.Aimbot.TargetBone, bones, IM_ARRAYSIZE(bones));
-					ImGui::SliderInt(XorStr("Smoothing###AimbotSmoothing"), &g_Options.Legit.Aimbot.Smoothing, 1, 50);
+					ImGui::SliderInt(XorStr("Smoothing###AimbotSmoothing"), &g_Options.Legit.Aimbot.Smoothing, 1, 25);
 				}
 				ImGui::EndChild();
 
@@ -273,14 +278,21 @@ void Gui::Render()
 			}
 			if (tab == IMGUI_WND_PAGES::P_SETTINGS)
 			{
-				ImGui::BeginChild(XorStr("Info"), ImVec2(290.0f, 155.0f), true);
+				ImGui::BeginChild(XorStr("Info"), ImVec2(590.0f, 180.0f), true);
 				{
 					ImGui::Text(XorStr("Info"));
 					ImGui::Separator();
-					if (ImGui::Button(XorStr("GitHub"), ImVec2(100.0f, 35.0f)))
-						ShellExecute(0, 0, L"http://www.github.com/TosoxDev", 0, 0, SW_SHOW);
-					if (ImGui::Button(XorStr("Discord"), ImVec2(100.0f, 35.0f)))
-						MessageBox(NULL, L"Tosox#0573", L"Discord Tag", MB_OK | MB_ICONINFORMATION);
+					ImGui::Text(XorStr("Source code:"));
+					ImGui::SameLine();
+					if (ImGui::Button(XorStr("GitHub"), ImVec2(100.0f, 17.5f)))
+						ShellExecute(0, 0, L"http://www.github.com/TosoxDev/Destiny.ut", 0, 0, SW_SHOW);
+					ImGui::Spacing();
+					ImGui::Text(XorStr("Credits"));
+					ImGui::Separator();
+					ImGui::Text(XorStr("-Special thanks to the GuidedHacking community"));
+					ImGui::Text(XorStr("-Offsets provided by: hazedumper"));
+					ImGui::Text(XorStr("-GUI powered by: ImGui and GLFW"));
+					ImGui::Text(XorStr("-JSON library by: Niels Lohmann"));
 					ImGui::Separator();
 					ImGui::Checkbox(XorStr("Enable Developer"), &g_Options.Developer.Enable);
 				}
@@ -288,7 +300,7 @@ void Gui::Render()
 
 				if (g_Options.Developer.Enable)
 				{
-					ImGui::BeginChild(XorStr("Developer"), ImVec2(450.0f, 250.0f), true);
+					ImGui::BeginChild(XorStr("Developer"), ImVec2(590.0f, 235.0f), true);
 					{
 						ImGui::Text(XorStr("Developer"));
 						ImGui::Separator();

@@ -16,9 +16,11 @@ namespace offsets
 		inline DWORD dwForceAttack2;
 		inline DWORD dwbSendPackets;
 		inline DWORD model_ambient_min;
+		inline DWORD dwGameDir;
 		inline DWORD dwClientState;
 		inline DWORD dwClientState_State;
 		inline DWORD dwClientState_ViewAngles;
+		inline DWORD dwClientState_MapDirectory;
 		inline DWORD m_bDormant;
 	}
 	namespace netvars
