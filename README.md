@@ -25,11 +25,15 @@ Copyright Disclaimer under section 107 of the Copyright Act 1976, allowance is m
 Make sure that [CS:GO](https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/) is running and the cheat up-to-date.
 
 ### The features do not work
-Make certain that the cheat creates an [offsets.json](https://github.com/TosoxDev/Destiny.ut/blob/master/src/offsets.json) file.
+Make certain that the program creates an [offsets.json](https://github.com/TosoxDev/Destiny.ut/blob/master/src/offsets.json) file.
 
-### The [offsets.json](https://github.com/TosoxDev/Destiny.ut/blob/master/src/offsets.json) file is empty
-Check your network connection or try starting the program with a link to the [blazedumper dump](https://raw.githubusercontent.com/Akandesh/blazedumper/master/csgo.json)
+### They still do not work
+Try starting the program with a link to the [blazedumper dump](https://raw.githubusercontent.com/Akandesh/blazedumper/master/csgo.json)
 as first parameter to download its offsets.
+1. Start CMD or PowerShell
+2. Enter:
+  - cd "_PathToTheCheatFolder_"
+  - start Destiny.ut.exe "_[blazedumper dump](https://raw.githubusercontent.com/Akandesh/blazedumper/master/csgo.json)_"
 
 ### Can I bring the menu to front?
 Yes, press <kbd>INSERT</kbd> to bring the window to front.
