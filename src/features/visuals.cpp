@@ -77,7 +77,7 @@ void HandleGlow(CEntity& entity)
 	// Color player depending on different flags
 	if (g_LocalPlayer.GetTeamNum() == entity.GetTeamNum())
 	{
-		if (g_Options.Visuals.Glow.Teammates)
+		if (!g_Options.Visuals.Glow.Teammates)
 			return;
 		glowColor = g_Options.Colors.Glow.Teammates;
 	}

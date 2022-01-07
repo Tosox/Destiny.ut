@@ -130,8 +130,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
-    <IncludePath>\lib;$(IncludePath)</IncludePath>
-    <LibraryPath>\lib\glfw\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\..\lib;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\lib\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>

@@ -1,7 +1,6 @@
 ﻿#include <Windows.h>
 #include <xor/xor.hpp>
 #include <MemMan/MemMan.hpp>
-#include <iostream>
 #include "menu.hpp"
 #include "settings/globals.hpp"
 #include "helpers/utils.hpp"
