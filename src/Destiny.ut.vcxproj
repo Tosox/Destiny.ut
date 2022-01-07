@@ -76,6 +76,9 @@
   <ItemGroup>
     <Library Include="..\lib\glfw\lib\glfw3.lib" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9CDA7840-B7A5-496D-A527-E95571496D18}</ProjectGuid>
     <RootNamespace>Destiny.ut</RootNamespace>
@@ -127,8 +130,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
-    <IncludePath>C:\Users\benja\Documents\Visual Studio\Projects\Destiny.ut\lib;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\benja\Documents\Visual Studio\Projects\Destiny.ut\lib\glfw\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>\lib;$(IncludePath)</IncludePath>
+    <LibraryPath>\lib\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>

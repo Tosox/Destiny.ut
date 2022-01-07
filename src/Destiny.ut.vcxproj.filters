@@ -203,4 +203,7 @@
       <Filter>lib\glfw\lib</Filter>
     </Library>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+  </ItemGroup>
 </Project>
