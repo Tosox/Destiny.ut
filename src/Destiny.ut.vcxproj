@@ -27,10 +27,10 @@
     <ClCompile Include="..\lib\imgui\imgui_impl_opengl2.cpp" />
     <ClCompile Include="..\lib\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\lib\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="..\lib\MemMan\MemMan.cpp" />
     <ClCompile Include="features\legit.cpp" />
     <ClCompile Include="features\misc.cpp" />
     <ClCompile Include="features\visuals.cpp" />
+    <ClCompile Include="helpers\Memory.cpp" />
     <ClCompile Include="helpers\offsets.cpp" />
     <ClCompile Include="helpers\utils.cpp" />
     <ClCompile Include="main.cpp" />
@@ -55,9 +55,9 @@
     <ClInclude Include="..\lib\imgui\imstb_textedit.h" />
     <ClInclude Include="..\lib\imgui\imstb_truetype.h" />
     <ClInclude Include="..\lib\json\json.hpp" />
-    <ClInclude Include="..\lib\MemMan\MemMan.hpp" />
     <ClInclude Include="..\lib\xor\xor.hpp" />
     <ClInclude Include="features\features.hpp" />
+    <ClInclude Include="helpers\Memory.hpp" />
     <ClInclude Include="helpers\offsets.hpp" />
     <ClInclude Include="helpers\utils.hpp" />
     <ClInclude Include="menu.hpp" />

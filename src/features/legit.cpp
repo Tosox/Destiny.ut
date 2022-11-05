@@ -11,19 +11,17 @@
 #define KEY_DOWN 0x8000
 #define LOWEST_LOCAL_BONE_INDEX 3
 
-#define MAX_PLAYERS 64
 #define MAX_TASER_RANGE 3.5f
 #define MAX_KNIFE_RANGE 1.65f
 #define OPT_HEALTH_BOUND 55
 
-CEntity entity{};
-
 CEntity& ClosestEnemy()
 {
+	CEntity entity{};
 	float closest = FLT_MAX;
 	int closestIndex = -1;
 
-	for (short i = 0; i < (g_Options.Developer.Use32EntityLoop ? 32 : MAX_PLAYERS); ++i)
+	for (short i = 0; i < 64; ++i)
 	{
 		entity.Set(g_Client.GetEntityFromList(i));
 
@@ -84,7 +82,7 @@ void AimAt(Vector3 target)
 	g_Engine.SetClientState_ViewAngles(newAngles);
 }
 
-void Shoot()
+void Shoot(CEntity &entity)
 {
 	CWeaponEntity weapon = g_LocalPlayer.GetActiveWeapon();
 	float distance = g_LocalPlayer.GetOrigin().to(entity.GetOrigin()).mag() * UNITS_TO_METERS;
@@ -108,11 +106,11 @@ void Shoot()
 	}
 }
 
-bool CheckTriggerbot()
+bool CheckTriggerbot(CEntity &entity)
 {
 	// Check if target is a player
 	int crosshairId = g_LocalPlayer.GetCrosshairId();
-	if (crosshairId < 1 || crosshairId > MAX_PLAYERS)
+	if (crosshairId < 1 || crosshairId > 64)
 		return false;
 
 	entity.Set(g_Client.GetEntityFromList(crosshairId - 1));
@@ -165,9 +163,9 @@ void Features::Legit()
 			shoot = GetAsyncKeyState(VK_MENU) & KEY_DOWN;
 		}
 
-		if ((shoot) && (CheckTriggerbot()))
+		if ((shoot) && (CheckTriggerbot(entity)))
 		{
-			Shoot();
+			Shoot(entity);
 		}
 	}
 
@@ -182,7 +180,7 @@ void Features::Legit()
 
 		if (g_LocalPlayer.GetActiveWeapon().IsGun())
 		{
-			entity = ClosestEnemy();
+			CEntity &entity = ClosestEnemy();
 
 			if ((aim) && (entity.IsExisting()))
 			{

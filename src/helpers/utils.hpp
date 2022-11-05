@@ -2,12 +2,12 @@
 
 #include <string>
 
-namespace Utils
+namespace utils
 {
-	std::string random_string(int length);
-	const wchar_t* GetWideChar(const char* str);
+	std::string randomString(std::size_t length);
+	const wchar_t* toWideChar(const char* str);
 
-	bool GotTargetWindow();
-	void GetDefaultValues();
-	void Unload();
+	bool isTargetRunning();
+	void saveDefaultValues();
+	void unload();
 }

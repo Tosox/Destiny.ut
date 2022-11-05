@@ -16,9 +16,6 @@
     <Filter Include="lib\json">
       <UniqueIdentifier>{5edd5298-4cf3-4fbf-93b3-1cb2c4bcb99f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lib\MemMan">
-      <UniqueIdentifier>{4e5deaf3-0a16-4e48-a8e4-ba3bb581e7d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="lib\xor">
       <UniqueIdentifier>{5021c0ef-4860-41db-bbf3-f1410e629e0d}</UniqueIdentifier>
     </Filter>
@@ -47,9 +44,6 @@
     </ClCompile>
     <ClCompile Include="menu.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\MemMan\MemMan.cpp">
-      <Filter>lib\MemMan</Filter>
     </ClCompile>
     <ClCompile Include="..\lib\imgui\imgui.cpp">
       <Filter>lib\imgui</Filter>
@@ -105,6 +99,9 @@
     <ClCompile Include="sdk\CWeaponEntity.cpp">
       <Filter>src\sdk</Filter>
     </ClCompile>
+    <ClCompile Include="helpers\Memory.cpp">
+      <Filter>src\helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.hpp">
@@ -112,9 +109,6 @@
     </ClInclude>
     <ClInclude Include="..\lib\xor\xor.hpp">
       <Filter>lib\xor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\MemMan\MemMan.hpp">
-      <Filter>lib\MemMan</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\json\json.hpp">
       <Filter>lib\json</Filter>
@@ -196,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="sdk\Vector.hpp">
       <Filter>src\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\Memory.hpp">
+      <Filter>src\helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

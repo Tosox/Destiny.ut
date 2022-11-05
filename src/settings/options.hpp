@@ -96,7 +96,6 @@ struct Options
 	{
 		bool Enable = false;
 		bool UnloadOnExit = true;
-		bool Use32EntityLoop = false;
 		float GlowAlpha = 0.85f;
 		int GlowStyle = 0;
 		float LocalPlayerFlashFlagAmount = 2.5f;

@@ -1,5 +1,4 @@
-﻿#include <Windows.h>
-#include <xor/xor.hpp>
+﻿#include <xor/xor.hpp>
 #include <MemMan/MemMan.hpp>
 #include "menu.hpp"
 #include "settings/globals.hpp"
@@ -13,12 +12,6 @@
 #define CLIENTDLL L"client.dll"
 #define ENGINEDLL L"engine.dll"
 
-MemMan* g_Mem = new MemMan();
-Options g_Options;
-CClient g_Client;
-CEngine g_Engine;
-CBaseEntity g_LocalPlayer;
-
 int main(int argc, char** argv)
 {
 	// Init the window
@@ -29,9 +22,9 @@ int main(int argc, char** argv)
 	Gui::InitImGui();
 
 	// Get process info
-	int procID = g_Mem->getProcess(PROCESSEXE);
-	g_Client.Set(g_Mem->getModule(procID, CLIENTDLL));
-	g_Engine.Set(g_Mem->getModule(procID, ENGINEDLL));
+	int procID = g_Memory.getProcess(PROCESSEXE);
+	g_Client.Set(g_Memory.getModule(procID, CLIENTDLL));
+	g_Engine.Set(g_Memory.getModule(procID, ENGINEDLL));
 
 	// Handle the latest offsets
 	URLDownloadToFile(NULL, XorStr(argc > 1 ? Utils::GetWideChar(argv[1]) : L"https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json"), XorStr(L"offsets.json"), 0, NULL);
