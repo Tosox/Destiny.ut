@@ -27,8 +27,14 @@
     <ClCompile Include="..\lib\imgui\imgui_impl_opengl2.cpp" />
     <ClCompile Include="..\lib\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\lib\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="features\autopistol.cpp" />
+    <ClCompile Include="features\brightness.cpp" />
+    <ClCompile Include="features\bunnyhop.cpp" />
+    <ClCompile Include="features\chams.cpp" />
+    <ClCompile Include="features\fov.cpp" />
+    <ClCompile Include="features\glow.cpp" />
     <ClCompile Include="features\legit.cpp" />
-    <ClCompile Include="features\misc.cpp" />
+    <ClCompile Include="features\noflash.cpp" />
     <ClCompile Include="features\visuals.cpp" />
     <ClCompile Include="helpers\Memory.cpp" />
     <ClCompile Include="helpers\offsets.cpp" />
@@ -55,7 +61,7 @@
     <ClInclude Include="..\lib\imgui\imstb_textedit.h" />
     <ClInclude Include="..\lib\imgui\imstb_truetype.h" />
     <ClInclude Include="..\lib\json\json.hpp" />
-    <ClInclude Include="features\features.hpp" />
+    <ClInclude Include="features\Features.hpp" />
     <ClInclude Include="helpers\Memory.hpp" />
     <ClInclude Include="helpers\offsets.hpp" />
     <ClInclude Include="helpers\utils.hpp" />

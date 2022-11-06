@@ -207,7 +207,6 @@ void Gui::Render()
 					ImGui::Text("Color Chams");
 					ImGui::Separator();
 					ImGui::Checkbox("Enable###ChamsEnable", &g_Options.Visuals.Chams.Enable);
-					ImGui::Checkbox("Teammates###ChamsTeammates", &g_Options.Visuals.Chams.Teammates);
 					if (ImGui::Button("Clear###ChamsClear"))
 					{
 						g_Options.Visuals.Chams.Enable = false;

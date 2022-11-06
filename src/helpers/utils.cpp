@@ -32,7 +32,7 @@ std::string utils::randomString(std::size_t length)
 // Get CS:GO window handle
 bool utils::isTargetRunning()
 {
-	const HWND csgo = FindWindowA(nullptr, "Counter-Strike: Global Offensive - Direct3D 9");
+	const HWND csgo = FindWindowA("Valve001", nullptr);
 	return csgo != nullptr;
 }
 

@@ -1,8 +1,24 @@
 #pragma once
 
-namespace Features
+namespace features
 {
-	void Legit();
-	void Visuals();
-	void Misc();
+	namespace visuals
+	{
+		void brightness();
+		void glow();
+		void chams();
+	}
+
+	namespace misc
+	{
+		void bunnyhop();
+		void noflash();
+		void fov();
+		void autopistol();
+	}
+
+	inline void run()
+	{
+
+	}
 }

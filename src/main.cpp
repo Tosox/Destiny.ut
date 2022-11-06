@@ -21,7 +21,8 @@ int main(int argc, char** argv)
 	g_Engine = g_Memory.getModule(procID, "engine.dll");
 
 	// Handle the latest offsets
-	URLDownloadToFileA(nullptr, argc > 1 ? argv[1] : "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json", "offsets.json", NULL, nullptr);
+	const char* url = argc > 1 ? argv[1] : "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json";
+	URLDownloadToFileA(nullptr, url, "offsets.json", NULL, nullptr);
 	offsets::initilize();
 
 	// Prevent crash when activating features in main menu
@@ -43,9 +44,7 @@ int main(int argc, char** argv)
 
 		Gui::Render();
 
-		//Features::Legit();
-		//Features::Visuals();
-		//Features::Misc();
+		features::run();
 		
 		Sleep(1);
 	}

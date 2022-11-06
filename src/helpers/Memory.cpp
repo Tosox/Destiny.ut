@@ -13,18 +13,18 @@ std::uintptr_t Memory::getProcess(const char* process)
 	PROCESSENTRY32 processEntry{};
 	processEntry.dwSize = sizeof processEntry;
 
-	std::uintptr_t processId = NULL;
 	while (Process32Next(toolHelp, &processEntry))
 	{
 		if (stricmp(processEntry.szExeFile, process) == 0)
 		{
 			CloseHandle(toolHelp);
-			processId = processEntry.th32ProcessID;
+			const std::uintptr_t processId = processEntry.th32ProcessID;
 			m_Handle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
+			return processId;
 		}
 	}
 
-	return processId;
+	return NULL;
 }
 
 std::uintptr_t Memory::getModule(std::uintptr_t processId, const char* module)
@@ -36,8 +36,11 @@ std::uintptr_t Memory::getModule(std::uintptr_t processId, const char* module)
 
 	while (Module32Next(toolHelp, &moduleEntry))
 	{
-		CloseHandle(toolHelp);
-		return reinterpret_cast<std::uintptr_t>(moduleEntry.hModule);
+		if (stricmp(moduleEntry.szModule, module) == 0)
+		{
+			CloseHandle(toolHelp);
+			return reinterpret_cast<std::uintptr_t>(moduleEntry.hModule);
+		}
 	}
 
 	return NULL;

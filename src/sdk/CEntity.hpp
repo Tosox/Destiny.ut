@@ -12,7 +12,6 @@ public:
 	CEntity(std::uintptr_t address);
 
 	bool isAlive();
-	bool isExisting();
 	bool isDefusing();
 	bool isDormant();
 	bool isScoped();
@@ -38,6 +37,7 @@ public:
 	inline CEntity& operator= (const std::uintptr_t& address) { m_Address = address; return *this; }
 	friend std::uintptr_t operator+ (const CEntity& entity, const std::uintptr_t& offset) { return entity.m_Address + offset; }
 	friend bool operator== (const CEntity& entity1, const CEntity& entity2) { return entity1.m_Address == entity2.m_Address; }
+	friend bool operator! (const CEntity& entity) { return entity.m_Address == NULL; };
 
 protected:
 	std::uintptr_t m_Address{};

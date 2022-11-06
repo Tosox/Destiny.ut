@@ -29,7 +29,6 @@ void offsets::initilize()
 	readValue(json["signatures"]["dwForceJump"], offsets::signatures::dwForceJump);
 	readValue(json["signatures"]["dwForceAttack"], offsets::signatures::dwForceAttack);
 	readValue(json["signatures"]["dwForceAttack2"], offsets::signatures::dwForceAttack2);
-	readValue(json["signatures"]["dwbSendPackets"], offsets::signatures::dwbSendPackets);
 	readValue(json["signatures"]["model_ambient_min"], offsets::signatures::model_ambient_min);
 	readValue(json["signatures"]["dwGameDir"], offsets::signatures::dwGameDir);
 	readValue(json["signatures"]["dwClientState"], offsets::signatures::dwClientState);

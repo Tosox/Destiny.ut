@@ -14,7 +14,6 @@ namespace offsets
 		inline std::uintptr_t dwForceJump;
 		inline std::uintptr_t dwForceAttack;
 		inline std::uintptr_t dwForceAttack2;
-		inline std::uintptr_t dwbSendPackets;
 		inline std::uintptr_t model_ambient_min;
 		inline std::uintptr_t dwGameDir;
 		inline std::uintptr_t dwClientState;

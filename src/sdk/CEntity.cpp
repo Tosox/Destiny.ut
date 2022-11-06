@@ -21,11 +21,6 @@ bool CEntity::isAlive()
 	return getHealth() > 0;
 }
 
-bool CEntity::isExisting()
-{
-	return m_Address != NULL;
-}
-
 bool CEntity::isDefusing()
 {
 	return g_Memory.read<bool>(m_Address + offsets::netvars::m_bIsDefusing);
@@ -53,7 +48,7 @@ bool CEntity::isSpottedBy(CEntity& entity)
 
 bool CEntity::isValid()
 {
-	if (!isExisting())
+	if (!*this)
 		return false;
 	if (!isAlive())
 		return false;
@@ -94,7 +89,7 @@ int CEntity::getTeamNum()
 
 CWeaponEntity CEntity::getActiveWeapon()
 {
-	int hWeapon = g_Memory.read<int>(m_Address + offsets::netvars::m_hActiveWeapon);
+	const int hWeapon = g_Memory.read<int>(m_Address + offsets::netvars::m_hActiveWeapon);
 	return g_Memory.read<CWeaponEntity>(g_Client + offsets::signatures::dwEntityList + ((hWeapon & 0xFFF) - 0x1) * 0x10);
 }
 

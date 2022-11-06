@@ -69,9 +69,6 @@
     <ClCompile Include="features\legit.cpp">
       <Filter>src\features</Filter>
     </ClCompile>
-    <ClCompile Include="features\misc.cpp">
-      <Filter>src\features</Filter>
-    </ClCompile>
     <ClCompile Include="features\visuals.cpp">
       <Filter>src\features</Filter>
     </ClCompile>
@@ -98,6 +95,27 @@
     </ClCompile>
     <ClCompile Include="helpers\Memory.cpp">
       <Filter>src\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="features\bunnyhop.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\noflash.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\fov.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\autopistol.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\glow.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\chams.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\brightness.cpp">
+      <Filter>src\features</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,7 +161,7 @@
     <ClInclude Include="..\lib\glfw\include\glfw3native.hpp">
       <Filter>lib\glfw\include</Filter>
     </ClInclude>
-    <ClInclude Include="features\features.hpp">
+    <ClInclude Include="features\Features.hpp">
       <Filter>src\features</Filter>
     </ClInclude>
     <ClInclude Include="helpers\offsets.hpp">

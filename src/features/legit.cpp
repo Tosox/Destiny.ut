@@ -8,7 +8,7 @@
 #define KEY_DOWN 0x8000
 #define LOWEST_LOCAL_BONE_INDEX 3
 
-CEntity& ClosestEnemy()
+CEntity ClosestEnemy()
 {
 	CEntity entity{};
 	float closest = FLT_MAX;
@@ -99,34 +99,35 @@ void Shoot(CEntity &entity)
 	}
 }
 
-bool CheckTriggerbot()
+CEntity CheckTriggerbot()
 {
+	CEntity entity{};
+
 	// Check if target is a player
 	const int crosshairId = g_LocalPlayer.getCrosshairId();
 	if (crosshairId < 1 || crosshairId > 64)
-		return false;
+		return {};
 
-	CEntity entity{};
 	entity = g_Client.getEntityFromList(crosshairId - 1);
 
 	// Check entity and flags
 	if (g_Client.isMouseEnabled())
-		return false;
+		return {};
 	if (!entity.isAlive())
-		return false;
+		return {};
 	if ((entity.getTeamNum() == g_LocalPlayer.getTeamNum()) && (!g_Options.Legit.Triggerbot.Deathmatch))
-		return false;
+		return {};
 	if ((g_LocalPlayer.getActiveWeapon().isSniper()) && (g_Options.Legit.Triggerbot.Scoped) && (!g_LocalPlayer.isScoped()))
-		return false;
+		return {};
 	if ((g_LocalPlayer.getFlashDuration() > g_Options.Developer.LocalPlayerFlashFlagAmount) && (g_Options.Legit.Triggerbot.Flashed))
-		return false;
+		return {};
 	if ((!g_LocalPlayer.getFlags()) && (g_Options.Legit.Triggerbot.InAir))
-		return false;
+		return {};
 
-	return true;
+	return entity;
 }
 
-void Features::Legit()
+void features::Legit()
 {
 	if (g_Options.Legit.RCS.Enable)
 	{
@@ -157,9 +158,10 @@ void Features::Legit()
 			shoot = GetAsyncKeyState(VK_MENU) & KEY_DOWN;
 		}
 
-		if ((shoot) && (CheckTriggerbot()))
+		if ((shoot))
 		{
-			Shoot(CEntity());
+			CEntity entity = CheckTriggerbot();
+			Shoot(entity);
 		}
 	}
 
@@ -176,7 +178,7 @@ void Features::Legit()
 		{
 			CEntity &entity = ClosestEnemy();
 
-			if ((aim) && (entity.isExisting()))
+			if ((aim) && (!!entity))
 			{
 				Vector3 targetPos = entity.getBoneById(g_Options.Legit.Aimbot.TargetBone + LOWEST_LOCAL_BONE_INDEX);
 				AimAt(targetPos);
