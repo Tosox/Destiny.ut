@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Windows.h>
 #include "options.hpp"
 #include "../helpers/Memory.hpp"
 #include "../sdk/CClient.hpp"

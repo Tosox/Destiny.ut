@@ -1,70 +1,48 @@
-#include <Windows.h>
 #include <array>
-#include <MemMan/MemMan.hpp>
 #include "../helpers/offsets.hpp"
 #include "../settings/globals.hpp"
 
-bool CEngine::IsConnected()
+bool CEngine::isConnected()
 {
-	return this->GetClientState_State() == 6;
+	return getClientState_State() == 6;
 }
 
-bool CEngine::GetSendPackets()
+const char* CEngine::getGameDirectory()
 {
-	return g_Mem->read<bool>(this->addr + offsets::signatures::dwbSendPackets);
+	return g_Memory.read<std::array<char, 0x120>>(m_Address + offsets::signatures::dwGameDir).data();
 }
 
-char* CEngine::GetGameDirectory()
+const char* CEngine::getMapDirectory()
 {
-	return g_Mem->read<std::array<char, 0x120>>(this->addr + offsets::signatures::dwGameDir).data();
+	return g_Memory.read<std::array<char, 0x120>>(getClientState() + offsets::signatures::dwClientState_MapDirectory).data();
 }
 
-char* CEngine::GetMapDirectory()
+int CEngine::getModelAmbientMin()
 {
-	return g_Mem->read<std::array<char, 0x120>>(this->GetClientState() + offsets::signatures::dwClientState_MapDirectory).data();
+	return g_Memory.read<int>(m_Address + offsets::signatures::model_ambient_min);
 }
 
-int CEngine::GetModelAmbientMin()
+int CEngine::getClientState_State()
 {
-	return g_Mem->read<int>(this->addr + offsets::signatures::model_ambient_min);
+	return g_Memory.read<int>(getClientState() + offsets::signatures::dwClientState_State);
 }
 
-int CEngine::GetClientState_State()
+std::uintptr_t CEngine::getClientState()
 {
-	return g_Mem->read<int>(this->GetClientState() + offsets::signatures::dwClientState_State);
+	return g_Memory.read<std::uintptr_t>(m_Address + offsets::signatures::dwClientState);
 }
 
-uintptr_t CEngine::Get()
+Vector2 CEngine::getClientStateViewAngles()
 {
-	return this->addr;
+	return g_Memory.read<Vector2>(getClientState() + offsets::signatures::dwClientState_ViewAngles);
 }
 
-uintptr_t CEngine::GetClientState()
+void CEngine::setModelAmbientMin(int value)
 {
-	return g_Mem->read<uintptr_t>(this->addr + offsets::signatures::dwClientState);
+	g_Memory.write<int>(m_Address + offsets::signatures::model_ambient_min, value);
 }
 
-Vector2 CEngine::GetClientState_ViewAngles()
+void CEngine::setClientStateViewAngles(Vector2& value)
 {
-	return g_Mem->read<Vector2>(this->GetClientState() + offsets::signatures::dwClientState_ViewAngles);
-}
-
-void CEngine::Set(uintptr_t val)
-{
-	this->addr = val;
-}
-
-void CEngine::SetModelAmbientMin(int val)
-{
-	g_Mem->write<int>(this->addr + offsets::signatures::model_ambient_min, val);
-}
-
-void CEngine::SetSendPackets(bool val)
-{
-	g_Mem->write<bool>(this->addr + offsets::signatures::dwbSendPackets, val);
-}
-
-void CEngine::SetClientState_ViewAngles(Vector2& val)
-{
-	g_Mem->write<Vector2>(this->GetClientState() + offsets::signatures::dwClientState_ViewAngles, val);
+	g_Memory.write<Vector2>(getClientState() + offsets::signatures::dwClientState_ViewAngles, value);
 }

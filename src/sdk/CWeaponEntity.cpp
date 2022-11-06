@@ -1,18 +1,16 @@
-#include <Windows.h>
-#include <MemMan/MemMan.hpp>
 #include "CWeaponEntity.hpp"
 #include "../helpers/offsets.hpp"
 #include "../settings/globals.hpp"
 #include "../sdk/DefEnums.hpp"
 
-int CWeaponEntity::GetItemId()
+int CWeaponEntity::getItemId()
 {
-	return g_Mem->read<int>(this->addr + offsets::netvars::m_iItemDefinitionIndex);
+	return g_Memory.read<int>(m_Address + offsets::netvars::m_iItemDefinitionIndex);
 }
 
-bool CWeaponEntity::IsSniper()
+bool CWeaponEntity::isSniper()
 {
-	int id = this->GetItemId();
+	const int id = getItemId();
 	switch (id)
 	{
 	case weapon_awp:
@@ -25,9 +23,9 @@ bool CWeaponEntity::IsSniper()
 	}
 }
 
-bool CWeaponEntity::IsPistol()
+bool CWeaponEntity::isPistol()
 {
-	int id = this->GetItemId();
+	const int id = getItemId();
 	switch (id)
 	{
 	case weapon_deagle:
@@ -46,9 +44,9 @@ bool CWeaponEntity::IsPistol()
 	}
 }
 
-bool CWeaponEntity::IsKnife()
+bool CWeaponEntity::isKnife()
 {
-	int id = this->GetItemId();
+	const int id = getItemId();
 	switch (id)
 	{
 	case weapon_knifegg:
@@ -80,9 +78,9 @@ bool CWeaponEntity::IsKnife()
 	}
 }
 
-bool CWeaponEntity::IsGun()
+bool CWeaponEntity::isGun()
 {
-	int id = this->GetItemId();
+	const int id = getItemId();
 	switch (id)
 	{
 	case weapon_deagle:
@@ -125,9 +123,9 @@ bool CWeaponEntity::IsGun()
 	}
 }
 
-bool CWeaponEntity::IsGrenade()
+bool CWeaponEntity::isGrenade()
 {
-	int id = this->GetItemId();
+	const int id = getItemId();
 	switch (id)
 	{
 	case weapon_hegrenade:

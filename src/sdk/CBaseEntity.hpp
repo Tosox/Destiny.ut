@@ -1,17 +1,19 @@
 #pragma once
-#include <Windows.h>
+
 #include "CEntity.hpp"
 #include "Vector.hpp"
 
 class CBaseEntity : public CEntity
 {
 public:
-	BYTE GetFlags();
-	int GetCrosshairId();
-	int GetFov();
-	int GetShotsFired();
-	Vector2 GetAimPunchAngle();
-	Vector3 GetViewOffset();
+	unsigned char getFlags();
+	int getCrosshairId();
+	int getFov();
+	int getShotsFired();
+	Vector2 getAimPunchAngle();
+	Vector3 getViewOffset();
 
-	void SetFov(int val);
+	void setFov(int value);
+
+	inline CBaseEntity& operator= (const std::uintptr_t& address) { m_Address = address; return *this; }
 };

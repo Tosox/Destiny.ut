@@ -1,6 +1,4 @@
-﻿#include <xor/xor.hpp>
-#include <MemMan/MemMan.hpp>
-#include "menu.hpp"
+﻿#include "menu.hpp"
 #include "settings/globals.hpp"
 #include "helpers/utils.hpp"
 #include "helpers/offsets.hpp"
@@ -8,30 +6,26 @@
 
 #pragma comment(lib, "urlmon.lib")
 
-#define PROCESSEXE L"csgo.exe"
-#define CLIENTDLL L"client.dll"
-#define ENGINEDLL L"engine.dll"
-
 int main(int argc, char** argv)
 {
 	// Init the window
-	if (!Utils::GotTargetWindow())
+	if (!utils::isTargetRunning())
 		return EXIT_FAILURE;
 	if (!Glfw::GenerateWindow())
 		return EXIT_FAILURE;
 	Gui::InitImGui();
 
 	// Get process info
-	int procID = g_Memory.getProcess(PROCESSEXE);
-	g_Client.Set(g_Memory.getModule(procID, CLIENTDLL));
-	g_Engine.Set(g_Memory.getModule(procID, ENGINEDLL));
+	const std::uintptr_t procID = g_Memory.getProcess("csgo.exe");
+	g_Client = g_Memory.getModule(procID, "client.dll");
+	g_Engine = g_Memory.getModule(procID, "engine.dll");
 
 	// Handle the latest offsets
-	URLDownloadToFile(NULL, XorStr(argc > 1 ? Utils::GetWideChar(argv[1]) : L"https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json"), XorStr(L"offsets.json"), 0, NULL);
-	offsets::InitOffsets();
+	URLDownloadToFileA(nullptr, argc > 1 ? argv[1] : "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json", "offsets.json", NULL, nullptr);
+	offsets::initilize();
 
 	// Prevent crash when activating features in main menu
-	while (!g_Engine.IsConnected())
+	while (!g_Engine.isConnected())
 	{
 		Gui::Render();
 		Sleep(50);
@@ -40,23 +34,23 @@ int main(int argc, char** argv)
 			return EXIT_SUCCESS;
 	}
 
-	Utils::GetDefaultValues();
+	utils::saveDefaultValues();
 	
 	// Main loop
 	while (Glfw::WindowNotClosed())
 	{
-		g_LocalPlayer.Set(g_Client.GetLocalPlayer());
+		g_LocalPlayer = g_Client.getLocalPlayer();
 
 		Gui::Render();
 
-		Features::Legit();
-		Features::Visuals();
-		Features::Misc();
+		//Features::Legit();
+		//Features::Visuals();
+		//Features::Misc();
 		
 		Sleep(1);
 	}
 
-	// Exit
-	Utils::Unload();
+	utils::unload();
+
 	return EXIT_SUCCESS;
 }

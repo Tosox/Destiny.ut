@@ -6,14 +6,8 @@
 #include "../sdk/DefEnums.hpp"
 
 #define M_PI 3.14159265358979323846f
-#define UNITS_TO_METERS 0.0254f
-#define RCS_RANGE 2.0f
 #define KEY_DOWN 0x8000
 #define LOWEST_LOCAL_BONE_INDEX 3
-
-#define MAX_TASER_RANGE 3.5f
-#define MAX_KNIFE_RANGE 1.65f
-#define OPT_HEALTH_BOUND 55
 
 CEntity& ClosestEnemy()
 {
@@ -23,27 +17,27 @@ CEntity& ClosestEnemy()
 
 	for (short i = 0; i < 64; ++i)
 	{
-		entity.Set(g_Client.GetEntityFromList(i));
+		entity = g_Client.getEntityFromList(i);
 
 		// Check entity and flags
-		if (g_Client.IsMouseEnabled())
+		if (g_Client.isMouseEnabled())
 			continue;
-		if (entity.Get() == g_LocalPlayer.Get())
+		if (entity == g_LocalPlayer)
 			continue;
-		if (!entity.IsValid())
+		if (!entity.isValid())
 			continue;
-		if ((entity.GetTeamNum() == g_LocalPlayer.GetTeamNum()) && (!g_Options.Legit.Aimbot.Deathmatch))
+		if ((entity.getTeamNum() == g_LocalPlayer.getTeamNum()) && (!g_Options.Legit.Aimbot.Deathmatch))
 			continue;
-		if ((!entity.IsSpottedBy(g_LocalPlayer) && (g_Options.Legit.Aimbot.Visible)))
+		if ((!entity.isSpottedBy(g_LocalPlayer) && (g_Options.Legit.Aimbot.Visible)))
 			continue;
-		if ((g_LocalPlayer.GetActiveWeapon().IsSniper()) && (g_Options.Legit.Aimbot.Scoped) && (!g_LocalPlayer.IsScoped()))
+		if ((g_LocalPlayer.getActiveWeapon().isSniper()) && (g_Options.Legit.Aimbot.Scoped) && (!g_LocalPlayer.isScoped()))
 			continue;
-		if ((g_LocalPlayer.GetFlashDuration() > g_Options.Developer.LocalPlayerFlashFlagAmount) && (g_Options.Legit.Aimbot.Flashed))
+		if ((g_LocalPlayer.getFlashDuration() > g_Options.Developer.LocalPlayerFlashFlagAmount) && (g_Options.Legit.Aimbot.Flashed))
 			continue;
-		if ((!g_LocalPlayer.GetFlags()) && (g_Options.Legit.Aimbot.InAir))
+		if ((!g_LocalPlayer.getFlags()) && (g_Options.Legit.Aimbot.InAir))
 			continue;
 
-		float distance = g_LocalPlayer.GetOrigin().to(entity.GetOrigin()).mag();
+		const float distance = g_LocalPlayer.getOrigin().to(entity.getOrigin()).mag();
 		if (distance < closest)
 		{
 			closest = distance;
@@ -53,16 +47,16 @@ CEntity& ClosestEnemy()
 	
 	// Check if we found a valid target
 	if (closestIndex != -1)
-		entity.Set(g_Client.GetEntityFromList(closestIndex));
+		entity = g_Client.getEntityFromList(closestIndex);
 	else
-		entity.Set(NULL);
+		entity = NULL;
 
 	return entity;
 }
 
 void AimAt(Vector3 target)
 {
-	Vector3 myPos = g_LocalPlayer.GetOrigin() + g_LocalPlayer.GetViewOffset();
+	Vector3 myPos = g_LocalPlayer.getOrigin() + g_LocalPlayer.getViewOffset();
 	Vector3 deltaVec = myPos.to(target);
 	Vector2 newAngles{};
 
@@ -72,61 +66,62 @@ void AimAt(Vector3 target)
 
 	// Add RCS if requested
 	if (g_Options.Legit.RCS.Enable)
-		newAngles -= g_LocalPlayer.GetAimPunchAngle() * (g_Options.Legit.RCS.Amount / 100) * RCS_RANGE;
+		newAngles -= g_LocalPlayer.getAimPunchAngle() * (g_Options.Legit.RCS.Amount / 100) * 2.f;
 
 	// Prevent snapping onto the target
-	newAngles = g_Engine.GetClientState_ViewAngles() + (newAngles - g_Engine.GetClientState_ViewAngles()) / g_Options.Legit.Aimbot.Smoothing;
+	newAngles = g_Engine.getClientStateViewAngles() + (newAngles - g_Engine.getClientStateViewAngles()) / g_Options.Legit.Aimbot.Smoothing;
 
 	newAngles.ClampAngles();
 
-	g_Engine.SetClientState_ViewAngles(newAngles);
+	g_Engine.setClientStateViewAngles(newAngles);
 }
 
 void Shoot(CEntity &entity)
 {
-	CWeaponEntity weapon = g_LocalPlayer.GetActiveWeapon();
-	float distance = g_LocalPlayer.GetOrigin().to(entity.GetOrigin()).mag() * UNITS_TO_METERS;
+	CWeaponEntity weapon = g_LocalPlayer.getActiveWeapon();
+	const float distance = g_LocalPlayer.getOrigin().to(entity.getOrigin()).mag();
 
 	// Decide to shoot if we got the right gun and conditions
-	if ((weapon.IsGun()) && (!g_Options.Legit.Triggerbot.ExcludeGuns))
+	if ((weapon.isGun()) && (!g_Options.Legit.Triggerbot.ExcludeGuns))
 	{
 		Sleep(g_Options.Legit.Triggerbot.Delay);
-		g_Client.DoForceAttack();
+		g_Client.doForceAttack();
 	}
-	else if ((weapon.GetItemId() == weapon_taser) && (g_Options.Legit.Triggerbot.AutoTaser))
+	else if ((weapon.getItemId() == weapon_taser) && (g_Options.Legit.Triggerbot.AutoTaser))
 	{
-		if (distance <= MAX_TASER_RANGE)
-			g_Client.DoForceAttack();
+		if (distance <= 137.5f)
+			g_Client.doForceAttack();
 		
 	}
-	else if ((weapon.IsKnife()) && (g_Options.Legit.Triggerbot.AutoKnife))
+	else if ((weapon.isKnife()) && (g_Options.Legit.Triggerbot.AutoKnife))
 	{
-		if (distance <= MAX_KNIFE_RANGE)
-			entity.GetHealth() < OPT_HEALTH_BOUND ? g_Client.DoForceAttack2() : g_Client.DoForceAttack();
+		if (distance <= 65.f)
+			entity.getHealth() < 55 ? g_Client.doForceAttack2() : g_Client.doForceAttack();
 	}
 }
 
-bool CheckTriggerbot(CEntity &entity)
+bool CheckTriggerbot()
 {
 	// Check if target is a player
-	int crosshairId = g_LocalPlayer.GetCrosshairId();
+	const int crosshairId = g_LocalPlayer.getCrosshairId();
 	if (crosshairId < 1 || crosshairId > 64)
 		return false;
 
-	entity.Set(g_Client.GetEntityFromList(crosshairId - 1));
+	CEntity entity{};
+	entity = g_Client.getEntityFromList(crosshairId - 1);
 
 	// Check entity and flags
-	if (g_Client.IsMouseEnabled())
+	if (g_Client.isMouseEnabled())
 		return false;
-	if (!entity.IsAlive())
+	if (!entity.isAlive())
 		return false;
-	if ((entity.GetTeamNum() == g_LocalPlayer.GetTeamNum()) && (!g_Options.Legit.Triggerbot.Deathmatch))
+	if ((entity.getTeamNum() == g_LocalPlayer.getTeamNum()) && (!g_Options.Legit.Triggerbot.Deathmatch))
 		return false;
-	if ((g_LocalPlayer.GetActiveWeapon().IsSniper()) && (g_Options.Legit.Triggerbot.Scoped) && (!g_LocalPlayer.IsScoped()))
+	if ((g_LocalPlayer.getActiveWeapon().isSniper()) && (g_Options.Legit.Triggerbot.Scoped) && (!g_LocalPlayer.isScoped()))
 		return false;
-	if ((g_LocalPlayer.GetFlashDuration() > g_Options.Developer.LocalPlayerFlashFlagAmount) && (g_Options.Legit.Triggerbot.Flashed))
+	if ((g_LocalPlayer.getFlashDuration() > g_Options.Developer.LocalPlayerFlashFlagAmount) && (g_Options.Legit.Triggerbot.Flashed))
 		return false;
-	if ((!g_LocalPlayer.GetFlags()) && (g_Options.Legit.Triggerbot.InAir))
+	if ((!g_LocalPlayer.getFlags()) && (g_Options.Legit.Triggerbot.InAir))
 		return false;
 
 	return true;
@@ -137,21 +132,21 @@ void Features::Legit()
 	if (g_Options.Legit.RCS.Enable)
 	{
 		static Vector2 oPunch{};
-		Vector2 aimPunchAngle = g_LocalPlayer.GetAimPunchAngle();
+		Vector2 aimPunchAngle = g_LocalPlayer.getAimPunchAngle();
 		Vector2 nViewAngles{};
 
 		// Check if player shot a specific amount of rounds
-		if (g_LocalPlayer.GetShotsFired() >= g_Options.Developer.RcsShotsTrigger)
+		if (g_LocalPlayer.getShotsFired() >= g_Options.Developer.RcsShotsTrigger)
 		{
-			Vector2 cViewAngles = g_Engine.GetClientState_ViewAngles();
+			Vector2 cViewAngles = g_Engine.getClientStateViewAngles();
 
 			// Calculate new view angles
-			nViewAngles = (cViewAngles + oPunch) - (aimPunchAngle * (g_Options.Legit.RCS.Amount / 100) * RCS_RANGE);
+			nViewAngles = (cViewAngles + oPunch) - (aimPunchAngle * (g_Options.Legit.RCS.Amount / 100) * 2.f);
 			nViewAngles.NormalizeAngles();
 
-			g_Engine.SetClientState_ViewAngles(nViewAngles);
+			g_Engine.setClientStateViewAngles(nViewAngles);
 		}
-		oPunch = aimPunchAngle * (g_Options.Legit.RCS.Amount / 100) * RCS_RANGE;
+		oPunch = aimPunchAngle * (g_Options.Legit.RCS.Amount / 100) * 2.f;
 	}
 
 	if (g_Options.Legit.Triggerbot.Enable)
@@ -163,9 +158,9 @@ void Features::Legit()
 			shoot = GetAsyncKeyState(VK_MENU) & KEY_DOWN;
 		}
 
-		if ((shoot) && (CheckTriggerbot(entity)))
+		if ((shoot) && (CheckTriggerbot()))
 		{
-			Shoot(entity);
+			Shoot(CEntity());
 		}
 	}
 
@@ -178,13 +173,13 @@ void Features::Legit()
 			aim = GetAsyncKeyState(VK_LBUTTON) & KEY_DOWN;
 		}
 
-		if (g_LocalPlayer.GetActiveWeapon().IsGun())
+		if (g_LocalPlayer.getActiveWeapon().isGun())
 		{
 			CEntity &entity = ClosestEnemy();
 
-			if ((aim) && (entity.IsExisting()))
+			if ((aim) && (entity.isExisting()))
 			{
-				Vector3 targetPos = entity.GetBoneById(g_Options.Legit.Aimbot.TargetBone + LOWEST_LOCAL_BONE_INDEX);
+				Vector3 targetPos = entity.getBoneById(g_Options.Legit.Aimbot.TargetBone + LOWEST_LOCAL_BONE_INDEX);
 				AimAt(targetPos);
 			}
 		}

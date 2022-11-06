@@ -1,6 +1,5 @@
 #include <Windows.h>
 #include <shellapi.h>
-#include <xor/xor.hpp>
 #include <glfw/include/glfw3.hpp>
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw.h>
@@ -15,8 +14,6 @@
 #if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #pragma comment(lib, "legacy_stdio_definitions")
 #endif
-
-#define MAX_PLAYERS 64
 
 GLFWwindow* window;
 
@@ -33,12 +30,13 @@ bool Glfw::GenerateWindow()
 
 	// Create Window
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-	window = glfwCreateWindow(800, 450, XorStr(Utils::random_string(12).c_str()), NULL, NULL);
+	window = glfwCreateWindow(800, 450, utils::randomString(12).c_str(), nullptr, nullptr);
 	if (!window)
 		return false;
 
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
+
 	return true;
 }
 
@@ -116,20 +114,20 @@ void Gui::Render()
 	ImGui::SetNextWindowSize(ImVec2(800.0f, 450.0f));
 
 	// Render ImGui
-	ImGui::Begin(XorStr("Destiny.ut"), nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar| ImGuiWindowFlags_NoScrollWithMouse);
+	ImGui::Begin("Destiny.ut", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar| ImGuiWindowFlags_NoScrollWithMouse);
 	{
 		ImGui::SetCursorPos(ImVec2(12.5f, 25.0f));
-		ImGui::BeginChild(XorStr("Features"), ImVec2(175.0f, 450.0f), false);
+		ImGui::BeginChild("Features", ImVec2(175.0f, 450.0f), false);
 		{
-			if (ImGui::Button(XorStr("Legit"), ImVec2(155.0f, 50.0f)))
+			if (ImGui::Button("Legit", ImVec2(155.0f, 50.0f)))
 				tab = IMGUI_WND_PAGES::P_LEGIT;
-			if (ImGui::Button(XorStr("Visuals"), ImVec2(155.0f, 50.0f)))
+			if (ImGui::Button("Visuals", ImVec2(155.0f, 50.0f)))
 				tab = IMGUI_WND_PAGES::P_VISUALS;
-			if (ImGui::Button(XorStr("Misc"), ImVec2(155.0f, 50.0f)))
+			if (ImGui::Button("Misc", ImVec2(155.0f, 50.0f)))
 				tab = IMGUI_WND_PAGES::P_MISC;
-			if (ImGui::Button(XorStr("Colors"), ImVec2(155.0f, 50.0f)))
+			if (ImGui::Button("Colors", ImVec2(155.0f, 50.0f)))
 				tab = IMGUI_WND_PAGES::P_COLORS;
-			if (ImGui::Button(XorStr("Settings"), ImVec2(155.0f, 50.0f)))
+			if (ImGui::Button("Settings", ImVec2(155.0f, 50.0f)))
 				tab = IMGUI_WND_PAGES::P_SETTINGS;
 		}
 		ImGui::EndChild();
@@ -138,188 +136,185 @@ void Gui::Render()
 		ImGui::GetForegroundDrawList()->AddLine(ImVec2(180.0f, 25.0f), ImVec2(180.0f, 440.0f), ImColor(255, 0, 0));
 		ImGui::SameLine();
 
-		ImGui::BeginChild(XorStr("Options"), ImVec2(625.0f, 450.0f), false);
+		ImGui::BeginChild("Options", ImVec2(625.0f, 450.0f), false);
 		{
 			if (tab == IMGUI_WND_PAGES::P_LEGIT)
 			{
-				ImGui::BeginChild(XorStr("Aimbot"), ImVec2(290.0f, 415.0f), true);
+				ImGui::BeginChild("Aimbot", ImVec2(290.0f, 415.0f), true);
 				{
-					ImGui::Text(XorStr("Aimbot"));
+					ImGui::Text("Aimbot");
 					ImGui::Separator();
-					ImGui::Checkbox(XorStr("Enable###AimbotEnable"), &g_Options.Legit.Aimbot.Enable);
-					ImGui::Checkbox(XorStr("Auto Aim###AimbotAutoAim"), &g_Options.Legit.Aimbot.AutoAim);
-					ImGui::Checkbox(XorStr("Deathmatch###AimbotDeathmatch"), &g_Options.Legit.Aimbot.Deathmatch);
-					ImGui::Checkbox(XorStr("Visible###AimbotVisible"), &g_Options.Legit.Aimbot.Visible);
-					ImGui::Checkbox(XorStr("Scoped###AimbotScoped"), &g_Options.Legit.Aimbot.Scoped);
-					ImGui::Checkbox(XorStr("Flashed###AimbotFlashed"), &g_Options.Legit.Aimbot.Flashed);
-					ImGui::Checkbox(XorStr("In Air###AimbotInAir"), &g_Options.Legit.Aimbot.InAir);
-					ImGui::Combo(XorStr("Target Bone###TargetBone"), &g_Options.Legit.Aimbot.TargetBone, bones, IM_ARRAYSIZE(bones));
-					ImGui::SliderInt(XorStr("Smoothing###AimbotSmoothing"), &g_Options.Legit.Aimbot.Smoothing, 1, 25);
+					ImGui::Checkbox("Enable###AimbotEnable", &g_Options.Legit.Aimbot.Enable);
+					ImGui::Checkbox("Auto Aim###AimbotAutoAim", &g_Options.Legit.Aimbot.AutoAim);
+					ImGui::Checkbox("Deathmatch###AimbotDeathmatch", &g_Options.Legit.Aimbot.Deathmatch);
+					ImGui::Checkbox("Visible###AimbotVisible", &g_Options.Legit.Aimbot.Visible);
+					ImGui::Checkbox("Scoped###AimbotScoped", &g_Options.Legit.Aimbot.Scoped);
+					ImGui::Checkbox("Flashed###AimbotFlashed", &g_Options.Legit.Aimbot.Flashed);
+					ImGui::Checkbox("In Air###AimbotInAir", &g_Options.Legit.Aimbot.InAir);
+					ImGui::Combo("Target Bone###TargetBone", &g_Options.Legit.Aimbot.TargetBone, bones, IM_ARRAYSIZE(bones));
+					ImGui::SliderInt("Smoothing###AimbotSmoothing", &g_Options.Legit.Aimbot.Smoothing, 1, 25);
 				}
 				ImGui::EndChild();
 
 				ImGui::SameLine();
 
-				ImGui::BeginChild(XorStr("Triggerbot"), ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("Triggerbot", ImVec2(290.0f, 250.0f), true);
 				{
-					ImGui::Text(XorStr("Triggerbot"));
+					ImGui::Text("Triggerbot");
 					ImGui::Separator();
-					ImGui::Checkbox(XorStr("Enable###TriggerbotEnable"), &g_Options.Legit.Triggerbot.Enable);
-					ImGui::Checkbox(XorStr("Auto Fire###TriggerbotAutoFire"), &g_Options.Legit.Triggerbot.AutoFire);
-					ImGui::Checkbox(XorStr("Deathmatch###TriggerbotDeathmatch"), &g_Options.Legit.Triggerbot.Deathmatch);
-					ImGui::Checkbox(XorStr("Scoped###TriggerbotScoped"), &g_Options.Legit.Triggerbot.Scoped);
-					ImGui::Checkbox(XorStr("Flashed###TriggerbotFlashed"), &g_Options.Legit.Triggerbot.Flashed);
-					ImGui::Checkbox(XorStr("In Air###TriggerbotInAir"), &g_Options.Legit.Triggerbot.InAir);
-					ImGui::SliderInt(XorStr("Delay###TriggerbotDelay"), &g_Options.Legit.Triggerbot.Delay, 0, 500);
+					ImGui::Checkbox("Enable###TriggerbotEnable", &g_Options.Legit.Triggerbot.Enable);
+					ImGui::Checkbox("Auto Fire###TriggerbotAutoFire", &g_Options.Legit.Triggerbot.AutoFire);
+					ImGui::Checkbox("Deathmatch###TriggerbotDeathmatch", &g_Options.Legit.Triggerbot.Deathmatch);
+					ImGui::Checkbox("Scoped###TriggerbotScoped", &g_Options.Legit.Triggerbot.Scoped);
+					ImGui::Checkbox("Flashed###TriggerbotFlashed", &g_Options.Legit.Triggerbot.Flashed);
+					ImGui::Checkbox("In Air###TriggerbotInAir", &g_Options.Legit.Triggerbot.InAir);
+					ImGui::SliderInt("Delay###TriggerbotDelay", &g_Options.Legit.Triggerbot.Delay, 0, 500);
 					ImGui::Separator();
-					ImGui::Checkbox(XorStr("Exclude Guns###TriggerbotExcludeGuns"), &g_Options.Legit.Triggerbot.ExcludeGuns);
-					ImGui::Checkbox(XorStr("Auto Knife###HelpersAutoKnife"), &g_Options.Legit.Triggerbot.AutoKnife);
-					ImGui::Checkbox(XorStr("Auto Taser###HelpersAutoTaser"), &g_Options.Legit.Triggerbot.AutoTaser);
+					ImGui::Checkbox("Exclude Guns###TriggerbotExcludeGuns", &g_Options.Legit.Triggerbot.ExcludeGuns);
+					ImGui::Checkbox("Auto Knife###HelpersAutoKnife", &g_Options.Legit.Triggerbot.AutoKnife);
+					ImGui::Checkbox("Auto Taser###HelpersAutoTaser", &g_Options.Legit.Triggerbot.AutoTaser);
 				}
 				ImGui::EndChild();
 
 				ImGui::SetCursorPos(ImVec2(298.5f, 260.0f));
 
-				ImGui::BeginChild(XorStr("RCS"), ImVec2(290.0f, 155.0f), true);
+				ImGui::BeginChild("RCS", ImVec2(290.0f, 155.0f), true);
 				{
-					ImGui::Text(XorStr("RCS"));
+					ImGui::Text("RCS");
 					ImGui::Separator();
-					ImGui::Checkbox(XorStr("Enable###RCSEnable"), &g_Options.Legit.RCS.Enable);
-					ImGui::SliderFloat(XorStr("###RCSAmount"), &g_Options.Legit.RCS.Amount, 0.0f, 100.0f, "%.0f");
+					ImGui::Checkbox("Enable###RCSEnable", &g_Options.Legit.RCS.Enable);
+					ImGui::SliderFloat("###RCSAmount", &g_Options.Legit.RCS.Amount, 0.0f, 100.0f, "%.0f");
 				}
 				ImGui::EndChild();
 			}
 			if (tab == IMGUI_WND_PAGES::P_VISUALS)
 			{
-				ImGui::BeginChild(XorStr("Glow"), ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("Glow", ImVec2(290.0f, 250.0f), true);
 				{
-					ImGui::Text(XorStr("Glow"));
+					ImGui::Text("Glow");
 					ImGui::Separator();
-					ImGui::Checkbox(XorStr("Enable###GlowEnable"), &g_Options.Visuals.Glow.Enable);
-					ImGui::Checkbox(XorStr("Teammates###GlowTeammates"), &g_Options.Visuals.Glow.Teammates);
-					ImGui::Checkbox(XorStr("Visible###GlowVisible"), &g_Options.Visuals.Glow.Visible);
-					ImGui::Checkbox(XorStr("Healthbased###GlowHealthbased"), &g_Options.Visuals.Glow.Healthbased);
-					ImGui::Checkbox(XorStr("Defusing###GlowDefusing"), &g_Options.Visuals.Glow.Defusing);
-					ImGui::Checkbox(XorStr("Scoped###GlowScoped"), &g_Options.Visuals.Glow.Scoped);
-					ImGui::Checkbox(XorStr("Flashed###GlowFlashed"), &g_Options.Visuals.Glow.Flashed);
+					ImGui::Checkbox("Enable###GlowEnable", &g_Options.Visuals.Glow.Enable);
+					ImGui::Checkbox("Teammates###GlowTeammates", &g_Options.Visuals.Glow.Teammates);
+					ImGui::Checkbox("Visible###GlowVisible", &g_Options.Visuals.Glow.Visible);
+					ImGui::Checkbox("Healthbased###GlowHealthbased", &g_Options.Visuals.Glow.Healthbased);
+					ImGui::Checkbox("Defusing###GlowDefusing", &g_Options.Visuals.Glow.Defusing);
+					ImGui::Checkbox("Scoped###GlowScoped", &g_Options.Visuals.Glow.Scoped);
+					ImGui::Checkbox("Flashed###GlowFlashed", &g_Options.Visuals.Glow.Flashed);
 				}
 				ImGui::EndChild();
 
 				ImGui::SameLine();
 
-				ImGui::BeginChild(XorStr("ColorChams"), ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("ColorChams", ImVec2(290.0f, 250.0f), true);
 				{
-					ImGui::Text(XorStr("Color Chams"));
+					ImGui::Text("Color Chams");
 					ImGui::Separator();
-					ImGui::Checkbox(XorStr("Enable###ChamsEnable"), &g_Options.Visuals.Chams.Enable);
-					ImGui::Checkbox(XorStr("Teammates###ChamsTeammates"), &g_Options.Visuals.Chams.Teammates);
-					if (ImGui::Button(XorStr("Clear###ChamsClear")))
+					ImGui::Checkbox("Enable###ChamsEnable", &g_Options.Visuals.Chams.Enable);
+					ImGui::Checkbox("Teammates###ChamsTeammates", &g_Options.Visuals.Chams.Teammates);
+					if (ImGui::Button("Clear###ChamsClear"))
 					{
 						g_Options.Visuals.Chams.Enable = false;
 						CEntity entity{};
 						ClrRender_t clearClr = { 255, 255, 255 };
-						for (short i = 0; i < MAX_PLAYERS; ++i)
+						for (short i = 0; i < 64; ++i)
 						{
-							entity.Set(g_Client.GetEntityFromList(i + 1));
-							entity.SetClrRender(clearClr);
+							entity = g_Client.getEntityFromList(i + 1);
+							entity.setClrRender(clearClr);
 						}
 					}
 				}
 				ImGui::EndChild();
 
-				ImGui::BeginChild(XorStr("World"), ImVec2(290.0f, 155.0f), true);
+				ImGui::BeginChild("World", ImVec2(290.0f, 155.0f), true);
 				{
-					ImGui::Text(XorStr("World"));
+					ImGui::Text("World");
 					ImGui::Separator();
-					ImGui::Checkbox(XorStr("Radar###WorldRadar"), &g_Options.Visuals.World.Radar);
-					ImGui::SliderFloat(XorStr("Brightness###WorldBrightness"), &g_Options.Visuals.World.Brightness, 0.0f, 20.0f, "%.0f");
+					ImGui::Checkbox("Radar###WorldRadar", &g_Options.Visuals.World.Radar);
+					ImGui::SliderFloat("Brightness###WorldBrightness", &g_Options.Visuals.World.Brightness, 0.0f, 20.0f, "%.0f");
 				}
 				ImGui::EndChild();
 			}
 			if (tab == IMGUI_WND_PAGES::P_MISC)
 			{
-				ImGui::BeginChild(XorStr("Helpers"), ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("Helpers", ImVec2(290.0f, 250.0f), true);
 				{
-					ImGui::Text(XorStr("Helpers"));
+					ImGui::Text("Helpers");
 					ImGui::Separator();
-					ImGui::Checkbox(XorStr("Bunnyhop###HelpersBunnyhop"), &g_Options.Misc.Helpers.Bunnyhop);
-					ImGui::Checkbox(XorStr("Fake Lag###HelpersFakeLag"), &g_Options.Misc.Helpers.FakeLag);
-					ImGui::Checkbox(XorStr("Auto Pistol###HelpersAutoPistol"), &g_Options.Misc.Helpers.AutoPistol);
-					ImGui::Checkbox(XorStr("No Flash###VisualsNoFlash"), &g_Options.Misc.Helpers.NoFlash);
-					ImGui::SliderInt(XorStr("FOV###VisualsFOV"), &g_Options.Misc.Helpers.Fov, 50, 150);
+					ImGui::Checkbox("Bunnyhop###HelpersBunnyhop", &g_Options.Misc.Helpers.Bunnyhop);
+					ImGui::Checkbox("Fake Lag###HelpersFakeLag", &g_Options.Misc.Helpers.FakeLag);
+					ImGui::Checkbox("Auto Pistol###HelpersAutoPistol", &g_Options.Misc.Helpers.AutoPistol);
+					ImGui::Checkbox("No Flash###VisualsNoFlash", &g_Options.Misc.Helpers.NoFlash);
+					ImGui::SliderInt("FOV###VisualsFOV", &g_Options.Misc.Helpers.Fov, 50, 150);
 				}
 				ImGui::EndChild();
 			}
 			if (tab == IMGUI_WND_PAGES::P_COLORS)
 			{
-				ImGui::BeginChild(XorStr("Glow"), ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("Glow", ImVec2(290.0f, 250.0f), true);
 				{
-					ImGui::Text(XorStr("Glow"));
+					ImGui::Text("Glow");
 					ImGui::Separator();
-					ImGui::ColorEdit3(XorStr("Teammates###GlowTeammates"), (float*)&g_Options.Colors.Glow.Teammates, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3(XorStr("Enemies###GlowEnemy"), (float*)&g_Options.Colors.Glow.Enemies, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3(XorStr("Enemies Visible###GlowEnemiesVisible"), (float*)&g_Options.Colors.Glow.EnemiesVisible, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3(XorStr("Defusing###GlowDefusing"), (float*)&g_Options.Colors.Glow.Defusing, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3(XorStr("Scoped###GlowScoped"), (float*)&g_Options.Colors.Glow.Scoped, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3(XorStr("Flashed###GlowFlashed"), (float*)&g_Options.Colors.Glow.Flashed, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Teammates###GlowTeammates", (float*)&g_Options.Colors.Glow.Teammates, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies###GlowEnemy", (float*)&g_Options.Colors.Glow.Enemies, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies Visible###GlowEnemiesVisible", (float*)&g_Options.Colors.Glow.EnemiesVisible, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Defusing###GlowDefusing", (float*)&g_Options.Colors.Glow.Defusing, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Scoped###GlowScoped", (float*)&g_Options.Colors.Glow.Scoped, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Flashed###GlowFlashed", (float*)&g_Options.Colors.Glow.Flashed, ImGuiColorEditFlags_NoInputs);
 				}
 				ImGui::EndChild();
 
 				ImGui::SameLine();
 
-				ImGui::BeginChild(XorStr("ColorChams"), ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("ColorChams", ImVec2(290.0f, 250.0f), true);
 				{
-					ImGui::Text(XorStr("Color Chams"));
+					ImGui::Text("Color Chams");
 					ImGui::Separator();
-					ImGui::ColorEdit3(XorStr("Teammates###ChamsTeammates"), (float*)&g_Options.Colors.Chams.Teammates, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3(XorStr("Enemies###ChamsEnemies"), (float*)&g_Options.Colors.Chams.Enemies, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Teammates###ChamsTeammates", (float*)&g_Options.Colors.Chams.Teammates, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies###ChamsEnemies", (float*)&g_Options.Colors.Chams.Enemies, ImGuiColorEditFlags_NoInputs);
 				}
 				ImGui::EndChild();
 			}
 			if (tab == IMGUI_WND_PAGES::P_SETTINGS)
 			{
-				ImGui::BeginChild(XorStr("Info"), ImVec2(590.0f, 180.0f), true);
+				ImGui::BeginChild("Info", ImVec2(590.0f, 180.0f), true);
 				{
-					ImGui::Text(XorStr("Info"));
+					ImGui::Text("Info");
 					ImGui::Separator();
-					ImGui::Text(XorStr("Source code:"));
+					ImGui::Text("Source code:");
 					ImGui::SameLine();
-					if (ImGui::Button(XorStr("GitHub"), ImVec2(100.0f, 17.5f)))
-						ShellExecute(0, 0, L"http://www.github.com/TosoxDev/Destiny.ut", 0, 0, SW_SHOW);
+					if (ImGui::Button("GitHub", ImVec2(100.0f, 17.5f)))
+						ShellExecuteA(nullptr, nullptr, "http://www.github.com/TosoxDev/Destiny.ut", nullptr, nullptr, SW_SHOW);
 					ImGui::Spacing();
-					ImGui::Text(XorStr("Credits"));
+					ImGui::Text("Credits");
 					ImGui::Separator();
-					ImGui::Text(XorStr("-Special thanks to the GuidedHacking community"));
-					ImGui::Text(XorStr("-Offsets provided by: hazedumper"));
-					ImGui::Text(XorStr("-GUI powered by: ImGui and GLFW"));
-					ImGui::Text(XorStr("-JSON library by: Niels Lohmann"));
+					ImGui::Text("-Special thanks to the GuidedHacking community");
+					ImGui::Text("-Offsets provided by: hazedumper");
+					ImGui::Text("-GUI powered by: ImGui and GLFW");
+					ImGui::Text("-JSON library by: Niels Lohmann");
 					ImGui::Separator();
-					ImGui::Checkbox(XorStr("Enable Developer"), &g_Options.Developer.Enable);
+					ImGui::Checkbox("Enable Developer", &g_Options.Developer.Enable);
 				}
 				ImGui::EndChild();
 
 				if (g_Options.Developer.Enable)
 				{
-					ImGui::BeginChild(XorStr("Developer"), ImVec2(590.0f, 235.0f), true);
+					ImGui::BeginChild("Developer", ImVec2(590.0f, 235.0f), true);
 					{
-						ImGui::Text(XorStr("Developer"));
+						ImGui::Text("Developer");
 						ImGui::Separator();
-						ImGui::Checkbox(XorStr("Unload on Exit"), &g_Options.Developer.UnloadOnExit);
+						ImGui::Checkbox("Unload on Exit", &g_Options.Developer.UnloadOnExit);
 						ImGui::Separator();
-						ImGui::Checkbox(XorStr("Loop 32 entities"), &g_Options.Developer.Use32EntityLoop);
+						ImGui::SliderFloat("Glow Alpha", &g_Options.Developer.GlowAlpha, 0.0f, 1.0f, "%.2f");
+						ImGui::SliderInt("Glow Style", &g_Options.Developer.GlowStyle, 0, 3);
 						ImGui::Separator();
-						ImGui::SliderFloat(XorStr("Glow Alpha"), &g_Options.Developer.GlowAlpha, 0.0f, 1.0f, "%.2f");
-						ImGui::SliderInt(XorStr("Glow Style"), &g_Options.Developer.GlowStyle, 0, 3);
+						ImGui::SliderFloat("Player Flash Trigger", &g_Options.Developer.LocalPlayerFlashFlagAmount, 0.0f, 10.0f, "%.2f");
+						ImGui::SliderFloat("Enemy Flash Trigger", &g_Options.Developer.EntityFlashFlagAmount, 0.0f, 10.0f, "%.2f");
 						ImGui::Separator();
-						ImGui::SliderFloat(XorStr("Player Flash Trigger"), &g_Options.Developer.LocalPlayerFlashFlagAmount, 0.0f, 10.0f, "%.2f");
-						ImGui::SliderFloat(XorStr("Enemy Flash Trigger"), &g_Options.Developer.EntityFlashFlagAmount, 0.0f, 10.0f, "%.2f");
+						ImGui::SliderInt("RCS Trigger", &g_Options.Developer.RcsShotsTrigger, 0, 10);
 						ImGui::Separator();
-						ImGui::SliderInt(XorStr("RCS Trigger"), &g_Options.Developer.RcsShotsTrigger, 0, 10);
-						ImGui::Separator();
-						if (ImGui::Button(XorStr("Reset")))
+						if (ImGui::Button("Reset"))
 						{
 							g_Options.Developer.UnloadOnExit = true;
-							g_Options.Developer.Use32EntityLoop = false;
 							g_Options.Developer.GlowAlpha = 0.85f;
 							g_Options.Developer.GlowStyle = 0;
 							g_Options.Developer.LocalPlayerFlashFlagAmount = 2.5f;

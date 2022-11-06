@@ -2,5 +2,7 @@
 
 struct Color
 {
-	float red, green, blue;
+	float red;
+	float green;
+	float blue;
 };

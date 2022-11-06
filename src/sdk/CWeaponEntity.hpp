@@ -1,17 +1,17 @@
 #pragma once
 
-#include <Windows.h>
+#include <cstdint>
 
 class CWeaponEntity
 {
 public:
-	int GetItemId();
-	bool IsSniper();
-	bool IsPistol();
-	bool IsKnife();
-	bool IsGun();
-	bool IsGrenade();
+	int getItemId();
+	bool isSniper();
+	bool isPistol();
+	bool isKnife();
+	bool isGun();
+	bool isGrenade();
 
 private:
-	uintptr_t addr;
+	std::uintptr_t m_Address{};
 };

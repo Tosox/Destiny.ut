@@ -16,9 +16,6 @@
     <Filter Include="lib\json">
       <UniqueIdentifier>{5edd5298-4cf3-4fbf-93b3-1cb2c4bcb99f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lib\xor">
-      <UniqueIdentifier>{5021c0ef-4860-41db-bbf3-f1410e629e0d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="lib\glfw\include">
       <UniqueIdentifier>{39a32d83-7044-4904-a185-01e73bdffd98}</UniqueIdentifier>
     </Filter>
@@ -106,9 +103,6 @@
   <ItemGroup>
     <ClInclude Include="menu.hpp">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\xor\xor.hpp">
-      <Filter>lib\xor</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\json\json.hpp">
       <Filter>lib\json</Filter>

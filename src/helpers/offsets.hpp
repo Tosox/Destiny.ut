@@ -1,51 +1,51 @@
 #pragma once
 
-#include <Windows.h>
+#include <cstdint>
 
 namespace offsets
 {
 	namespace signatures
 	{
-		inline DWORD dwLocalPlayer;
-		inline DWORD dwMouseEnable;
-		inline DWORD dwMouseEnablePtr;
-		inline DWORD dwGlowObjectManager;
-		inline DWORD dwEntityList;
-		inline DWORD dwForceJump;
-		inline DWORD dwForceAttack;
-		inline DWORD dwForceAttack2;
-		inline DWORD dwbSendPackets;
-		inline DWORD model_ambient_min;
-		inline DWORD dwGameDir;
-		inline DWORD dwClientState;
-		inline DWORD dwClientState_State;
-		inline DWORD dwClientState_ViewAngles;
-		inline DWORD dwClientState_MapDirectory;
-		inline DWORD m_bDormant;
+		inline std::uintptr_t dwLocalPlayer;
+		inline std::uintptr_t dwMouseEnable;
+		inline std::uintptr_t dwMouseEnablePtr;
+		inline std::uintptr_t dwGlowObjectManager;
+		inline std::uintptr_t dwEntityList;
+		inline std::uintptr_t dwForceJump;
+		inline std::uintptr_t dwForceAttack;
+		inline std::uintptr_t dwForceAttack2;
+		inline std::uintptr_t dwbSendPackets;
+		inline std::uintptr_t model_ambient_min;
+		inline std::uintptr_t dwGameDir;
+		inline std::uintptr_t dwClientState;
+		inline std::uintptr_t dwClientState_State;
+		inline std::uintptr_t dwClientState_ViewAngles;
+		inline std::uintptr_t dwClientState_MapDirectory;
+		inline std::uintptr_t m_bDormant;
 	}
 	namespace netvars
 	{
-		inline DWORD m_bIsDefusing;
-		inline DWORD m_bIsScoped;
-		inline DWORD m_bSpotted;
-		inline DWORD m_bSpottedByMask;
-		inline DWORD m_flFlashDuration;
-		inline DWORD m_iGlowIndex;
-		inline DWORD m_iHealth;
-		inline DWORD m_iTeamNum;
-		inline DWORD m_hActiveWeapon;
-		inline DWORD m_dwBoneMatrix;
-		inline DWORD m_vecOrigin;
-		inline DWORD m_vecVelocity;
-		inline DWORD m_iItemDefinitionIndex;
-		inline DWORD m_fFlags;
-		inline DWORD m_iCrosshairId;
-		inline DWORD m_iDefaultFOV;
-		inline DWORD m_iShotsFired;
-		inline DWORD m_aimPunchAngle;
-		inline DWORD m_clrRender;
-		inline DWORD m_vecViewOffset;
+		inline std::uintptr_t m_bIsDefusing;
+		inline std::uintptr_t m_bIsScoped;
+		inline std::uintptr_t m_bSpotted;
+		inline std::uintptr_t m_bSpottedByMask;
+		inline std::uintptr_t m_flFlashDuration;
+		inline std::uintptr_t m_iGlowIndex;
+		inline std::uintptr_t m_iHealth;
+		inline std::uintptr_t m_iTeamNum;
+		inline std::uintptr_t m_hActiveWeapon;
+		inline std::uintptr_t m_dwBoneMatrix;
+		inline std::uintptr_t m_vecOrigin;
+		inline std::uintptr_t m_vecVelocity;
+		inline std::uintptr_t m_iItemDefinitionIndex;
+		inline std::uintptr_t m_fFlags;
+		inline std::uintptr_t m_iCrosshairId;
+		inline std::uintptr_t m_iDefaultFOV;
+		inline std::uintptr_t m_iShotsFired;
+		inline std::uintptr_t m_aimPunchAngle;
+		inline std::uintptr_t m_clrRender;
+		inline std::uintptr_t m_vecViewOffset;
 	}
 
-	void InitOffsets();
+	void initilize();
 }

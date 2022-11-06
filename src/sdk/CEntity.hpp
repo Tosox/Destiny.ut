@@ -8,32 +8,34 @@
 class CEntity
 {
 public:
-	bool IsAlive();
-	bool IsExisting();
-	bool IsDefusing();
-	bool IsDormant();
-	bool IsScoped();
-	bool IsSpotted();
-	bool IsSpottedBy(CEntity& entity);
-	bool IsValid();
-	float GetFlashDuration();
-	int GetClassId();
-	int GetGlowIndex();
-	int GetHealth();
-	int GetId();
-	int GetTeamNum();
-	CWeaponEntity GetActiveWeapon();
-	uintptr_t Get();
-	uintptr_t GetBoneMatrix();
-	Vector3 GetBoneById(int bone);
-	Vector3 GetOrigin();
-	Vector3 GetVelocity();
+	bool isAlive();
+	bool isExisting();
+	bool isDefusing();
+	bool isDormant();
+	bool isScoped();
+	bool isSpotted();
+	bool isSpottedBy(CEntity& entity);
+	bool isValid();
+	float getFlashDuration();
+	int getClassId();
+	int getGlowIndex();
+	int getHealth();
+	int getId();
+	int getTeamNum();
+	CWeaponEntity getActiveWeapon();
+	uintptr_t getBoneMatrix();
+	Vector3 getBoneById(int boneId);
+	Vector3 getOrigin();
+	Vector3 getVelocity();
 
-	void Set(uintptr_t val);
-	void SetFlashDuration(float val);
-	void SetSpotted(bool val);
-	void SetClrRender(ClrRender_t& clrRender);
+	void setFlashDuration(float value);
+	void setSpotted(bool value);
+	void setClrRender(ClrRender_t& clrRender);
+
+	inline CEntity& operator= (const std::uintptr_t& address) { m_Address = address; return *this; }
+	friend std::uintptr_t operator+ (const CEntity& entity, const std::uintptr_t& offset) { return entity.m_Address + offset; }
+	friend bool operator== (const CEntity& entity1, const CEntity& entity2) { return entity1.m_Address == entity2.m_Address; }
 
 protected:
-	uintptr_t addr;
+	std::uintptr_t m_Address{};
 };

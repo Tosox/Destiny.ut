@@ -5,12 +5,9 @@
 #include "../sdk/Structs.hpp"
 #include "../sdk/CEntity.hpp"
 
-#define BYTE_MAX 255
-#define MAX_PLAYERS 64
-
 struct EntityList_t
 {
-	CEntity entity[MAX_PLAYERS];
+	CEntity entity[64];
 } EntityList;
 
 void HandleBrightness()
@@ -21,16 +18,16 @@ void HandleBrightness()
 	if (tBrightness != g_Options.Visuals.World.Brightness)
 	{
 		int xorBrightness = *(int*)&g_Options.Visuals.World.Brightness ^ g_Options.Default.oModelAmbient;
-		g_Engine.SetModelAmbientMin(xorBrightness);
+		g_Engine.setModelAmbientMin(xorBrightness);
 		tBrightness = g_Options.Visuals.World.Brightness;
 	}
 }
 
 void SetChamsStyle(ClrRender_t& clrRender, const Color color)
 {
-	clrRender.red = (BYTE)(color.red * BYTE_MAX);
-	clrRender.green = (BYTE)(color.green * BYTE_MAX);
-	clrRender.blue = (BYTE)(color.blue * BYTE_MAX);
+	clrRender.red = static_cast<unsigned char>(color.red * 255);
+	clrRender.green = static_cast<unsigned char>(color.green * 255);
+	clrRender.blue = static_cast<unsigned char>(color.blue * 255);
 }
 
 void HandleChams(CEntity& entity)
@@ -39,7 +36,7 @@ void HandleChams(CEntity& entity)
 	Color clrRenderColor{};
 
 	// Color player depending on team
-	if (g_LocalPlayer.GetTeamNum() == entity.GetTeamNum())
+	if (g_LocalPlayer.getTeamNum() == entity.getTeamNum())
 	{
 		if (!g_Options.Visuals.Chams.Teammates)
 			return;
@@ -52,7 +49,7 @@ void HandleChams(CEntity& entity)
 
 	SetChamsStyle(clrRender, clrRenderColor);
 
-	entity.SetClrRender(clrRender);
+	entity.setClrRender(clrRender);
 }
 
 void SetGlowStyle(GlowStruct_t& glowStruct, const Color color)
@@ -68,14 +65,14 @@ void SetGlowStyle(GlowStruct_t& glowStruct, const Color color)
 
 void HandleGlow(CEntity& entity)
 {
-	int glowIndex = entity.GetGlowIndex();
-	bool isSpotted = entity.IsSpottedBy(g_LocalPlayer);
+	int glowIndex = entity.getGlowIndex();
+	bool isSpotted = entity.isSpottedBy(g_LocalPlayer);
 
-	GlowStruct_t glowStruct = g_Client.GetGlowStruct(glowIndex);
+	GlowStruct_t glowStruct = g_Client.getGlowStruct(glowIndex);
 	Color glowColor{};
 
 	// Color player depending on different flags
-	if (g_LocalPlayer.GetTeamNum() == entity.GetTeamNum())
+	if (g_LocalPlayer.getTeamNum() == entity.getTeamNum())
 	{
 		if (!g_Options.Visuals.Glow.Teammates)
 			return;
@@ -83,15 +80,15 @@ void HandleGlow(CEntity& entity)
 	}
 	else
 	{
-		if ((g_Options.Visuals.Glow.Flashed) && (entity.GetFlashDuration() > g_Options.Developer.EntityFlashFlagAmount))
+		if ((g_Options.Visuals.Glow.Flashed) && (entity.getFlashDuration() > g_Options.Developer.EntityFlashFlagAmount))
 			glowColor = g_Options.Colors.Glow.Flashed;
-		else if ((g_Options.Visuals.Glow.Flashed) && (entity.IsDefusing()))
+		else if ((g_Options.Visuals.Glow.Flashed) && (entity.isDefusing()))
 			glowColor = g_Options.Colors.Glow.Defusing;
-		else if ((g_Options.Visuals.Glow.Scoped) && (entity.IsScoped()))
+		else if ((g_Options.Visuals.Glow.Scoped) && (entity.isScoped()))
 			glowColor = g_Options.Colors.Glow.Scoped;
 		else if (g_Options.Visuals.Glow.Healthbased)
 		{
-			int health = entity.GetHealth();
+			const int health = entity.getHealth();
 			glowColor = { health * -0.01f + 1, health * 0.01f, 0.0f };
 		}
 		else
@@ -107,24 +104,24 @@ void HandleGlow(CEntity& entity)
 
 	SetGlowStyle(glowStruct, glowColor);
 
-	g_Client.SetGlowStruct(glowIndex, glowStruct);
+	g_Client.setGlowStruct(glowIndex, glowStruct);
 }
 
 void Features::Visuals()
 {
 	HandleBrightness();
 
-	for (short i = 0; i < (g_Options.Developer.Use32EntityLoop ? 32 : MAX_PLAYERS); ++i)
+	for (short i = 0; i < 64; ++i)
 	{
-		EntityList.entity[i].Set(g_Client.GetEntityFromList(i));
+		EntityList.entity[i] = g_Client.getEntityFromList(i);
 
-		if (EntityList.entity[i].Get() == g_LocalPlayer.Get())
+		if (EntityList.entity[i] == g_LocalPlayer)
 			continue;
-		if (!EntityList.entity[i].IsValid())
+		if (!EntityList.entity[i].isValid())
 			continue;
 
 		if (g_Options.Visuals.World.Radar)
-			EntityList.entity[i].SetSpotted(true);
+			EntityList.entity[i].setSpotted(true);
 		if (g_Options.Visuals.Glow.Enable)
 			HandleGlow(EntityList.entity[i]);
 		if (g_Options.Visuals.Chams.Enable)
