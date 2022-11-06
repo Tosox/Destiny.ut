@@ -1,14 +1,8 @@
-﻿#include <Windows.h>
-#include "Features.hpp"
+﻿#include "Features.hpp"
 #include "../settings/globals.hpp"
 #include "../sdk/Color.hpp"
 #include "../sdk/Structs.hpp"
 #include "../sdk/CEntity.hpp"
-
-struct EntityList_t
-{
-	CEntity entity[64];
-} EntityList;
 
 void HandleBrightness()
 {
@@ -113,18 +107,18 @@ void Features::Visuals()
 
 	for (short i = 0; i < 64; ++i)
 	{
-		EntityList.entity[i] = g_Client.getEntityFromList(i);
+		CEntity entity = g_Client.getEntityFromList(i);
 
-		if (EntityList.entity[i] == g_LocalPlayer)
+		if (entity == g_LocalPlayer)
 			continue;
-		if (!EntityList.entity[i].isValid())
+		if (!entity.isValid())
 			continue;
 
 		if (g_Options.Visuals.World.Radar)
-			EntityList.entity[i].setSpotted(true);
+			entity.setSpotted(true);
 		if (g_Options.Visuals.Glow.Enable)
-			HandleGlow(EntityList.entity[i]);
+			HandleGlow(entity);
 		if (g_Options.Visuals.Chams.Enable)
-			HandleChams(EntityList.entity[i]);
+			HandleChams(entity);
 	}
 }

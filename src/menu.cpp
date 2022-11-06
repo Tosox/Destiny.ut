@@ -21,9 +21,6 @@ static const char* bones[6]{ "Pelvic", "Stomach", "Lower Chest", "Upper Chest", 
 
 bool Glfw::GenerateWindow()
 {
-	// Use 'SW_SHOW' for debugging
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
-
 	glfwSetErrorCallback(NULL);
 	if (!glfwInit())
 		return false;
@@ -214,11 +211,10 @@ void Gui::Render()
 					if (ImGui::Button("Clear###ChamsClear"))
 					{
 						g_Options.Visuals.Chams.Enable = false;
-						CEntity entity{};
 						ClrRender_t clearClr = { 255, 255, 255 };
 						for (short i = 0; i < 64; ++i)
 						{
-							entity = g_Client.getEntityFromList(i + 1);
+							CEntity entity = g_Client.getEntityFromList(i + 1);
 							entity.setClrRender(clearClr);
 						}
 					}
@@ -241,7 +237,6 @@ void Gui::Render()
 					ImGui::Text("Helpers");
 					ImGui::Separator();
 					ImGui::Checkbox("Bunnyhop###HelpersBunnyhop", &g_Options.Misc.Helpers.Bunnyhop);
-					ImGui::Checkbox("Fake Lag###HelpersFakeLag", &g_Options.Misc.Helpers.FakeLag);
 					ImGui::Checkbox("Auto Pistol###HelpersAutoPistol", &g_Options.Misc.Helpers.AutoPistol);
 					ImGui::Checkbox("No Flash###VisualsNoFlash", &g_Options.Misc.Helpers.NoFlash);
 					ImGui::SliderInt("FOV###VisualsFOV", &g_Options.Misc.Helpers.Fov, 50, 150);

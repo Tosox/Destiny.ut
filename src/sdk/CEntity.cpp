@@ -6,6 +6,16 @@
 #include "../helpers/offsets.hpp"
 #include "../settings/globals.hpp"
 
+CEntity::CEntity()
+{
+	m_Address = 0;
+}
+
+CEntity::CEntity(std::uintptr_t address)
+{
+	m_Address = address;
+}
+
 bool CEntity::isAlive()
 {
 	return getHealth() > 0;

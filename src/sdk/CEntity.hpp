@@ -8,6 +8,9 @@
 class CEntity
 {
 public:
+	CEntity();
+	CEntity(std::uintptr_t address);
+
 	bool isAlive();
 	bool isExisting();
 	bool isDefusing();

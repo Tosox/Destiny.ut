@@ -1,4 +1,3 @@
-#include <Windows.h>
 #include "Features.hpp"
 #include "../settings/globals.hpp"
 #include "../sdk/Vector.hpp"

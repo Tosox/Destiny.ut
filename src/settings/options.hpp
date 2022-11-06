@@ -67,7 +67,6 @@ struct Options
 		struct Helpers_t
 		{
 			bool Bunnyhop = false;
-			bool FakeLag = false;
 			bool AutoPistol = false;
 			bool NoFlash = false;
 			int Fov = 90;
