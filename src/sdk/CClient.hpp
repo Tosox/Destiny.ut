@@ -1,25 +1,26 @@
 #pragma once
 
-#include <Windows.h>
+#include <cstdint>
 #include "Structs.hpp"
 
 class CClient
 {
 public:
-	bool IsMouseEnabled();
-	GlowStruct_t GetGlowStruct(int glowIndex);
-	uintptr_t Get();
-	uintptr_t GetLocalPlayer();
-	uintptr_t GetGlowObjectManager();
-	uintptr_t GetEntityFromList(int i);
+	bool isMouseEnabled();
+	GlowStruct_t getGlowStruct(int glowIndex);
+	std::uintptr_t getLocalPlayer();
+	std::uintptr_t getGlowObjectManager();
+	std::uintptr_t getEntityFromList(int index);
 
-	void Set(uintptr_t val);
-	void SetGlowStruct(int glowIndex, GlowStruct_t& glowStruct);
-	void DoForceJump();
-	void DoForceAttack();
-	void DoForceAttack2();
+	void setGlowStruct(int glowIndex, GlowStruct_t& glowStruct);
+	void doForceJump();
+	void doForceAttack();
+	void doForceAttack2();
+
+	inline CClient& operator= (const std::uintptr_t& address) { m_Address = address; return *this; }
+	friend std::uintptr_t operator+ (const CClient& entity, const std::uintptr_t& offset) { return entity.m_Address + offset; }
 
 private:
-	uintptr_t addr;
+	std::uintptr_t m_Address{};
 };
 

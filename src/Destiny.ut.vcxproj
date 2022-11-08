@@ -27,12 +27,22 @@
     <ClCompile Include="..\lib\imgui\imgui_impl_opengl2.cpp" />
     <ClCompile Include="..\lib\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\lib\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="..\lib\MemMan\MemMan.cpp" />
-    <ClCompile Include="features\legit.cpp" />
-    <ClCompile Include="features\misc.cpp" />
-    <ClCompile Include="features\visuals.cpp" />
+    <ClCompile Include="features\aimbot.cpp" />
+    <ClCompile Include="features\autopistol.cpp" />
+    <ClCompile Include="features\brightness.cpp" />
+    <ClCompile Include="features\bunnyhop.cpp" />
+    <ClCompile Include="features\chams.cpp" />
+    <ClCompile Include="features\fov.cpp" />
+    <ClCompile Include="features\glow.cpp" />
+    <ClCompile Include="features\noflash.cpp" />
+    <ClCompile Include="features\radar.cpp" />
+    <ClCompile Include="features\rcs.cpp" />
+    <ClCompile Include="features\triggerbot.cpp" />
+    <ClCompile Include="helpers\Console.cpp" />
+    <ClCompile Include="helpers\Memory.cpp" />
     <ClCompile Include="helpers\offsets.cpp" />
     <ClCompile Include="helpers\utils.cpp" />
+    <ClCompile Include="features\loop.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="sdk\CBaseEntity.cpp" />
@@ -55,9 +65,9 @@
     <ClInclude Include="..\lib\imgui\imstb_textedit.h" />
     <ClInclude Include="..\lib\imgui\imstb_truetype.h" />
     <ClInclude Include="..\lib\json\json.hpp" />
-    <ClInclude Include="..\lib\MemMan\MemMan.hpp" />
-    <ClInclude Include="..\lib\xor\xor.hpp" />
-    <ClInclude Include="features\features.hpp" />
+    <ClInclude Include="features\Features.hpp" />
+    <ClInclude Include="helpers\Console.hpp" />
+    <ClInclude Include="helpers\Memory.hpp" />
     <ClInclude Include="helpers\offsets.hpp" />
     <ClInclude Include="helpers\utils.hpp" />
     <ClInclude Include="menu.hpp" />
@@ -88,7 +98,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -101,7 +111,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -141,7 +151,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\..\lib;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\lib\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
@@ -184,9 +195,10 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..;..;..\libs\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

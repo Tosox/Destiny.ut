@@ -1,62 +1,50 @@
-#include <Windows.h>
-#include <MemMan/MemMan.hpp>
 #include "CClient.hpp"
 #include "../helpers/offsets.hpp"
 #include "../settings/globals.hpp"
 
-bool CClient::IsMouseEnabled()
+bool CClient::isMouseEnabled()
 {
-	int mouse = g_Mem->read<int>(this->addr + offsets::signatures::dwMouseEnable);
+	int mouse = g_Memory.read<int>(m_Address + offsets::signatures::dwMouseEnable);
 	mouse ^= offsets::signatures::dwMouseEnablePtr;
 	return !(mouse & 1);
 }
 
-GlowStruct_t CClient::GetGlowStruct(int glowIndex)
+GlowStruct_t CClient::getGlowStruct(int glowIndex)
 {
-	return g_Mem->read<GlowStruct_t>(this->GetGlowObjectManager() + (glowIndex * 0x38));
+	return g_Memory.read<GlowStruct_t>(getGlowObjectManager() + (glowIndex * 0x38));
 }
 
-uintptr_t CClient::Get()
+std::uintptr_t CClient::getLocalPlayer()
 {
-	return this->addr;
+	return g_Memory.read<std::uintptr_t>(m_Address + offsets::signatures::dwLocalPlayer);
 }
 
-uintptr_t CClient::GetLocalPlayer()
+std::uintptr_t CClient::getGlowObjectManager()
 {
-	return g_Mem->read<uintptr_t>(this->addr + offsets::signatures::dwLocalPlayer);
+	return g_Memory.read<std::uintptr_t>(m_Address + offsets::signatures::dwGlowObjectManager);
 }
 
-uintptr_t CClient::GetGlowObjectManager()
+std::uintptr_t CClient::getEntityFromList(int index)
 {
-	return g_Mem->read<uintptr_t>(this->addr + offsets::signatures::dwGlowObjectManager);
+	return g_Memory.read<std::uintptr_t>(m_Address + offsets::signatures::dwEntityList + (index * 0x10));
 }
 
-uintptr_t CClient::GetEntityFromList(int i)
+void CClient::setGlowStruct(int glowIndex, GlowStruct_t& glowStruct)
 {
-	return g_Mem->read<uintptr_t>(this->addr + offsets::signatures::dwEntityList + (i * 0x10));
+	g_Memory.write<GlowStruct_t>(getGlowObjectManager() + (glowIndex * 0x38), glowStruct);
 }
 
-void CClient::Set(uintptr_t val)
+void CClient::doForceJump()
 {
-	this->addr = val;
+	g_Memory.write<uintptr_t>(m_Address + offsets::signatures::dwForceJump, 6);
 }
 
-void CClient::SetGlowStruct(int glowIndex, GlowStruct_t& glowStruct)
+void CClient::doForceAttack()
 {
-	g_Mem->write<GlowStruct_t>(this->GetGlowObjectManager() + (glowIndex * 0x38), glowStruct);
+	g_Memory.write<uintptr_t>(m_Address + offsets::signatures::dwForceAttack, 6);
 }
 
-void CClient::DoForceJump()
+void CClient::doForceAttack2()
 {
-	g_Mem->write<uintptr_t>(this->addr + offsets::signatures::dwForceJump, 6);
-}
-
-void CClient::DoForceAttack()
-{
-	g_Mem->write<uintptr_t>(this->addr + offsets::signatures::dwForceAttack, 6);
-}
-
-void CClient::DoForceAttack2()
-{
-	g_Mem->write<uintptr_t>(this->addr + offsets::signatures::dwForceAttack2, 6);
+	g_Memory.write<uintptr_t>(m_Address + offsets::signatures::dwForceAttack2, 6);
 }

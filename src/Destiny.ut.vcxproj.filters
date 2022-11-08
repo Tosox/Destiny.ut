@@ -16,12 +16,6 @@
     <Filter Include="lib\json">
       <UniqueIdentifier>{5edd5298-4cf3-4fbf-93b3-1cb2c4bcb99f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lib\MemMan">
-      <UniqueIdentifier>{4e5deaf3-0a16-4e48-a8e4-ba3bb581e7d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\xor">
-      <UniqueIdentifier>{5021c0ef-4860-41db-bbf3-f1410e629e0d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="lib\glfw\include">
       <UniqueIdentifier>{39a32d83-7044-4904-a185-01e73bdffd98}</UniqueIdentifier>
     </Filter>
@@ -48,9 +42,6 @@
     <ClCompile Include="menu.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\MemMan\MemMan.cpp">
-      <Filter>lib\MemMan</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\imgui\imgui.cpp">
       <Filter>lib\imgui</Filter>
     </ClCompile>
@@ -75,15 +66,6 @@
     <ClCompile Include="..\lib\imgui\imgui_widgets.cpp">
       <Filter>lib\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="features\legit.cpp">
-      <Filter>src\features</Filter>
-    </ClCompile>
-    <ClCompile Include="features\misc.cpp">
-      <Filter>src\features</Filter>
-    </ClCompile>
-    <ClCompile Include="features\visuals.cpp">
-      <Filter>src\features</Filter>
-    </ClCompile>
     <ClCompile Include="helpers\offsets.cpp">
       <Filter>src\helpers</Filter>
     </ClCompile>
@@ -105,16 +87,52 @@
     <ClCompile Include="sdk\CWeaponEntity.cpp">
       <Filter>src\sdk</Filter>
     </ClCompile>
+    <ClCompile Include="helpers\Memory.cpp">
+      <Filter>src\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="features\bunnyhop.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\noflash.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\fov.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\autopistol.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\glow.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\chams.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\brightness.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\loop.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\radar.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\rcs.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\triggerbot.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\aimbot.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="helpers\Console.cpp">
+      <Filter>src\helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.hpp">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\xor\xor.hpp">
-      <Filter>lib\xor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\MemMan\MemMan.hpp">
-      <Filter>lib\MemMan</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\json\json.hpp">
       <Filter>lib\json</Filter>
@@ -155,7 +173,7 @@
     <ClInclude Include="..\lib\glfw\include\glfw3native.hpp">
       <Filter>lib\glfw\include</Filter>
     </ClInclude>
-    <ClInclude Include="features\features.hpp">
+    <ClInclude Include="features\Features.hpp">
       <Filter>src\features</Filter>
     </ClInclude>
     <ClInclude Include="helpers\offsets.hpp">
@@ -196,6 +214,12 @@
     </ClInclude>
     <ClInclude Include="sdk\Vector.hpp">
       <Filter>src\sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\Memory.hpp">
+      <Filter>src\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\Console.hpp">
+      <Filter>src\helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

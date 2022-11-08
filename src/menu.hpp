@@ -10,15 +10,12 @@ enum IMGUI_WND_PAGES : short
 	P_SETTINGS
 };
 
-namespace Glfw
+namespace gui
 {
-	bool GenerateWindow();
-	bool WindowNotClosed();
-}
+	bool generateWindow();
+	bool windowNotClosed();
 
-namespace Gui
-{
-	void InitImGui();
-	void Render();
-	void Shutdown();
+	void initilize();
+	void render();
+	void shutdown();
 }

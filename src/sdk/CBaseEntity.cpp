@@ -1,40 +1,38 @@
-#include <Windows.h>
-#include <MemMan/MemMan.hpp>
 #include "CBaseEntity.hpp"
 #include "../settings/globals.hpp"
 #include "../helpers/offsets.hpp"
 
-BYTE CBaseEntity::GetFlags()
+unsigned char CBaseEntity::getFlags()
 {
-	return g_Mem->read<BYTE>(this->addr + offsets::netvars::m_fFlags);
+	return g_Memory.read<unsigned char>(m_Address + offsets::netvars::m_fFlags);
 }
 
-int CBaseEntity::GetCrosshairId()
+int CBaseEntity::getCrosshairId()
 {
-	return g_Mem->read<int>(this->addr + offsets::netvars::m_iCrosshairId);
+	return g_Memory.read<int>(m_Address + offsets::netvars::m_iCrosshairId);
 }
 
-int CBaseEntity::GetFov()
+int CBaseEntity::getFov()
 {
-	return g_Mem->read<int>(this->addr + offsets::netvars::m_iDefaultFOV);
+	return g_Memory.read<int>(m_Address + offsets::netvars::m_iDefaultFOV);
 }
 
-int CBaseEntity::GetShotsFired()
+int CBaseEntity::getShotsFired()
 {
-	return g_Mem->read<int>(this->addr + offsets::netvars::m_iShotsFired);
+	return g_Memory.read<int>(m_Address + offsets::netvars::m_iShotsFired);
 }
 
-Vector2 CBaseEntity::GetAimPunchAngle()
+Vector2 CBaseEntity::getAimPunchAngle()
 {
-	return g_Mem->read<Vector2>(this->addr + offsets::netvars::m_aimPunchAngle);
+	return g_Memory.read<Vector2>(m_Address + offsets::netvars::m_aimPunchAngle);
 }
 
-Vector3 CBaseEntity::GetViewOffset()
+Vector3 CBaseEntity::getViewOffset()
 {
-	return g_Mem->read<Vector3>(this->addr + offsets::netvars::m_vecViewOffset);
+	return g_Memory.read<Vector3>(m_Address + offsets::netvars::m_vecViewOffset);
 }
 
-void CBaseEntity::SetFov(int val)
+void CBaseEntity::setFov(int value)
 {
-	g_Mem->write<int>(this->addr + offsets::netvars::m_iDefaultFOV, val);
+	g_Memory.write<int>(m_Address + offsets::netvars::m_iDefaultFOV, value);
 }

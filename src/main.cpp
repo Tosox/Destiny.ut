@@ -1,7 +1,4 @@
-﻿#include <Windows.h>
-#include <xor/xor.hpp>
-#include <MemMan/MemMan.hpp>
-#include "menu.hpp"
+﻿#include "menu.hpp"
 #include "settings/globals.hpp"
 #include "helpers/utils.hpp"
 #include "helpers/offsets.hpp"
@@ -9,61 +6,42 @@
 
 #pragma comment(lib, "urlmon.lib")
 
-#define PROCESSEXE L"csgo.exe"
-#define CLIENTDLL L"client.dll"
-#define ENGINEDLL L"engine.dll"
-
-MemMan* g_Mem = new MemMan();
-Options g_Options;
-CClient g_Client;
-CEngine g_Engine;
-CBaseEntity g_LocalPlayer;
-
 int main(int argc, char** argv)
 {
 	// Init the window
-	if (!Utils::GotTargetWindow())
+	if (!utils::isTargetRunning())
 		return EXIT_FAILURE;
-	if (!Glfw::GenerateWindow())
+	if (!gui::generateWindow())
 		return EXIT_FAILURE;
-	Gui::InitImGui();
+	gui::initilize();
 
 	// Get process info
-	int procID = g_Mem->getProcess(PROCESSEXE);
-	g_Client.Set(g_Mem->getModule(procID, CLIENTDLL));
-	g_Engine.Set(g_Mem->getModule(procID, ENGINEDLL));
+	const std::uintptr_t procID = g_Memory.getProcess("csgo.exe");
+	g_Client = g_Memory.getModule(procID, "client.dll");
+	g_Engine = g_Memory.getModule(procID, "engine.dll");
 
 	// Handle the latest offsets
-	URLDownloadToFile(NULL, XorStr(argc > 1 ? Utils::GetWideChar(argv[1]) : L"https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json"), XorStr(L"offsets.json"), 0, NULL);
-	offsets::InitOffsets();
+	const char* url = (argc > 1 ? argv[1] : "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json");
+	const HRESULT result = URLDownloadToFileA(nullptr, url, "offsets.json", NULL, nullptr);
+	offsets::initilize();
 
-	// Prevent crash when activating features in main menu
-	while (!g_Engine.IsConnected())
-	{
-		Gui::Render();
-		Sleep(50);
-
-		if (!Glfw::WindowNotClosed())
-			return EXIT_SUCCESS;
-	}
-
-	Utils::GetDefaultValues();
+	utils::saveDefaultValues();
 	
 	// Main loop
-	while (Glfw::WindowNotClosed())
+	while (gui::windowNotClosed())
 	{
-		g_LocalPlayer.Set(g_Client.GetLocalPlayer());
+		g_LocalPlayer = g_Client.getLocalPlayer();
 
-		Gui::Render();
+		gui::render();
 
-		Features::Legit();
-		Features::Visuals();
-		Features::Misc();
+		features::run();
 		
 		Sleep(1);
 	}
 
-	// Exit
-	Utils::Unload();
+	gui::shutdown();
+	if (g_Options.Developer.UnloadOnExit)
+		utils::unload();
+
 	return EXIT_SUCCESS;
 }

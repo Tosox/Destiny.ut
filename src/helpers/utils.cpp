@@ -2,65 +2,49 @@
 #include <string>
 #include <algorithm>
 #include <ctime>
-#include <xor/xor.hpp>
 #include "utils.hpp"
-#include "../menu.hpp"
 #include "../settings/globals.hpp"
 
 // Generate random window name
-std::string Utils::random_string(int length)
+std::string utils::randomString(std::size_t length)
 {
-    // Init the randomizer
-    srand((unsigned)time(NULL) * GetCurrentProcessId());
+	// Initilize the randomizer
+	const std::size_t seed = static_cast<std::size_t>(std::time(nullptr)) * GetCurrentProcessId();
+	std::srand(seed);
 
-    auto randchar = []() -> char
-    {
-        const char charset[] =
-            "0123456789"
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            "abcdefghijklmnopqrstuvwxyz";
-        const int max_index = (sizeof(charset) - 1);
-        return charset[rand() % max_index];
-    };
+	auto randchar = []() -> char
+	{
+		const char charset[] =
+			"0123456789"
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+			"abcdefghijklmnopqrstuvwxyz";
+		const int maxIdx = sizeof(charset) - 1;
+		return charset[std::rand() % maxIdx];
+	};
 
-    std::string str(length, 0);
-    std::generate_n(str.begin(), length, randchar);
-    return str;
-}
+	std::string str(length, 0);
+	std::generate_n(str.begin(), length, randchar);
 
-// Convert between char* and wchar_t*
-const wchar_t* Utils::GetWideChar(const char* str)
-{
-    size_t len;
-    const size_t szStr = strlen(str) + 1;
-    wchar_t* wstr = new wchar_t[szStr];
-    mbstowcs_s(&len, wstr, szStr,str, szStr - 1);
-    return wstr;
+	return str;
 }
 
 // Get CS:GO window handle
-bool Utils::GotTargetWindow()
+bool utils::isTargetRunning()
 {
-	HWND csgo = FindWindow(0, (XorStr(L"Counter-Strike: Global Offensive - Direct3D 9")));
-	return csgo != NULL;
+	const HWND csgo = FindWindowA("Valve001", nullptr);
+	return csgo != nullptr;
 }
 
 // Get default values
-void Utils::GetDefaultValues()
+void utils::saveDefaultValues()
 {
 	g_Options.Default.oFov = 90; // TODO: g_LocalPlayer.m_iDefaultFOV() is returning 0
-	g_Options.Default.oModelAmbient = g_Engine.GetModelAmbientMin();
+	g_Options.Default.oModelAmbient = g_Engine.getModelAmbientMin();
 }
 
 // Restore default values
-void Utils::Unload()
+void utils::unload()
 {
-	if (g_Options.Developer.UnloadOnExit)
-	{
-		g_LocalPlayer.SetFov(g_Options.Default.oFov);
-		g_Engine.SetModelAmbientMin(g_Options.Default.oModelAmbient);
-	}
-
-	delete g_Mem;
-	Gui::Shutdown();
+	g_LocalPlayer.setFov(g_Options.Default.oFov);
+	g_Engine.setModelAmbientMin(g_Options.Default.oModelAmbient);
 }

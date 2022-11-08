@@ -40,10 +40,11 @@ struct Options
 
 	struct Visuals_t
 	{
+		bool EnableGlobal = false;
+
 		struct Glow_t
 		{
 			bool Enable = false;
-			bool Teammates = false;
 			bool Visible = false;
 			bool Healthbased = false;
 			bool Defusing = false;
@@ -53,7 +54,6 @@ struct Options
 		struct Chams_t
 		{
 			bool Enable = false;
-			bool Teammates = false;
 		} Chams;
 		struct World_t
 		{
@@ -67,7 +67,6 @@ struct Options
 		struct Helpers_t
 		{
 			bool Bunnyhop = false;
-			bool FakeLag = false;
 			bool AutoPistol = false;
 			bool NoFlash = false;
 			int Fov = 90;
@@ -96,12 +95,10 @@ struct Options
 	{
 		bool Enable = false;
 		bool UnloadOnExit = true;
-		bool Use32EntityLoop = false;
-		float GlowAlpha = 0.85f;
+		float GlowAlpha = 0.65f;
 		int GlowStyle = 0;
 		float LocalPlayerFlashFlagAmount = 2.5f;
 		float EntityFlashFlagAmount = 2.5f;
-		int RcsShotsTrigger = 3;
 	} Developer;
 
 	struct Default_t

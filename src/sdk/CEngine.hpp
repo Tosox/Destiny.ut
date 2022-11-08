@@ -1,26 +1,25 @@
 #pragma once
 
-#include <Windows.h>
+#include <cstdint>
 #include "Vector.hpp"
 
 class CEngine
 {
 public:
-	bool IsConnected();
-	bool GetSendPackets();
-	char* GetGameDirectory();
-	char* GetMapDirectory();
-	int GetModelAmbientMin();
-	int GetClientState_State();
-	uintptr_t Get();
-	uintptr_t GetClientState();
-	Vector2 GetClientState_ViewAngles();
+	bool isConnected();
+	const char* getGameDirectory();
+	const char* getMapDirectory();
+	int getModelAmbientMin();
+	int getClientState_State();
+	std::uintptr_t getClientState();
+	Vector2 getClientStateViewAngles();
 
-	void Set(uintptr_t val);
-	void SetModelAmbientMin(int val);
-	void SetSendPackets(bool val);
-	void SetClientState_ViewAngles(Vector2& val);
+	void setModelAmbientMin(int value);
+	void setClientStateViewAngles(Vector2& value);
+
+	inline CEngine& operator= (const std::uintptr_t& address) { m_Address = address; return *this; }
+	friend std::uintptr_t operator+ (const CEngine& entity, const std::uintptr_t& offset) { return entity.m_Address + offset; }
 
 private:
-	uintptr_t addr;
+	std::uintptr_t m_Address{};
 };

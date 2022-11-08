@@ -1,18 +1,17 @@
 #pragma once
 
-#include <Windows.h>
-#include <MemMan/MemMan.hpp>
 #include "options.hpp"
+#include "../helpers/Memory.hpp"
 #include "../sdk/CClient.hpp"
 #include "../sdk/CEngine.hpp"
 #include "../sdk/CBaseEntity.hpp"
 
-extern MemMan* g_Mem;
+inline Memory g_Memory;
 
-extern Options g_Options;
+inline Options g_Options;
 
-extern CClient g_Client;
+inline CClient g_Client;
 
-extern CEngine g_Engine;
+inline CEngine g_Engine;
 
-extern CBaseEntity g_LocalPlayer;
+inline CBaseEntity g_LocalPlayer;
