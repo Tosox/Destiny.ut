@@ -46,5 +46,5 @@ namespace offsets
 		inline std::uintptr_t m_vecViewOffset;
 	}
 
-	void initilize();
+	void initialize();
 }

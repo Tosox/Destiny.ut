@@ -5,7 +5,6 @@
 #include "utils.hpp"
 #include "../settings/globals.hpp"
 
-// Generate random window name
 std::string utils::randomString(std::size_t length)
 {
 	// Initilize the randomizer
@@ -28,21 +27,18 @@ std::string utils::randomString(std::size_t length)
 	return str;
 }
 
-// Get CS:GO window handle
 bool utils::isTargetRunning()
 {
 	const HWND csgo = FindWindowA("Valve001", nullptr);
 	return csgo != nullptr;
 }
 
-// Get default values
 void utils::saveDefaultValues()
 {
 	g_Options.Default.oFov = 90; // TODO: g_LocalPlayer.m_iDefaultFOV() is returning 0
 	g_Options.Default.oModelAmbient = g_Engine.getModelAmbientMin();
 }
 
-// Restore default values
 void utils::unload()
 {
 	g_LocalPlayer.setFov(g_Options.Default.oFov);

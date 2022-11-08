@@ -11,7 +11,7 @@ void readValue(const nlohmann::json& src, T& dest)
 		dest = src.get<T>();
 }
 
-void offsets::initilize()
+void offsets::initialize()
 {
 	// Check offsets file
 	std::ifstream input_file{ "offsets.json" };

@@ -5,6 +5,7 @@
 #include "../sdk/CClient.hpp"
 #include "../sdk/CEngine.hpp"
 #include "../sdk/CBaseEntity.hpp"
+#include "../helpers/Console.hpp"
 
 inline Memory g_Memory;
 
