@@ -126,6 +126,9 @@
     <ClCompile Include="features\aimbot.cpp">
       <Filter>src\features</Filter>
     </ClCompile>
+    <ClCompile Include="helpers\Console.cpp">
+      <Filter>src\helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.hpp">
@@ -213,6 +216,9 @@
       <Filter>src\sdk</Filter>
     </ClInclude>
     <ClInclude Include="helpers\Memory.hpp">
+      <Filter>src\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="helpers\Console.hpp">
       <Filter>src\helpers</Filter>
     </ClInclude>
   </ItemGroup>

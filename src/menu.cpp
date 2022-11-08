@@ -1,6 +1,6 @@
 #include <Windows.h>
 #include <shellapi.h>
-#include <glfw/include/glfw3.hpp>
+#include <glfw/include/glfw3.h>
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl2.h>
