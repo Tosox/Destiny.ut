@@ -15,14 +15,14 @@
 #pragma comment(lib, "legacy_stdio_definitions")
 #endif
 
-GLFWwindow* window;
-
 static const char* bones[6]{ "Pelvic", "Stomach", "Lower Chest", "Upper Chest", "Neck", "Head" };
 
-bool Glfw::GenerateWindow()
+GLFWwindow* window = nullptr;
+
+bool gui::generateWindow()
 {
-	glfwSetErrorCallback(NULL);
-	if (!glfwInit())
+	glfwSetErrorCallback(nullptr);
+	if (glfwInit() == GLFW_FALSE)
 		return false;
 
 	// Create Window
@@ -37,12 +37,12 @@ bool Glfw::GenerateWindow()
 	return true;
 }
 
-bool Glfw::WindowNotClosed()
+bool gui::windowNotClosed()
 {
 	return !glfwWindowShouldClose(window);
 }
 
-void Gui::InitImGui()
+void gui::initilize()
 {
 	// Set ImGui Flags
 	ImGui::CreateContext();
@@ -91,7 +91,7 @@ void Gui::InitImGui()
 	ImGui_ImplOpenGL2_Init();
 }
 
-void Gui::Render()
+void gui::render()
 {
 	static int tab = IMGUI_WND_PAGES::P_LEGIT;
 
@@ -99,9 +99,7 @@ void Gui::Render()
 
 	// Show window on key press
 	if (GetAsyncKeyState(VK_INSERT) & 1)
-	{
 		glfwShowWindow(window);
-	}
 
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
@@ -191,7 +189,6 @@ void Gui::Render()
 					ImGui::Text("Glow");
 					ImGui::Separator();
 					ImGui::Checkbox("Enable###GlowEnable", &g_Options.Visuals.Glow.Enable);
-					ImGui::Checkbox("Teammates###GlowTeammates", &g_Options.Visuals.Glow.Teammates);
 					ImGui::Checkbox("Visible###GlowVisible", &g_Options.Visuals.Glow.Visible);
 					ImGui::Checkbox("Healthbased###GlowHealthbased", &g_Options.Visuals.Glow.Healthbased);
 					ImGui::Checkbox("Defusing###GlowDefusing", &g_Options.Visuals.Glow.Defusing);
@@ -277,7 +274,7 @@ void Gui::Render()
 					ImGui::Text("Source code:");
 					ImGui::SameLine();
 					if (ImGui::Button("GitHub", ImVec2(100.0f, 17.5f)))
-						ShellExecuteA(nullptr, nullptr, "http://www.github.com/TosoxDev/Destiny.ut", nullptr, nullptr, SW_SHOW);
+						ShellExecuteA(nullptr, nullptr, "https://www.github.com/TosoxDev/Destiny.ut", nullptr, nullptr, SW_SHOW);
 					ImGui::Spacing();
 					ImGui::Text("Credits");
 					ImGui::Separator();
@@ -304,8 +301,6 @@ void Gui::Render()
 						ImGui::SliderFloat("Player Flash Trigger", &g_Options.Developer.LocalPlayerFlashFlagAmount, 0.0f, 10.0f, "%.2f");
 						ImGui::SliderFloat("Enemy Flash Trigger", &g_Options.Developer.EntityFlashFlagAmount, 0.0f, 10.0f, "%.2f");
 						ImGui::Separator();
-						ImGui::SliderInt("RCS Trigger", &g_Options.Developer.RcsShotsTrigger, 0, 10);
-						ImGui::Separator();
 						if (ImGui::Button("Reset"))
 						{
 							g_Options.Developer.UnloadOnExit = true;
@@ -313,7 +308,6 @@ void Gui::Render()
 							g_Options.Developer.GlowStyle = 0;
 							g_Options.Developer.LocalPlayerFlashFlagAmount = 2.5f;
 							g_Options.Developer.EntityFlashFlagAmount = 2.5f;
-							g_Options.Developer.RcsShotsTrigger = 3;
 						}
 					}
 					ImGui::EndChild();
@@ -327,9 +321,9 @@ void Gui::Render()
 	ImGui::EndFrame();
 	ImGui::Render();
 
-	int display_w, display_h;
-	glfwGetFramebufferSize(window, &display_w, &display_h);
-	glViewport(0, 0, display_w, display_h);
+	int displayWidth, displayHeight;
+	glfwGetFramebufferSize(window, &displayWidth, &displayHeight);
+	glViewport(0, 0, displayWidth, displayHeight);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
@@ -338,7 +332,7 @@ void Gui::Render()
 	glfwSwapBuffers(window);
 }
 
-void Gui::Shutdown()
+void gui::shutdown()
 {
 	ImGui_ImplOpenGL2_Shutdown();
 	ImGui_ImplGlfw_Shutdown();

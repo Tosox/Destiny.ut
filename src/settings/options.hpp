@@ -40,10 +40,11 @@ struct Options
 
 	struct Visuals_t
 	{
+		bool EnableGlobal = false;
+
 		struct Glow_t
 		{
 			bool Enable = false;
-			bool Teammates = false;
 			bool Visible = false;
 			bool Healthbased = false;
 			bool Defusing = false;
@@ -98,7 +99,6 @@ struct Options
 		int GlowStyle = 0;
 		float LocalPlayerFlashFlagAmount = 2.5f;
 		float EntityFlashFlagAmount = 2.5f;
-		int RcsShotsTrigger = 3;
 	} Developer;
 
 	struct Default_t

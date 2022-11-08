@@ -15,7 +15,7 @@ std::uintptr_t Memory::getProcess(const char* process)
 
 	while (Process32Next(toolHelp, &processEntry))
 	{
-		if (stricmp(processEntry.szExeFile, process) == 0)
+		if (_stricmp(processEntry.szExeFile, process) == 0)
 		{
 			CloseHandle(toolHelp);
 			const std::uintptr_t processId = processEntry.th32ProcessID;
@@ -36,7 +36,7 @@ std::uintptr_t Memory::getModule(std::uintptr_t processId, const char* module)
 
 	while (Module32Next(toolHelp, &moduleEntry))
 	{
-		if (stricmp(moduleEntry.szModule, module) == 0)
+		if (_stricmp(moduleEntry.szModule, module) == 0)
 		{
 			CloseHandle(toolHelp);
 			return reinterpret_cast<std::uintptr_t>(moduleEntry.hModule);

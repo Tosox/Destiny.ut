@@ -66,12 +66,6 @@
     <ClCompile Include="..\lib\imgui\imgui_widgets.cpp">
       <Filter>lib\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="features\legit.cpp">
-      <Filter>src\features</Filter>
-    </ClCompile>
-    <ClCompile Include="features\visuals.cpp">
-      <Filter>src\features</Filter>
-    </ClCompile>
     <ClCompile Include="helpers\offsets.cpp">
       <Filter>src\helpers</Filter>
     </ClCompile>
@@ -115,6 +109,21 @@
       <Filter>src\features</Filter>
     </ClCompile>
     <ClCompile Include="features\brightness.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\loop.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\radar.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\rcs.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\triggerbot.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
+    <ClCompile Include="features\aimbot.cpp">
       <Filter>src\features</Filter>
     </ClCompile>
   </ItemGroup>

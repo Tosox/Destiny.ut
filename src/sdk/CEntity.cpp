@@ -46,17 +46,6 @@ bool CEntity::isSpottedBy(CEntity& entity)
 	return g_Memory.read<int>(m_Address + offsets::netvars::m_bSpottedByMask) & (1 << entity.getId());
 }
 
-bool CEntity::isValid()
-{
-	if (!*this)
-		return false;
-	if (!isAlive())
-		return false;
-	if (isDormant())
-		return false;
-	return true;
-}
-
 float CEntity::getFlashDuration()
 {
 	return g_Memory.read<float>(m_Address + offsets::netvars::m_flFlashDuration);

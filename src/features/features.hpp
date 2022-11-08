@@ -1,12 +1,24 @@
 #pragma once
 
+#include "../sdk/CEntity.hpp"
+
 namespace features
 {
+	namespace legit
+	{
+		void rcs();
+		void triggerbot();
+		void aimbot();
+	}
+
 	namespace visuals
 	{
 		void brightness();
-		void glow();
-		void chams();
+		void loop();
+
+		void glow(CEntity& entity);
+		void chams(CEntity& entity);
+		void radar(CEntity& entity);
 	}
 
 	namespace misc
@@ -19,6 +31,16 @@ namespace features
 
 	inline void run()
 	{
+		legit::rcs();
+		legit::triggerbot();
+		legit::aimbot();
 
+		visuals::brightness();
+		visuals::loop();
+
+		misc::bunnyhop();
+		misc::noflash();
+		misc::fov();
+		misc::autopistol();
 	}
 }
