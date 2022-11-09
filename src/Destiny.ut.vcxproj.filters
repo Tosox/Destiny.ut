@@ -34,6 +34,9 @@
     <Filter Include="src\settings">
       <UniqueIdentifier>{bc8eb6aa-6d06-4e09-9407-640c7959acbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="readme-res">
+      <UniqueIdentifier>{52361a09-f17b-4396-bcc2-7769e76ba220}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -229,5 +232,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\readme-res\legit.png">
+      <Filter>readme-res</Filter>
+    </Image>
+    <Image Include="..\readme-res\misc.png">
+      <Filter>readme-res</Filter>
+    </Image>
+    <Image Include="..\readme-res\visuals.png">
+      <Filter>readme-res</Filter>
+    </Image>
   </ItemGroup>
 </Project>

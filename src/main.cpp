@@ -1,4 +1,5 @@
-﻿#include "menu.hpp"
+﻿#include <format>
+#include "menu.hpp"
 #include "settings/globals.hpp"
 #include "helpers/utils.hpp"
 #include "helpers/offsets.hpp"
@@ -8,22 +9,35 @@
 
 int main(int argc, char** argv)
 {
-	// Init the window
-	if (!utils::isTargetRunning())
-		return EXIT_FAILURE;
-	if (!gui::generateWindow())
-		return EXIT_FAILURE;
+	const bool isTargetRunning = utils::isTargetRunning();
+	if (!isTargetRunning)
+		console::throwErrorAndExit(std::format("[!] CS:GO is not running yet (Errorcode: {})", GetLastError()));
+
+	const bool isWindowGenerated = gui::generateWindow();
+	if (!isWindowGenerated)
+		console::throwErrorAndExit(std::format("[!] Could not generate process window"));
+
 	gui::initilize();
+
+	// Handle the latest offsets
+	const char* url = (argc > 1 ? argv[1] : "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json");
+	HRESULT result = URLDownloadToFileA(nullptr, url, "offsets.json", 0, nullptr);
+	if (result != S_OK)
+	{
+		console::throwWarning("[!] Could not update offsets. Falling back to blazedumper's offsets");
+
+		url = "https://raw.githubusercontent.com/Akandesh/blazedumper/master/csgo.json";
+		result = URLDownloadToFileA(nullptr, url, "offsets.json", 0, nullptr);
+		if (result != S_OK)
+			console::throwWarning("[!] Could not update offsets. Falling back to old offsets file");
+	}
+
+	offsets::initialize();
 
 	// Get process info
 	const std::uintptr_t procID = g_Memory.getProcess("csgo.exe");
 	g_Client = g_Memory.getModule(procID, "client.dll");
 	g_Engine = g_Memory.getModule(procID, "engine.dll");
-
-	// Handle the latest offsets
-	const char* url = (argc > 1 ? argv[1] : "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json");
-	const HRESULT result = URLDownloadToFileA(nullptr, url, "offsets.json", NULL, nullptr);
-	offsets::initilize();
 
 	utils::saveDefaultValues();
 	
