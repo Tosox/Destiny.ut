@@ -89,6 +89,11 @@
   <ItemGroup>
     <None Include="..\README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\readme-res\legit.png" />
+    <Image Include="..\readme-res\misc.png" />
+    <Image Include="..\readme-res\visuals.png" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9CDA7840-B7A5-496D-A527-E95571496D18}</ProjectGuid>
     <RootNamespace>Destiny.ut</RootNamespace>
