@@ -21,9 +21,16 @@ int main(int argc, char** argv)
 
 	// Handle the latest offsets
 	const char* url = (argc > 1 ? argv[1] : "https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json");
-	const HRESULT result = URLDownloadToFileA(nullptr, url, "offsets.json", 0, nullptr);
+	HRESULT result = URLDownloadToFileA(nullptr, url, "offsets.json", 0, nullptr);
 	if (result != S_OK)
-		console::throwWarning("[!] Could not update offsets. Falling back to old offsets file");
+	{
+		console::throwWarning("[!] Could not update offsets. Falling back to blazedumper's offsets");
+
+		url = "https://raw.githubusercontent.com/Akandesh/blazedumper/master/csgo.json";
+		result = URLDownloadToFileA(nullptr, url, "offsets.json", 0, nullptr);
+		if (result != S_OK)
+			console::throwWarning("[!] Could not update offsets. Falling back to old offsets file");
+	}
 
 	offsets::initialize();
 
