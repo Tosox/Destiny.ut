@@ -24,9 +24,9 @@ Copyright Disclaimer under section 107 of the Copyright Act 1976, allowance is m
 
 <div align="center">
 
-[<img src="readme-res/legit.png" height="300" />](readme-res/legit.png)
-[<img src="readme-res/visuals.png" height="300" />](readme-res/visuals.png)
-[<img src="readme-res/misc.png" height="300" />](readme-res/misc.png)
+[<img src="readme-res/legit.png" height="400" />](readme-res/legit.png)
+[<img src="readme-res/visuals.png" height="400" />](readme-res/visuals.png)
+[<img src="readme-res/misc.png" height="400" />](readme-res/misc.png)
 
 </div>
 
