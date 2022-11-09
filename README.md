@@ -20,16 +20,23 @@ Copyright Disclaimer under section 107 of the Copyright Act 1976, allowance is m
 *   **Misc** - Miscellaneous features
 *   **Customization** - Change the settings to your liking
 
+### Media
+
+![](readme-res/legit.png)
+![](readme-res/visuals.png)
+![](readme-res/misc.png)
+
 ## FAQ
 
 ### Will the cheat be updated in the future?
-No new features are likely to be added, however bug fixes and code improvements can be expected.
+- There will most likely be no new features introduced, 
+but bug fixes and code improvements can be expected
 
 ## Known Issues
-- Some of the code is unoptimized.
-- The visibility check is unreliable.
-- There is a possibility that the cheat will not work immediately after new [CS:GO](https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/) 
-  updates, because [hazedumper's offsets](https://github.com/frk1/hazedumper) have not been updated yet. -> [Fix](#FAQ)
+- Some of the code is unoptimized
+- The visibility check is unreliable
+- There is a possibility that the cheat will not work immediately after new CS:GO
+  updates because the offsets have not yet been updated
 
 ## Credits
 - [ocornut](https://github.com/ocornut) for [Dear ImGui](https://github.com/ocornut)

@@ -138,8 +138,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)\_build\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\_build\$(Configuration)\dbg\</IntDir>
     <IncludePath>$(ProjectDir)\..\lib;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\..\lib\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -149,8 +149,8 @@
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)\_build\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\_build\$(Configuration)\dbg\</IntDir>
     <IncludePath>$(ProjectDir)\..\lib;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\..\lib\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
