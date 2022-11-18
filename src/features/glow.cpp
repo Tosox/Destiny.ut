@@ -28,7 +28,7 @@ void features::visuals::glow(CEntity& entity)
 		glowColor = g_Options.Colors.Glow.Teammates;
 	else
 	{
-		if ((g_Options.Visuals.Glow.Flashed) && (entity.getFlashDuration() > g_Options.Developer.EntityFlashFlagAmount))
+		if ((g_Options.Visuals.Glow.Flashed) && (entity.getFlashDuration() > 2.5f))
 			glowColor = g_Options.Colors.Glow.Flashed;
 		else if ((g_Options.Visuals.Glow.Flashed) && (entity.isDefusing()))
 			glowColor = g_Options.Colors.Glow.Defusing;

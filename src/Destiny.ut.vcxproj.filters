@@ -37,6 +37,9 @@
     <Filter Include="readme-res">
       <UniqueIdentifier>{52361a09-f17b-4396-bcc2-7769e76ba220}</UniqueIdentifier>
     </Filter>
+    <Filter Include="res">
+      <UniqueIdentifier>{bd7fe496-d4af-471e-80f6-34af4db018a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

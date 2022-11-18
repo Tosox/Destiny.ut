@@ -37,7 +37,7 @@ CEntity getClosestEnemy()
 		if ((g_LocalPlayer.getActiveWeapon().isSniper()) && (g_Options.Legit.Aimbot.Scoped) && (!g_LocalPlayer.isScoped()))
 			continue;
 
-		if ((g_LocalPlayer.getFlashDuration() > g_Options.Developer.LocalPlayerFlashFlagAmount) && (g_Options.Legit.Aimbot.Flashed))
+		if ((g_LocalPlayer.getFlashDuration() > 2.5f) && (g_Options.Legit.Aimbot.Flashed))
 			continue;
 
 		if ((!g_LocalPlayer.getFlags()) && (g_Options.Legit.Aimbot.InAir))

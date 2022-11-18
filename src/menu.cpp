@@ -1,13 +1,13 @@
-#include <Windows.h>
+#include "menu.hpp"
+#include "settings/globals.hpp"
+#include "helpers/utils.hpp"
+#include "sdk/Structs.hpp"
+
 #include <shellapi.h>
 #include <glfw/include/glfw3.h>
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl2.h>
-#include "menu.hpp"
-#include "settings/globals.hpp"
-#include "helpers/utils.hpp"
-#include "sdk/Structs.hpp"
 
 #pragma comment(lib, "glfw3.lib")
 
@@ -109,7 +109,7 @@ void gui::render()
 	ImGui::SetNextWindowSize(ImVec2(800.0f, 450.0f));
 
 	// Render ImGui
-	ImGui::Begin("Destiny.ut", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar| ImGuiWindowFlags_NoScrollWithMouse);
+	ImGui::Begin("Destiny.ut", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 	{
 		ImGui::SetCursorPos(ImVec2(12.5f, 25.0f));
 		ImGui::BeginChild("Features", ImVec2(175.0f, 450.0f), false);
@@ -245,12 +245,12 @@ void gui::render()
 				{
 					ImGui::Text("Glow");
 					ImGui::Separator();
-					ImGui::ColorEdit3("Teammates###GlowTeammates", (float*)&g_Options.Colors.Glow.Teammates, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Enemies###GlowEnemy", (float*)&g_Options.Colors.Glow.Enemies, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Enemies Visible###GlowEnemiesVisible", (float*)&g_Options.Colors.Glow.EnemiesVisible, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Defusing###GlowDefusing", (float*)&g_Options.Colors.Glow.Defusing, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Scoped###GlowScoped", (float*)&g_Options.Colors.Glow.Scoped, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Flashed###GlowFlashed", (float*)&g_Options.Colors.Glow.Flashed, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Teammates###GlowTeammates", reinterpret_cast<float*>(&g_Options.Colors.Glow.Teammates), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies###GlowEnemy", reinterpret_cast<float*>(&g_Options.Colors.Glow.Enemies), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies Visible###GlowEnemiesVisible", reinterpret_cast<float*>(&g_Options.Colors.Glow.EnemiesVisible), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Defusing###GlowDefusing", reinterpret_cast<float*>(&g_Options.Colors.Glow.Defusing), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Scoped###GlowScoped", reinterpret_cast<float*>(&g_Options.Colors.Glow.Scoped), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Flashed###GlowFlashed", reinterpret_cast<float*>(&g_Options.Colors.Glow.Flashed), ImGuiColorEditFlags_NoInputs);
 				}
 				ImGui::EndChild();
 
@@ -260,8 +260,8 @@ void gui::render()
 				{
 					ImGui::Text("Color Chams");
 					ImGui::Separator();
-					ImGui::ColorEdit3("Teammates###ChamsTeammates", (float*)&g_Options.Colors.Chams.Teammates, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Enemies###ChamsEnemies", (float*)&g_Options.Colors.Chams.Enemies, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Teammates###ChamsTeammates", reinterpret_cast<float*>(&g_Options.Colors.Chams.Teammates), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies###ChamsEnemies", reinterpret_cast<float*>(&g_Options.Colors.Chams.Enemies), ImGuiColorEditFlags_NoInputs);
 				}
 				ImGui::EndChild();
 			}
@@ -293,21 +293,13 @@ void gui::render()
 					{
 						ImGui::Text("Developer");
 						ImGui::Separator();
-						ImGui::Checkbox("Unload on Exit", &g_Options.Developer.UnloadOnExit);
-						ImGui::Separator();
 						ImGui::SliderFloat("Glow Alpha", &g_Options.Developer.GlowAlpha, 0.0f, 1.0f, "%.2f");
 						ImGui::SliderInt("Glow Style", &g_Options.Developer.GlowStyle, 0, 3);
 						ImGui::Separator();
-						ImGui::SliderFloat("Player Flash Trigger", &g_Options.Developer.LocalPlayerFlashFlagAmount, 0.0f, 10.0f, "%.2f");
-						ImGui::SliderFloat("Enemy Flash Trigger", &g_Options.Developer.EntityFlashFlagAmount, 0.0f, 10.0f, "%.2f");
-						ImGui::Separator();
 						if (ImGui::Button("Reset"))
 						{
-							g_Options.Developer.UnloadOnExit = true;
-							g_Options.Developer.GlowAlpha = 0.85f;
+							g_Options.Developer.GlowAlpha = 0.65f;
 							g_Options.Developer.GlowStyle = 0;
-							g_Options.Developer.LocalPlayerFlashFlagAmount = 2.5f;
-							g_Options.Developer.EntityFlashFlagAmount = 2.5f;
 						}
 					}
 					ImGui::EndChild();
@@ -330,6 +322,7 @@ void gui::render()
 
 	glfwMakeContextCurrent(window);
 	glfwSwapBuffers(window);
+
 }
 
 void gui::shutdown()
