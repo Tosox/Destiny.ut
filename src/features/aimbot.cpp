@@ -16,16 +16,10 @@ CEntity getClosestEnemy()
 	{
 		entity = g_Client.getEntityFromList(i);
 
-		if (!entity)
+		if ((!entity) || (entity == g_LocalPlayer))
 			continue;
 
-		if (entity == g_LocalPlayer)
-			continue;
-
-		if (!entity.isAlive())
-			continue;
-
-		if (entity.isDormant())
+		if ((!entity.isAlive()) || (entity.isDormant()))
 			continue;
 
 		if ((entity.getTeamNum() == g_LocalPlayer.getTeamNum()) && (!g_Options.Legit.Aimbot.Deathmatch))
@@ -61,15 +55,15 @@ void aimAt(Vector3& target)
 	Vector2 newAngles{};
 
 	// Calculate new view angles
-	newAngles.x = -std::asin(deltaVec.z / deltaVec.mag()) * (180.0f / M_PI);
-	newAngles.y = std::atan2(deltaVec.y, deltaVec.x) * (180.0f / M_PI);
+	newAngles.x = -std::asin(deltaVec.z / deltaVec.mag()) * (180.f / M_PI);
+	newAngles.y = std::atan2(deltaVec.y, deltaVec.x) * (180.f / M_PI);
 
 	// Add RCS if requested
 	if (g_Options.Legit.RCS.Enable)
-		newAngles -= g_LocalPlayer.getAimPunchAngle() * (g_Options.Legit.RCS.Amount / 100) * 2.f;
+		newAngles -= g_LocalPlayer.getAimPunchAngle() * ((g_Options.Legit.RCS.Amount / 100) * 2.f);
 
 	// Prevent snapping onto the target
-	newAngles = g_Engine.getClientStateViewAngles() + (newAngles - g_Engine.getClientStateViewAngles()) / g_Options.Legit.Aimbot.Smoothing;
+	newAngles = g_Engine.getClientStateViewAngles() + ((newAngles - g_Engine.getClientStateViewAngles()) / g_Options.Legit.Aimbot.Smoothing);
 
 	newAngles.ClampAngles();
 
