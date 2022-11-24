@@ -96,6 +96,9 @@
   <ItemGroup>
     <ResourceCompile Include="..\res\icon.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9CDA7840-B7A5-496D-A527-E95571496D18}</ProjectGuid>
     <RootNamespace>Destiny.ut</RootNamespace>
