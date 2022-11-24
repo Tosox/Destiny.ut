@@ -34,6 +34,11 @@ void CClient::setGlowStruct(int glowIndex, GlowStruct_t& glowStruct)
 	g_Memory.write<GlowStruct_t>(getGlowObjectManager() + (glowIndex * 0x38), glowStruct);
 }
 
+ViewMatrix_t CClient::getViewMatrix()
+{
+	return g_Memory.read<ViewMatrix_t>(m_Address + offsets::signatures::dwViewMatrix);
+}
+
 void CClient::doForceJump()
 {
 	g_Memory.write<uintptr_t>(m_Address + offsets::signatures::dwForceJump, 6);

@@ -11,6 +11,7 @@ public:
 	std::uintptr_t getLocalPlayer();
 	std::uintptr_t getGlowObjectManager();
 	std::uintptr_t getEntityFromList(int index);
+	ViewMatrix_t getViewMatrix();
 
 	void setGlowStruct(int glowIndex, GlowStruct_t& glowStruct);
 	void doForceJump();

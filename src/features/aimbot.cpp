@@ -1,22 +1,22 @@
 #include "features.hpp"
+#include "../helpers/math.hpp"
+#include "../helpers/utils.hpp"
 #include "../settings/globals.hpp"
 #include "../sdk/Vector.hpp"
 #include "../sdk/CEntity.hpp"
 
-#define M_PI 3.14159265358979323846f
 #define KEY_DOWN 0x8000
 
 CEntity getClosestEnemy()
 {
-	CEntity entity{};
 	float closest = FLT_MAX;
 	int closestIndex = -1;
 
 	for (int i = 0; i < 64; ++i)
 	{
-		entity = g_Client.getEntityFromList(i);
+		CEntity entity = g_Client.getEntityFromList(i);
 
-		if ((!entity) || (entity == g_LocalPlayer))
+		if ((entity == NULL) || (entity == g_LocalPlayer))
 			continue;
 
 		if ((!entity.isAlive()) || (entity.isDormant()))
@@ -37,7 +37,16 @@ CEntity getClosestEnemy()
 		if ((!g_LocalPlayer.getFlags()) && (g_Options.Legit.Aimbot.InAir))
 			continue;
 
-		const float distance = g_LocalPlayer.getOrigin().to(entity.getOrigin()).mag();
+		Vector2 angles = math::CalculateAngle(g_LocalPlayer.getEyeLocation(), entity.getOrigin());
+		Vector2 enemyPos{};
+		if (!math::WorldToScreen(entity.getOrigin(), enemyPos))
+			continue;
+
+		const SIZE windowSize = utils::getTargetSize();
+		const float distance = std::sqrtf(std::powf(enemyPos.x - (windowSize.cx / 2.f), 2) + std::powf(enemyPos.y - (windowSize.cy / 2.f), 2));
+		if (distance > g_Options.Legit.Aimbot.Fov)
+			continue;
+
 		if (distance < closest)
 		{
 			closest = distance;
@@ -50,13 +59,8 @@ CEntity getClosestEnemy()
 
 void aimAt(Vector3& target)
 {
-	Vector3 myPos = g_LocalPlayer.getOrigin() + g_LocalPlayer.getViewOffset();
-	Vector3 deltaVec = myPos.to(target);
-	Vector2 newAngles{};
-
 	// Calculate new view angles
-	newAngles.x = -std::asin(deltaVec.z / deltaVec.mag()) * (180.f / M_PI);
-	newAngles.y = std::atan2(deltaVec.y, deltaVec.x) * (180.f / M_PI);
+	Vector2 newAngles = math::CalculateAngle(g_LocalPlayer.getEyeLocation(), target);
 
 	// Add RCS if requested
 	if (g_Options.Legit.RCS.Enable)
@@ -86,11 +90,11 @@ void features::legit::aimbot()
 		return;
 
 	CWeaponEntity weapon = g_LocalPlayer.getActiveWeapon();
-	if ((!weapon) || (!weapon.isGun()))
+	if ((weapon == NULL) || (!weapon.isGun()))
 		return;
 
 	CEntity entity = getClosestEnemy();
-	if (!entity)
+	if (entity == NULL)
 		return;
 
 	Vector3 targetPos = entity.getBoneById(g_Options.Legit.Aimbot.TargetBone + 3);

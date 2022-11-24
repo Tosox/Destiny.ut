@@ -12,6 +12,7 @@ public:
 	int getShotsFired();
 	Vector2 getAimPunchAngle();
 	Vector3 getViewOffset();
+	Vector3 getEyeLocation();
 
 	void setFov(int value);
 

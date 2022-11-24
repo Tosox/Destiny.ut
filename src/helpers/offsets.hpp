@@ -21,6 +21,7 @@ namespace offsets
 		inline std::uintptr_t dwClientState_ViewAngles;
 		inline std::uintptr_t dwClientState_MapDirectory;
 		inline std::uintptr_t m_bDormant;
+		inline std::uintptr_t dwViewMatrix;
 	}
 	namespace netvars
 	{

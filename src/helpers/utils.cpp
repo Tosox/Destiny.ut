@@ -27,6 +27,16 @@ std::string utils::randomString(std::size_t length)
 	return str;
 }
 
+SIZE utils::getTargetSize()
+{
+	RECT rect{};
+
+	const HWND csgo = FindWindowA("Valve001", nullptr);
+	GetClientRect(csgo, &rect);
+
+	return SIZE{ rect.right, rect.bottom };
+}
+
 bool utils::isTargetRunning()
 {
 	const HWND csgo = FindWindowA("Valve001", nullptr);
