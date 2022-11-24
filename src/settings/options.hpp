@@ -94,11 +94,8 @@ struct Options
 	struct Developer_t
 	{
 		bool Enable = false;
-		bool UnloadOnExit = true;
 		float GlowAlpha = 0.65f;
 		int GlowStyle = 0;
-		float LocalPlayerFlashFlagAmount = 2.5f;
-		float EntityFlashFlagAmount = 2.5f;
 	} Developer;
 
 	struct Default_t

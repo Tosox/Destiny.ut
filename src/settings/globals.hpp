@@ -1,5 +1,9 @@
 #pragma once
 
+#include <Windows.h>
+#include <thread>
+#include <chrono>
+
 #include "options.hpp"
 #include "../helpers/Memory.hpp"
 #include "../sdk/CClient.hpp"

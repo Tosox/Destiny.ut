@@ -50,12 +50,11 @@ int main(int argc, char** argv)
 
 		features::run();
 		
-		Sleep(1);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 
 	gui::shutdown();
-	if (g_Options.Developer.UnloadOnExit)
-		utils::unload();
+	utils::unload();
 
 	return EXIT_SUCCESS;
 }
