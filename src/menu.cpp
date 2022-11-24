@@ -1,13 +1,13 @@
-#include <Windows.h>
+#include "menu.hpp"
+#include "settings/globals.hpp"
+#include "helpers/utils.hpp"
+#include "sdk/Structs.hpp"
+
 #include <shellapi.h>
 #include <glfw/include/glfw3.h>
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl2.h>
-#include "menu.hpp"
-#include "settings/globals.hpp"
-#include "helpers/utils.hpp"
-#include "sdk/Structs.hpp"
 
 #pragma comment(lib, "glfw3.lib")
 
@@ -26,8 +26,8 @@ bool gui::generateWindow()
 		return false;
 
 	// Create Window
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-	window = glfwCreateWindow(800, 450, utils::randomString(12).c_str(), nullptr, nullptr);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	window = glfwCreateWindow(1000, 560, utils::randomString(12).c_str(), nullptr, nullptr);
 	if (!window)
 		return false;
 
@@ -55,15 +55,15 @@ void gui::initilize()
 	ImGuiStyle& style = ImGui::GetStyle();
 	{
 		style.Alpha = 0.75f;
-		style.WindowRounding = 1.0f;
-		style.FrameRounding = 2.0f;
-		style.ScrollbarSize = 2.0f;
-		style.ScrollbarRounding = 12.0f;
-		style.GrabMinSize = 5.0f;
-		style.FramePadding = ImVec2(3.0f, 2.0f);
-		style.WindowPadding = ImVec2(8.0f, 8.0f);
-		style.ItemSpacing = ImVec2(8.0f, 4.0f);
-		style.ItemInnerSpacing = ImVec2(4.0f, 4.0f);
+		style.WindowRounding = 1.f;
+		style.FrameRounding = 2.f;
+		style.ScrollbarSize = 2.f;
+		style.ScrollbarRounding = 12.f;
+		style.GrabMinSize = 5.f;
+		style.FramePadding = ImVec2(3.f, 2.f);
+		style.WindowPadding = ImVec2(8.f, 8.f);
+		style.ItemSpacing = ImVec2(8.f, 4.f);
+		style.ItemInnerSpacing = ImVec2(4.f, 4.f);
 
 		style.Colors[ImGuiCol_Text] = ImColor(255, 255, 255);
 		style.Colors[ImGuiCol_TextDisabled] = ImColor(128, 128, 128);
@@ -105,37 +105,37 @@ void gui::render()
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
-	ImGui::SetNextWindowSize(ImVec2(800.0f, 450.0f));
+	ImGui::SetNextWindowPos(ImVec2(0.f, 0.f));
+	ImGui::SetNextWindowSize(ImVec2(1000.f, 560.f));
 
 	// Render ImGui
-	ImGui::Begin("Destiny.ut", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar| ImGuiWindowFlags_NoScrollWithMouse);
+	ImGui::Begin("Destiny.ut", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 	{
-		ImGui::SetCursorPos(ImVec2(12.5f, 25.0f));
-		ImGui::BeginChild("Features", ImVec2(175.0f, 450.0f), false);
+		ImGui::SetCursorPos(ImVec2(12.5f, 25.f));
+		ImGui::BeginChild("Features", ImVec2(175.f, 560.f), false);
 		{
-			if (ImGui::Button("Legit", ImVec2(155.0f, 50.0f)))
+			if (ImGui::Button("Legit", ImVec2(155.f, 50.f)))
 				tab = IMGUI_WND_PAGES::P_LEGIT;
-			if (ImGui::Button("Visuals", ImVec2(155.0f, 50.0f)))
+			if (ImGui::Button("Visuals", ImVec2(155.f, 50.f)))
 				tab = IMGUI_WND_PAGES::P_VISUALS;
-			if (ImGui::Button("Misc", ImVec2(155.0f, 50.0f)))
+			if (ImGui::Button("Misc", ImVec2(155.f, 50.f)))
 				tab = IMGUI_WND_PAGES::P_MISC;
-			if (ImGui::Button("Colors", ImVec2(155.0f, 50.0f)))
+			if (ImGui::Button("Colors", ImVec2(155.f, 50.f)))
 				tab = IMGUI_WND_PAGES::P_COLORS;
-			if (ImGui::Button("Settings", ImVec2(155.0f, 50.0f)))
+			if (ImGui::Button("Settings", ImVec2(155.f, 50.f)))
 				tab = IMGUI_WND_PAGES::P_SETTINGS;
 		}
 		ImGui::EndChild();
 
 		ImGui::SameLine();
-		ImGui::GetForegroundDrawList()->AddLine(ImVec2(180.0f, 25.0f), ImVec2(180.0f, 440.0f), ImColor(255, 0, 0));
+		ImGui::GetForegroundDrawList()->AddLine(ImVec2(180.f, 25.f), ImVec2(180.f, 550.f), ImColor(255, 0, 0));
 		ImGui::SameLine();
 
-		ImGui::BeginChild("Options", ImVec2(625.0f, 450.0f), false);
+		ImGui::BeginChild("Options", ImVec2(825.f, 560.f), false);
 		{
 			if (tab == IMGUI_WND_PAGES::P_LEGIT)
 			{
-				ImGui::BeginChild("Aimbot", ImVec2(290.0f, 415.0f), true);
+				ImGui::BeginChild("Aimbot", ImVec2(390.f, 525.f), true);
 				{
 					ImGui::Text("Aimbot");
 					ImGui::Separator();
@@ -153,7 +153,7 @@ void gui::render()
 
 				ImGui::SameLine();
 
-				ImGui::BeginChild("Triggerbot", ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("Triggerbot", ImVec2(390.f, 305.f), true);
 				{
 					ImGui::Text("Triggerbot");
 					ImGui::Separator();
@@ -171,20 +171,20 @@ void gui::render()
 				}
 				ImGui::EndChild();
 
-				ImGui::SetCursorPos(ImVec2(298.5f, 260.0f));
+				ImGui::SetCursorPos(ImVec2(398.5f, 315.f));
 
-				ImGui::BeginChild("RCS", ImVec2(290.0f, 155.0f), true);
+				ImGui::BeginChild("RCS", ImVec2(390.f, 210.f), true);
 				{
 					ImGui::Text("RCS");
 					ImGui::Separator();
 					ImGui::Checkbox("Enable###RCSEnable", &g_Options.Legit.RCS.Enable);
-					ImGui::SliderFloat("###RCSAmount", &g_Options.Legit.RCS.Amount, 0.0f, 100.0f, "%.0f");
+					ImGui::SliderFloat("###RCSAmount", &g_Options.Legit.RCS.Amount, 0.f, 100.f, "%.f");
 				}
 				ImGui::EndChild();
 			}
 			if (tab == IMGUI_WND_PAGES::P_VISUALS)
 			{
-				ImGui::BeginChild("Glow", ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("Glow", ImVec2(390.f, 305.f), true);
 				{
 					ImGui::Text("Glow");
 					ImGui::Separator();
@@ -199,7 +199,7 @@ void gui::render()
 
 				ImGui::SameLine();
 
-				ImGui::BeginChild("ColorChams", ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("ColorChams", ImVec2(390.f, 305.f), true);
 				{
 					ImGui::Text("Color Chams");
 					ImGui::Separator();
@@ -217,18 +217,18 @@ void gui::render()
 				}
 				ImGui::EndChild();
 
-				ImGui::BeginChild("World", ImVec2(290.0f, 155.0f), true);
+				ImGui::BeginChild("World", ImVec2(390.f, 210.f), true);
 				{
 					ImGui::Text("World");
 					ImGui::Separator();
 					ImGui::Checkbox("Radar###WorldRadar", &g_Options.Visuals.World.Radar);
-					ImGui::SliderFloat("Brightness###WorldBrightness", &g_Options.Visuals.World.Brightness, 0.0f, 20.0f, "%.0f");
+					ImGui::SliderFloat("Brightness###WorldBrightness", &g_Options.Visuals.World.Brightness, 0.f, 20.f, "%.0f");
 				}
 				ImGui::EndChild();
 			}
 			if (tab == IMGUI_WND_PAGES::P_MISC)
 			{
-				ImGui::BeginChild("Helpers", ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("Helpers", ImVec2(390.f, 305.f), true);
 				{
 					ImGui::Text("Helpers");
 					ImGui::Separator();
@@ -241,39 +241,39 @@ void gui::render()
 			}
 			if (tab == IMGUI_WND_PAGES::P_COLORS)
 			{
-				ImGui::BeginChild("Glow", ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("Glow", ImVec2(390.f, 305.f), true);
 				{
 					ImGui::Text("Glow");
 					ImGui::Separator();
-					ImGui::ColorEdit3("Teammates###GlowTeammates", (float*)&g_Options.Colors.Glow.Teammates, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Enemies###GlowEnemy", (float*)&g_Options.Colors.Glow.Enemies, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Enemies Visible###GlowEnemiesVisible", (float*)&g_Options.Colors.Glow.EnemiesVisible, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Defusing###GlowDefusing", (float*)&g_Options.Colors.Glow.Defusing, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Scoped###GlowScoped", (float*)&g_Options.Colors.Glow.Scoped, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Flashed###GlowFlashed", (float*)&g_Options.Colors.Glow.Flashed, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Teammates###GlowTeammates", reinterpret_cast<float*>(&g_Options.Colors.Glow.Teammates), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies###GlowEnemy", reinterpret_cast<float*>(&g_Options.Colors.Glow.Enemies), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies Visible###GlowEnemiesVisible", reinterpret_cast<float*>(&g_Options.Colors.Glow.EnemiesVisible), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Defusing###GlowDefusing", reinterpret_cast<float*>(&g_Options.Colors.Glow.Defusing), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Scoped###GlowScoped", reinterpret_cast<float*>(&g_Options.Colors.Glow.Scoped), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Flashed###GlowFlashed", reinterpret_cast<float*>(&g_Options.Colors.Glow.Flashed), ImGuiColorEditFlags_NoInputs);
 				}
 				ImGui::EndChild();
 
 				ImGui::SameLine();
 
-				ImGui::BeginChild("ColorChams", ImVec2(290.0f, 250.0f), true);
+				ImGui::BeginChild("ColorChams", ImVec2(390.f, 305.f), true);
 				{
 					ImGui::Text("Color Chams");
 					ImGui::Separator();
-					ImGui::ColorEdit3("Teammates###ChamsTeammates", (float*)&g_Options.Colors.Chams.Teammates, ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Enemies###ChamsEnemies", (float*)&g_Options.Colors.Chams.Enemies, ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Teammates###ChamsTeammates", reinterpret_cast<float*>(&g_Options.Colors.Chams.Teammates), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies###ChamsEnemies", reinterpret_cast<float*>(&g_Options.Colors.Chams.Enemies), ImGuiColorEditFlags_NoInputs);
 				}
 				ImGui::EndChild();
 			}
 			if (tab == IMGUI_WND_PAGES::P_SETTINGS)
 			{
-				ImGui::BeginChild("Info", ImVec2(590.0f, 180.0f), true);
+				ImGui::BeginChild("Info", ImVec2(790.f, 180.f), true);
 				{
 					ImGui::Text("Info");
 					ImGui::Separator();
 					ImGui::Text("Source code:");
 					ImGui::SameLine();
-					if (ImGui::Button("GitHub", ImVec2(100.0f, 17.5f)))
+					if (ImGui::Button("GitHub", ImVec2(100.f, 17.5f)))
 						ShellExecuteA(nullptr, nullptr, "https://www.github.com/TosoxDev/Destiny.ut", nullptr, nullptr, SW_SHOW);
 					ImGui::Spacing();
 					ImGui::Text("Credits");
@@ -289,25 +289,17 @@ void gui::render()
 
 				if (g_Options.Developer.Enable)
 				{
-					ImGui::BeginChild("Developer", ImVec2(590.0f, 235.0f), true);
+					ImGui::BeginChild("Developer", ImVec2(790.f, 235.f), true);
 					{
 						ImGui::Text("Developer");
 						ImGui::Separator();
-						ImGui::Checkbox("Unload on Exit", &g_Options.Developer.UnloadOnExit);
-						ImGui::Separator();
-						ImGui::SliderFloat("Glow Alpha", &g_Options.Developer.GlowAlpha, 0.0f, 1.0f, "%.2f");
+						ImGui::SliderFloat("Glow Alpha", &g_Options.Developer.GlowAlpha, 0.f, 1.f, "%.2f");
 						ImGui::SliderInt("Glow Style", &g_Options.Developer.GlowStyle, 0, 3);
-						ImGui::Separator();
-						ImGui::SliderFloat("Player Flash Trigger", &g_Options.Developer.LocalPlayerFlashFlagAmount, 0.0f, 10.0f, "%.2f");
-						ImGui::SliderFloat("Enemy Flash Trigger", &g_Options.Developer.EntityFlashFlagAmount, 0.0f, 10.0f, "%.2f");
 						ImGui::Separator();
 						if (ImGui::Button("Reset"))
 						{
-							g_Options.Developer.UnloadOnExit = true;
-							g_Options.Developer.GlowAlpha = 0.85f;
+							g_Options.Developer.GlowAlpha = 0.65f;
 							g_Options.Developer.GlowStyle = 0;
-							g_Options.Developer.LocalPlayerFlashFlagAmount = 2.5f;
-							g_Options.Developer.EntityFlashFlagAmount = 2.5f;
 						}
 					}
 					ImGui::EndChild();
@@ -330,6 +322,7 @@ void gui::render()
 
 	glfwMakeContextCurrent(window);
 	glfwSwapBuffers(window);
+
 }
 
 void gui::shutdown()

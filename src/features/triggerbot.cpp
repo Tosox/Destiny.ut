@@ -69,7 +69,7 @@ void features::legit::triggerbot()
 	if ((g_LocalPlayer.getActiveWeapon().isSniper()) && (g_Options.Legit.Triggerbot.Scoped) && (!g_LocalPlayer.isScoped()))
 		return;
 
-	if ((g_LocalPlayer.getFlashDuration() > g_Options.Developer.LocalPlayerFlashFlagAmount) && (g_Options.Legit.Triggerbot.Flashed))
+	if ((g_LocalPlayer.getFlashDuration() > 2.5f) && (g_Options.Legit.Triggerbot.Flashed))
 		return;
 
 	if ((!g_LocalPlayer.getFlags()) && (g_Options.Legit.Triggerbot.InAir))

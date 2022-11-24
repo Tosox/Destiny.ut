@@ -37,6 +37,9 @@
     <Filter Include="readme-res">
       <UniqueIdentifier>{52361a09-f17b-4396-bcc2-7769e76ba220}</UniqueIdentifier>
     </Filter>
+    <Filter Include="res">
+      <UniqueIdentifier>{b09c4849-d1e4-4443-872e-97e574b4b392}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -224,14 +227,14 @@
     <ClInclude Include="helpers\Console.hpp">
       <Filter>src\helpers</Filter>
     </ClInclude>
+    <ClInclude Include="..\res\resource.h">
+      <Filter>res</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\lib\glfw\lib\glfw3.lib">
       <Filter>lib\glfw\lib</Filter>
     </Library>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\readme-res\legit.png">
@@ -243,5 +246,13 @@
     <Image Include="..\readme-res\visuals.png">
       <Filter>readme-res</Filter>
     </Image>
+    <Image Include="..\res\icon.ico">
+      <Filter>res</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\res\icon.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
