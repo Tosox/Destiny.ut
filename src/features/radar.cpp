@@ -3,5 +3,6 @@
 
 void features::visuals::radar(CEntity& entity)
 {
-	entity.setSpotted(true);
+	if (g_Options.Visuals.World.Radar)
+		entity.setSpotted(true);
 }

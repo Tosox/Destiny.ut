@@ -6,7 +6,7 @@ void features::misc::fov()
 	if (!g_Options.Misc.Helpers.Fov)
 		return;
 
-	if (!g_LocalPlayer)
+	if (g_LocalPlayer == NULL)
 		return;
 
 	if (g_LocalPlayer.isScoped())

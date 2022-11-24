@@ -16,6 +16,9 @@ void setGlowStructByColor(GlowStruct_t& glowStruct, const Color& color)
 
 void features::visuals::glow(CEntity& entity)
 {
+	if (!g_Options.Visuals.Glow.Enable)
+		return;
+
 	const int glowIndex = entity.getGlowIndex();
 	const bool isSpotted = entity.isSpottedBy(g_LocalPlayer);
 	const int health = entity.getHealth();

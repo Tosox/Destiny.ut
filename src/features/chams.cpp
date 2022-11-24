@@ -12,19 +12,10 @@ ClrRender_t getClrRenderByColor(const Color color)
 
 void features::visuals::chams(CEntity& entity)
 {
-	if (!entity)
+	if (!g_Options.Visuals.Chams.Enable)
 		return;
 
-	if (entity.isDormant())
-		return;
-
-	if (!entity.isAlive())
-		return;
-
-	if (entity == g_LocalPlayer)
-		return;
-
-	const Color clrRenderColor = g_LocalPlayer.getTeamNum() == entity.getTeamNum() ? g_Options.Colors.Chams.Teammates : g_Options.Colors.Chams.Enemies;
+	const Color clrRenderColor = (g_LocalPlayer.getTeamNum() == entity.getTeamNum() ? g_Options.Colors.Chams.Teammates : g_Options.Colors.Chams.Enemies);
 	ClrRender_t clrRender = getClrRenderByColor(clrRenderColor);
 
 	entity.setClrRender(clrRender);
