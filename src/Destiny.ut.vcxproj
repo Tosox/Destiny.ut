@@ -65,6 +65,7 @@
     <ClInclude Include="..\lib\imgui\imstb_textedit.h" />
     <ClInclude Include="..\lib\imgui\imstb_truetype.h" />
     <ClInclude Include="..\lib\json\json.hpp" />
+    <ClInclude Include="..\res\resource.h" />
     <ClInclude Include="features\Features.hpp" />
     <ClInclude Include="helpers\Console.hpp" />
     <ClInclude Include="helpers\Memory.hpp" />
@@ -87,12 +88,13 @@
     <Library Include="..\lib\glfw\lib\glfw3.lib" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\README.md" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="..\readme-res\legit.png" />
     <Image Include="..\readme-res\misc.png" />
     <Image Include="..\readme-res\visuals.png" />
+    <Image Include="..\res\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\res\icon.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9CDA7840-B7A5-496D-A527-E95571496D18}</ProjectGuid>
