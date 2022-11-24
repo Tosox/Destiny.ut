@@ -57,10 +57,10 @@ void features::legit::triggerbot()
 		return;
 
 	CEntity entity = getPlayerInCrosshair();
-	if (!entity)
+	if (entity == NULL)
 		return;
 
-	if (!entity.isAlive())
+	if ((!entity.isAlive()) || (entity.isDormant()))
 		return;
 
 	if ((entity.getTeamNum() == g_LocalPlayer.getTeamNum()) && (!g_Options.Legit.Triggerbot.Deathmatch))

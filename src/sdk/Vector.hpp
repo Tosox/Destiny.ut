@@ -240,3 +240,8 @@ struct Vector3
 		return *this;
 	}
 };
+
+struct Vector4
+{
+	float x, y, z, w;
+};

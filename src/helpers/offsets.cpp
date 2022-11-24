@@ -36,6 +36,7 @@ void offsets::initialize()
 	readValue(json["signatures"]["dwClientState_ViewAngles"], offsets::signatures::dwClientState_ViewAngles);
 	readValue(json["signatures"]["dwClientState_MapDirectory"], offsets::signatures::dwClientState_MapDirectory);
 	readValue(json["signatures"]["m_bDormant"], offsets::signatures::m_bDormant);
+	readValue(json["signatures"]["dwViewMatrix"], offsets::signatures::dwViewMatrix);
 
 	readValue(json["netvars"]["m_bIsDefusing"], offsets::netvars::m_bIsDefusing);
 	readValue(json["netvars"]["m_bIsScoped"], offsets::netvars::m_bIsScoped);

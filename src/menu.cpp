@@ -148,6 +148,7 @@ void gui::render()
 					ImGui::Checkbox("In Air###AimbotInAir", &g_Options.Legit.Aimbot.InAir);
 					ImGui::Combo("Target Bone###TargetBone", &g_Options.Legit.Aimbot.TargetBone, bones, IM_ARRAYSIZE(bones));
 					ImGui::SliderInt("Smoothing###AimbotSmoothing", &g_Options.Legit.Aimbot.Smoothing, 1, 25);
+					ImGui::SliderInt("FOV###AimbotFov", &g_Options.Legit.Aimbot.Fov, 1, 1000);
 				}
 				ImGui::EndChild();
 

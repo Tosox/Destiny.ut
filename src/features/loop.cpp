@@ -3,9 +3,6 @@
 
 void features::visuals::loop()
 {
-	if (!g_Options.Visuals.EnableGlobal)
-		return;
-
 	if (!g_Engine.isConnected())
 		return;
 
@@ -13,17 +10,11 @@ void features::visuals::loop()
 	{
 		CEntity entity = g_Client.getEntityFromList(i);
 
-		if (!entity)
-			return;
+		if ((entity == NULL) || (entity == g_LocalPlayer))
+			continue;
 
-		if (entity.isDormant())
-			return;
-
-		if (!entity.isAlive())
-			return;
-
-		if (entity == g_LocalPlayer)
-			return;
+		if ((!entity.isAlive()) || (entity.isDormant()))
+			continue;
 
 		radar(entity);
 		glow(entity);

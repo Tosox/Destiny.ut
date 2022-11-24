@@ -3,6 +3,16 @@
 #include "../settings/globals.hpp"
 #include "../sdk/DefEnums.hpp"
 
+CWeaponEntity::CWeaponEntity()
+{
+	m_Address = 0;
+}
+
+CWeaponEntity::CWeaponEntity(std::uintptr_t address)
+{
+	m_Address = address;
+}
+
 int CWeaponEntity::getItemId()
 {
 	return g_Memory.read<int>(m_Address + offsets::netvars::m_iItemDefinitionIndex);

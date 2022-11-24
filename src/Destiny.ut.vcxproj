@@ -39,6 +39,7 @@
     <ClCompile Include="features\rcs.cpp" />
     <ClCompile Include="features\triggerbot.cpp" />
     <ClCompile Include="helpers\Console.cpp" />
+    <ClCompile Include="helpers\math.cpp" />
     <ClCompile Include="helpers\Memory.cpp" />
     <ClCompile Include="helpers\offsets.cpp" />
     <ClCompile Include="helpers\utils.cpp" />
@@ -68,6 +69,7 @@
     <ClInclude Include="..\res\resource.h" />
     <ClInclude Include="features\Features.hpp" />
     <ClInclude Include="helpers\Console.hpp" />
+    <ClInclude Include="helpers\math.hpp" />
     <ClInclude Include="helpers\Memory.hpp" />
     <ClInclude Include="helpers\offsets.hpp" />
     <ClInclude Include="helpers\utils.hpp" />

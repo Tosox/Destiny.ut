@@ -32,6 +32,11 @@ Vector3 CBaseEntity::getViewOffset()
 	return g_Memory.read<Vector3>(m_Address + offsets::netvars::m_vecViewOffset);
 }
 
+Vector3 CBaseEntity::getEyeLocation()
+{
+	return getOrigin() + getViewOffset();
+}
+
 void CBaseEntity::setFov(int value)
 {
 	g_Memory.write<int>(m_Address + offsets::netvars::m_iDefaultFOV, value);

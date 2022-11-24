@@ -17,6 +17,7 @@ struct Options
 			bool InAir = false;
 			int TargetBone = 3;
 			int Smoothing = 1;
+			int Fov = 50;
 		} Aimbot;
 		struct Triggerbot_t
 		{
@@ -40,8 +41,6 @@ struct Options
 
 	struct Visuals_t
 	{
-		bool EnableGlobal = false;
-
 		struct Glow_t
 		{
 			bool Enable = false;
