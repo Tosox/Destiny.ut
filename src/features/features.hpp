@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../sdk/CEntity.hpp"
+#include "../sdk/sdk.hpp"
 
 namespace features
 {

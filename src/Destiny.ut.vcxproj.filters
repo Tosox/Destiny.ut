@@ -28,9 +28,6 @@
     <Filter Include="src\helpers">
       <UniqueIdentifier>{2500626e-8d64-4766-8fe6-42d78c29e8c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\sdk">
-      <UniqueIdentifier>{2f29c675-8bcc-4842-b9e8-34cc53e56b06}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\settings">
       <UniqueIdentifier>{bc8eb6aa-6d06-4e09-9407-640c7959acbf}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,15 @@
     </Filter>
     <Filter Include="res">
       <UniqueIdentifier>{b09c4849-d1e4-4443-872e-97e574b4b392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk">
+      <UniqueIdentifier>{2f29c675-8bcc-4842-b9e8-34cc53e56b06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\classes">
+      <UniqueIdentifier>{4b58462d-bfa3-4fde-b116-bad73f35d3e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sdk\structs">
+      <UniqueIdentifier>{0ee97d92-9033-47d8-842d-53404553d1c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -77,21 +83,6 @@
     </ClCompile>
     <ClCompile Include="helpers\utils.cpp">
       <Filter>src\helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="sdk\CBaseEntity.cpp">
-      <Filter>src\sdk</Filter>
-    </ClCompile>
-    <ClCompile Include="sdk\CClient.cpp">
-      <Filter>src\sdk</Filter>
-    </ClCompile>
-    <ClCompile Include="sdk\CEngine.cpp">
-      <Filter>src\sdk</Filter>
-    </ClCompile>
-    <ClCompile Include="sdk\CEntity.cpp">
-      <Filter>src\sdk</Filter>
-    </ClCompile>
-    <ClCompile Include="sdk\CWeaponEntity.cpp">
-      <Filter>src\sdk</Filter>
     </ClCompile>
     <ClCompile Include="helpers\Memory.cpp">
       <Filter>src\helpers</Filter>
@@ -137,6 +128,21 @@
     </ClCompile>
     <ClCompile Include="helpers\math.cpp">
       <Filter>src\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\classes\CBaseEntity.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\classes\CClient.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\classes\CEngine.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\classes\CEntity.cpp">
+      <Filter>sdk\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sdk\classes\CWeaponEntity.cpp">
+      <Filter>sdk\classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,33 +203,6 @@
     <ClInclude Include="settings\options.hpp">
       <Filter>src\settings</Filter>
     </ClInclude>
-    <ClInclude Include="sdk\CBaseEntity.hpp">
-      <Filter>src\sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="sdk\CClient.hpp">
-      <Filter>src\sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="sdk\CEngine.hpp">
-      <Filter>src\sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="sdk\CEntity.hpp">
-      <Filter>src\sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="sdk\Color.hpp">
-      <Filter>src\sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="sdk\CWeaponEntity.hpp">
-      <Filter>src\sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="sdk\DefEnums.hpp">
-      <Filter>src\sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="sdk\Structs.hpp">
-      <Filter>src\sdk</Filter>
-    </ClInclude>
-    <ClInclude Include="sdk\Vector.hpp">
-      <Filter>src\sdk</Filter>
-    </ClInclude>
     <ClInclude Include="helpers\Memory.hpp">
       <Filter>src\helpers</Filter>
     </ClInclude>
@@ -235,6 +214,48 @@
     </ClInclude>
     <ClInclude Include="helpers\math.hpp">
       <Filter>src\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\sdk.hpp">
+      <Filter>sdk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\structs\Color.hpp">
+      <Filter>sdk\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\structs\DefEnums.hpp">
+      <Filter>sdk\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\structs\GlowStruct.hpp">
+      <Filter>sdk\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\structs\Vector2.hpp">
+      <Filter>sdk\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\classes\CBaseEntity.hpp">
+      <Filter>sdk\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\classes\CClient.hpp">
+      <Filter>sdk\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\classes\CEngine.hpp">
+      <Filter>sdk\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\classes\CEntity.hpp">
+      <Filter>sdk\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\classes\CWeaponEntity.hpp">
+      <Filter>sdk\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\structs\ClrRender.hpp">
+      <Filter>sdk\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\structs\ViewMatrix.hpp">
+      <Filter>sdk\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\structs\Vector3.hpp">
+      <Filter>sdk\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sdk\structs\Vector4.hpp">
+      <Filter>sdk\structs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

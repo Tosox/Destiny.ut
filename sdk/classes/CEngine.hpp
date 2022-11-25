@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "Vector.hpp"
+#include "../structs/Vector2.hpp"
 
 class CEngine
 {

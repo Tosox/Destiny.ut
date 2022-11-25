@@ -6,9 +6,7 @@
 
 #include "options.hpp"
 #include "../helpers/Memory.hpp"
-#include "../sdk/CClient.hpp"
-#include "../sdk/CEngine.hpp"
-#include "../sdk/CBaseEntity.hpp"
+#include "../../sdk/sdk.hpp"
 #include "../helpers/Console.hpp"
 
 inline Memory g_Memory;

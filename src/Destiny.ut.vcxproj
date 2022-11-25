@@ -27,6 +27,11 @@
     <ClCompile Include="..\lib\imgui\imgui_impl_opengl2.cpp" />
     <ClCompile Include="..\lib\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\lib\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\sdk\classes\CBaseEntity.cpp" />
+    <ClCompile Include="..\sdk\classes\CClient.cpp" />
+    <ClCompile Include="..\sdk\classes\CEngine.cpp" />
+    <ClCompile Include="..\sdk\classes\CEntity.cpp" />
+    <ClCompile Include="..\sdk\classes\CWeaponEntity.cpp" />
     <ClCompile Include="features\aimbot.cpp" />
     <ClCompile Include="features\autopistol.cpp" />
     <ClCompile Include="features\brightness.cpp" />
@@ -46,11 +51,6 @@
     <ClCompile Include="features\loop.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
-    <ClCompile Include="sdk\CBaseEntity.cpp" />
-    <ClCompile Include="sdk\CClient.cpp" />
-    <ClCompile Include="sdk\CEngine.cpp" />
-    <ClCompile Include="sdk\CEntity.cpp" />
-    <ClCompile Include="sdk\CWeaponEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\glfw\include\glfw3.hpp" />
@@ -67,6 +67,20 @@
     <ClInclude Include="..\lib\imgui\imstb_truetype.h" />
     <ClInclude Include="..\lib\json\json.hpp" />
     <ClInclude Include="..\res\resource.h" />
+    <ClInclude Include="..\sdk\classes\CBaseEntity.hpp" />
+    <ClInclude Include="..\sdk\classes\CClient.hpp" />
+    <ClInclude Include="..\sdk\classes\CEngine.hpp" />
+    <ClInclude Include="..\sdk\classes\CEntity.hpp" />
+    <ClInclude Include="..\sdk\classes\CWeaponEntity.hpp" />
+    <ClInclude Include="..\sdk\sdk.hpp" />
+    <ClInclude Include="..\sdk\structs\ClrRender.hpp" />
+    <ClInclude Include="..\sdk\structs\Color.hpp" />
+    <ClInclude Include="..\sdk\structs\DefEnums.hpp" />
+    <ClInclude Include="..\sdk\structs\GlowStruct.hpp" />
+    <ClInclude Include="..\sdk\structs\Vector2.hpp" />
+    <ClInclude Include="..\sdk\structs\Vector3.hpp" />
+    <ClInclude Include="..\sdk\structs\Vector4.hpp" />
+    <ClInclude Include="..\sdk\structs\ViewMatrix.hpp" />
     <ClInclude Include="features\Features.hpp" />
     <ClInclude Include="helpers\Console.hpp" />
     <ClInclude Include="helpers\math.hpp" />
@@ -74,15 +88,6 @@
     <ClInclude Include="helpers\offsets.hpp" />
     <ClInclude Include="helpers\utils.hpp" />
     <ClInclude Include="menu.hpp" />
-    <ClInclude Include="sdk\CBaseEntity.hpp" />
-    <ClInclude Include="sdk\CClient.hpp" />
-    <ClInclude Include="sdk\CEngine.hpp" />
-    <ClInclude Include="sdk\CEntity.hpp" />
-    <ClInclude Include="sdk\Color.hpp" />
-    <ClInclude Include="sdk\CWeaponEntity.hpp" />
-    <ClInclude Include="sdk\DefEnums.hpp" />
-    <ClInclude Include="sdk\Structs.hpp" />
-    <ClInclude Include="sdk\Vector.hpp" />
     <ClInclude Include="settings\globals.hpp" />
     <ClInclude Include="settings\options.hpp" />
   </ItemGroup>

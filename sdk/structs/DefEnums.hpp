@@ -1,6 +1,6 @@
 #pragma once
 
-enum item_definition_index : int
+enum item_definition_index : short
 {
 	weapon_deagle = 1,
 	weapon_elite,

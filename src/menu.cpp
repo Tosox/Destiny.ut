@@ -1,7 +1,7 @@
 #include "menu.hpp"
 #include "settings/globals.hpp"
 #include "helpers/utils.hpp"
-#include "sdk/Structs.hpp"
+#include "../sdk/sdk.hpp"
 
 #include <shellapi.h>
 #include <glfw/include/glfw3.h>

@@ -1,10 +1,7 @@
-#include <Windows.h>
 #include "CEntity.hpp"
 #include "CWeaponEntity.hpp"
-#include "Structs.hpp"
-#include "Vector.hpp"
-#include "../helpers/offsets.hpp"
-#include "../settings/globals.hpp"
+#include "../src/helpers/offsets.hpp"
+#include "../src/settings/globals.hpp"
 
 CEntity::CEntity()
 {
