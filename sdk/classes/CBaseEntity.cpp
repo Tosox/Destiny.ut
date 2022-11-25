@@ -1,6 +1,6 @@
 #include "CBaseEntity.hpp"
-#include "../settings/globals.hpp"
-#include "../helpers/offsets.hpp"
+#include "../src/settings/globals.hpp"
+#include "../src/helpers/offsets.hpp"
 
 unsigned char CBaseEntity::getFlags()
 {

@@ -1,7 +1,5 @@
 #include "Features.hpp"
 #include "../settings/globals.hpp"
-#include "../sdk/Structs.hpp"
-#include "../sdk/Color.hpp"
 
 void setGlowStructByColor(GlowStruct_t& glowStruct, const Color& color)
 {

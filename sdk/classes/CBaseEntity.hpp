@@ -1,7 +1,8 @@
 #pragma once
 
 #include "CEntity.hpp"
-#include "Vector.hpp"
+#include "../structs/Vector2.hpp"
+#include "../structs/Vector3.hpp"
 
 class CBaseEntity : public CEntity
 {

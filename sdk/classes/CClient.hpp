@@ -1,7 +1,8 @@
 #pragma once
 
 #include <cstdint>
-#include "Structs.hpp"
+#include "../structs/GlowStruct.hpp"
+#include "../structs/ViewMatrix.hpp"
 
 class CClient
 {

@@ -1,6 +1,8 @@
+#include "CEngine.hpp"
+#include "../src/helpers/offsets.hpp"
+#include "../src/settings/globals.hpp"
+
 #include <array>
-#include "../helpers/offsets.hpp"
-#include "../settings/globals.hpp"
 
 bool CEngine::isConnected()
 {

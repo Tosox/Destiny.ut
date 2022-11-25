@@ -1,7 +1,7 @@
 #include "CWeaponEntity.hpp"
-#include "../helpers/offsets.hpp"
-#include "../settings/globals.hpp"
-#include "../sdk/DefEnums.hpp"
+#include "../src/helpers/offsets.hpp"
+#include "../src/settings/globals.hpp"
+#include "../structs/DefEnums.hpp"
 
 CWeaponEntity::CWeaponEntity()
 {

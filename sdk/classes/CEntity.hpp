@@ -2,8 +2,8 @@
 
 #include <Windows.h>
 #include "CWeaponEntity.hpp"
-#include "Structs.hpp"
-#include "Vector.hpp"
+#include "../structs/Vector3.hpp"
+#include "../structs/ClrRender.hpp"
 
 class CEntity
 {

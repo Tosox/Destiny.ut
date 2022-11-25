@@ -2,8 +2,6 @@
 #include "../helpers/math.hpp"
 #include "../helpers/utils.hpp"
 #include "../settings/globals.hpp"
-#include "../sdk/Vector.hpp"
-#include "../sdk/CEntity.hpp"
 
 #define KEY_DOWN 0x8000
 

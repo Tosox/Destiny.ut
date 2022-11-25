@@ -1,7 +1,5 @@
 #include "features.hpp"
 #include "../settings/globals.hpp"
-#include "../sdk/CEntity.hpp"
-#include "../sdk/DefEnums.hpp"
 
 #define KEY_DOWN 0x8000
 

@@ -1,6 +1,6 @@
 #include "CClient.hpp"
-#include "../helpers/offsets.hpp"
-#include "../settings/globals.hpp"
+#include "../src/helpers/offsets.hpp"
+#include "../src/settings/globals.hpp"
 
 bool CClient::isMouseEnabled()
 {
