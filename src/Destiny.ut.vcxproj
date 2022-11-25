@@ -42,6 +42,7 @@
     <ClCompile Include="features\noflash.cpp" />
     <ClCompile Include="features\radar.cpp" />
     <ClCompile Include="features\rcs.cpp" />
+    <ClCompile Include="features\thirdperson.cpp" />
     <ClCompile Include="features\triggerbot.cpp" />
     <ClCompile Include="helpers\Console.cpp" />
     <ClCompile Include="helpers\math.cpp" />

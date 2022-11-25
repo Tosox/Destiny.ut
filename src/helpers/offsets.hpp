@@ -45,6 +45,8 @@ namespace offsets
 		inline std::uintptr_t m_aimPunchAngle;
 		inline std::uintptr_t m_clrRender;
 		inline std::uintptr_t m_vecViewOffset;
+		inline std::uintptr_t m_nModelIndex;
+		inline std::uintptr_t m_iObserverMode;
 	}
 
 	void initialize();

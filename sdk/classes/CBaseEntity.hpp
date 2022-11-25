@@ -14,8 +14,12 @@ public:
 	Vector2 getAimPunchAngle();
 	Vector3 getViewOffset();
 	Vector3 getEyeLocation();
+	int getModelIndex();
+	int getObserverMode();
 
 	void setFov(int value);
+	void setModelIndex(int value);
+	void setObserverMode(int value);
 
 	inline CBaseEntity& operator= (const std::uintptr_t& address) { m_Address = address; return *this; }
 };

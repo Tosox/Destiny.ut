@@ -240,6 +240,7 @@ void gui::render()
 					ImGui::Checkbox("Bunnyhop###HelpersBunnyhop", &g_Options.Misc.Helpers.Bunnyhop);
 					ImGui::Checkbox("Auto Pistol###HelpersAutoPistol", &g_Options.Misc.Helpers.AutoPistol);
 					ImGui::Checkbox("No Flash###VisualsNoFlash", &g_Options.Misc.Helpers.NoFlash);
+					ImGui::Checkbox("Thirdperson###VisualsThirdperson", &g_Options.Misc.Helpers.Thirdperson);
 					ImGui::SliderInt("FOV###VisualsFOV", &g_Options.Misc.Helpers.Fov, 50, 150);
 				}
 				ImGui::EndChild();
@@ -283,8 +284,7 @@ void gui::render()
 					ImGui::Spacing();
 					ImGui::Text("Credits");
 					ImGui::Separator();
-					ImGui::Text("-Special thanks to the GuidedHacking community");
-					ImGui::Text("-Offsets provided by: hazedumper");
+					ImGui::Text("-Offsets provided by: hazedumper and blazedumper");
 					ImGui::Text("-GUI powered by: ImGui and GLFW");
 					ImGui::Text("-JSON library by: Niels Lohmann");
 					ImGui::Separator();

@@ -144,6 +144,9 @@
     <ClCompile Include="..\sdk\classes\CWeaponEntity.cpp">
       <Filter>sdk\classes</Filter>
     </ClCompile>
+    <ClCompile Include="features\thirdperson.cpp">
+      <Filter>src\features</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.hpp">

@@ -37,7 +37,27 @@ Vector3 CBaseEntity::getEyeLocation()
 	return getOrigin() + getViewOffset();
 }
 
+int CBaseEntity::getModelIndex()
+{
+	return g_Memory.read<int>(m_Address + offsets::netvars::m_nModelIndex);
+}
+
+int CBaseEntity::getObserverMode()
+{
+	return g_Memory.read<int>(m_Address + offsets::netvars::m_iObserverMode);
+}
+
 void CBaseEntity::setFov(int value)
 {
 	g_Memory.write<int>(m_Address + offsets::netvars::m_iDefaultFOV, value);
+}
+
+void CBaseEntity::setModelIndex(int value)
+{
+	g_Memory.write<int>(m_Address + offsets::netvars::m_nModelIndex, value);
+}
+
+void CBaseEntity::setObserverMode(int value)
+{
+	g_Memory.write<int>(m_Address + offsets::netvars::m_iObserverMode, value);
 }
