@@ -21,13 +21,17 @@ GLFWwindow* window = nullptr;
 
 bool gui::generateWindow()
 {
+	const std::string randomWindowName = utils::randomString(12);
+
+	SetConsoleTitleA(randomWindowName.c_str());
+
 	glfwSetErrorCallback(nullptr);
 	if (glfwInit() == GLFW_FALSE)
 		return false;
 
 	// Create Window
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-	window = glfwCreateWindow(1000, 560, utils::randomString(12).c_str(), nullptr, nullptr);
+	window = glfwCreateWindow(1000, 560, randomWindowName.c_str(), nullptr, nullptr);
 	if (!window)
 		return false;
 
