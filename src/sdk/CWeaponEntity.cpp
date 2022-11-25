@@ -13,14 +13,14 @@ CWeaponEntity::CWeaponEntity(std::uintptr_t address)
 	m_Address = address;
 }
 
-int CWeaponEntity::getItemId()
+short CWeaponEntity::getItemId()
 {
-	return g_Memory.read<int>(m_Address + offsets::netvars::m_iItemDefinitionIndex);
+	return g_Memory.read<short>(m_Address + offsets::netvars::m_iItemDefinitionIndex);
 }
 
 bool CWeaponEntity::isSniper()
 {
-	const int id = getItemId();
+	const short id = getItemId();
 	switch (id)
 	{
 	case weapon_awp:
@@ -35,7 +35,7 @@ bool CWeaponEntity::isSniper()
 
 bool CWeaponEntity::isPistol()
 {
-	const int id = getItemId();
+	const short id = getItemId();
 	switch (id)
 	{
 	case weapon_deagle:
@@ -56,7 +56,7 @@ bool CWeaponEntity::isPistol()
 
 bool CWeaponEntity::isKnife()
 {
-	const int id = getItemId();
+	const short id = getItemId();
 	switch (id)
 	{
 	case weapon_knifegg:
@@ -90,7 +90,7 @@ bool CWeaponEntity::isKnife()
 
 bool CWeaponEntity::isGun()
 {
-	const int id = getItemId();
+	const short id = getItemId();
 	switch (id)
 	{
 	case weapon_deagle:
@@ -135,7 +135,7 @@ bool CWeaponEntity::isGun()
 
 bool CWeaponEntity::isGrenade()
 {
-	const int id = getItemId();
+	const short id = getItemId();
 	switch (id)
 	{
 	case weapon_hegrenade:

@@ -8,7 +8,7 @@ public:
 	CWeaponEntity();
 	CWeaponEntity(std::uintptr_t address);
 
-	int getItemId();
+	short getItemId();
 	bool isSniper();
 	bool isPistol();
 	bool isKnife();
