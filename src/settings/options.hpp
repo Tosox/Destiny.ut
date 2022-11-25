@@ -68,6 +68,7 @@ struct Options
 			bool Bunnyhop = false;
 			bool AutoPistol = false;
 			bool NoFlash = false;
+			bool Thirdperson = false;
 			int Fov = 90;
 		} Helpers;
 	} Misc;
@@ -101,5 +102,6 @@ struct Options
 	{
 		int oModelAmbient = 0;
 		int oFov = 0;
+		int oModelIndex = 0;
 	} Default;
 };

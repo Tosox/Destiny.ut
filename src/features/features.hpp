@@ -14,8 +14,8 @@ namespace features
 	namespace visuals
 	{
 		void brightness();
-		void loop();
 
+		void loop();
 		void glow(CEntity& entity);
 		void chams(CEntity& entity);
 		void radar(CEntity& entity);
@@ -27,6 +27,7 @@ namespace features
 		void noflash();
 		void fov();
 		void autopistol();
+		void thirdperson();
 	}
 
 	inline void run()
@@ -42,5 +43,6 @@ namespace features
 		misc::noflash();
 		misc::fov();
 		misc::autopistol();
+		misc::thirdperson();
 	}
 }

@@ -58,4 +58,6 @@ void offsets::initialize()
 	readValue(json["netvars"]["m_aimPunchAngle"], offsets::netvars::m_aimPunchAngle);
 	readValue(json["netvars"]["m_clrRender"], offsets::netvars::m_clrRender);
 	readValue(json["netvars"]["m_vecViewOffset"], offsets::netvars::m_vecViewOffset);
+	readValue(json["netvars"]["m_nModelIndex"], offsets::netvars::m_nModelIndex);
+	readValue(json["netvars"]["m_iObserverMode"], offsets::netvars::m_iObserverMode);
 }

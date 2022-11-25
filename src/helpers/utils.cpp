@@ -47,10 +47,12 @@ void utils::saveDefaultValues()
 {
 	g_Options.Default.oFov = 90; // TODO: g_LocalPlayer.m_iDefaultFOV() is returning 0
 	g_Options.Default.oModelAmbient = g_Engine.getModelAmbientMin();
+	g_Options.Default.oModelIndex = g_LocalPlayer.getModelIndex();
 }
 
 void utils::unload()
 {
 	g_LocalPlayer.setFov(g_Options.Default.oFov);
 	g_Engine.setModelAmbientMin(g_Options.Default.oModelAmbient);
+	g_LocalPlayer.setModelIndex(g_Options.Default.oModelIndex);
 }
