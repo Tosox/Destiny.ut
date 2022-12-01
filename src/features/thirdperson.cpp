@@ -5,6 +5,11 @@
 
 void features::misc::thirdperson()
 {
-	if (g_Options.Misc.Helpers.Thirdperson)
-		g_LocalPlayer.setObserverMode(GetAsyncKeyState(VK_MBUTTON) & KEY_DOWN ? 1 : 0);
+	if (!g_Options.Misc.Helpers.Thirdperson)
+		return;
+
+	if (g_LocalPlayer == NULL)
+		return;
+
+	g_LocalPlayer.setObserverMode(GetAsyncKeyState(VK_MBUTTON) & KEY_DOWN);
 }
