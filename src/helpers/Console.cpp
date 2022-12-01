@@ -19,5 +19,5 @@ void console::throwErrorAndExit(std::string error)
 {
 	throwError(error);
 	std::cin.get();
-	exit(EXIT_FAILURE);
+	std::exit(EXIT_FAILURE);
 }

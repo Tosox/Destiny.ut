@@ -39,5 +39,3 @@ bool math::WorldToScreen(Vector3 pos, Vector2& screen)
 
 	return true;
 }
-
-
