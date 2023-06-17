@@ -30,12 +30,12 @@ int main(int argc, char** argv)
 	HRESULT result = URLDownloadToFileA(nullptr, url, "offsets.json", 0, nullptr);
 	if (result != S_OK)
 	{
-		// console::throwWarning("[!] Could not update offsets. Falling back to blazedumper's offsets");
+		MessageBox(NULL, "Could not update offsets. Falling back to blazedumper's offsets", "Warning", MB_ICONWARNING);
 
 		url = "https://raw.githubusercontent.com/Akandesh/blazedumper/master/csgo.json";
 		result = URLDownloadToFileA(nullptr, url, "offsets.json", 0, nullptr);
-		// if (result != S_OK)
-			// console::throwWarning("[!] Could not update offsets. Falling back to old offsets file");
+		if (result != S_OK)
+			MessageBox(NULL, "Could not update offsets. Falling back to old offsets file", "Warning", MB_ICONWARNING);
 	}
 
 	offsets::initialize();
