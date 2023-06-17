@@ -8,7 +8,7 @@
 
 #include "structs/ClrRender.hpp"
 #include "structs/Color.hpp"
-#include "structs/DefEnums.hpp"
+#include "structs/Definitions.hpp"
 #include "structs/GlowStruct.hpp"
 #include "structs/Vector2.hpp"
 #include "structs/Vector3.hpp"

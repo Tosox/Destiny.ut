@@ -1,7 +1,7 @@
 #include "Features.hpp"
 #include "../settings/globals.hpp"
 
-void setGlowStructByColor(GlowStruct_t& glowStruct, const Color& color)
+void setGlowStructByColor(GlowStruct_t& glowStruct, Color& color)
 {
 	glowStruct.red = color.red;
 	glowStruct.green = color.green;
@@ -17,9 +17,9 @@ void features::visuals::glow(CEntity& entity)
 	if (!g_Options.Visuals.Glow.Enable)
 		return;
 
-	const int glowIndex = entity.getGlowIndex();
-	const bool isSpotted = entity.isSpottedBy(g_LocalPlayer);
-	const int health = entity.getHealth();
+	int glowIndex = entity.getGlowIndex();
+	bool isSpotted = entity.isSpottedBy(g_LocalPlayer);
+	int health = entity.getHealth();
 
 	GlowStruct_t glowStruct = g_Client.getGlowStruct(glowIndex);
 	Color glowColor{};

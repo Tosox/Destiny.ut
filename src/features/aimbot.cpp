@@ -14,7 +14,7 @@ CEntity getClosestEnemy()
 	{
 		CEntity entity = g_Client.getEntityFromList(i);
 
-		if ((entity == NULL) || (entity == g_LocalPlayer))
+		if ((entity.exists()) || (entity == g_LocalPlayer))
 			continue;
 
 		if ((!entity.isAlive()) || (entity.isDormant()))
@@ -40,8 +40,8 @@ CEntity getClosestEnemy()
 		if (!math::WorldToScreen(entity.getOrigin(), enemyPos))
 			continue;
 
-		const SIZE windowSize = utils::getTargetSize();
-		const float distance = std::sqrtf(std::powf(enemyPos.x - (windowSize.cx / 2.f), 2) + std::powf(enemyPos.y - (windowSize.cy / 2.f), 2));
+		SIZE windowSize = utils::getTargetSize();
+		float distance = std::sqrtf(std::powf(enemyPos.x - (windowSize.cx / 2.f), 2) + std::powf(enemyPos.y - (windowSize.cy / 2.f), 2));
 		if (distance > g_Options.Legit.Aimbot.Fov)
 			continue;
 
@@ -83,16 +83,16 @@ void features::legit::aimbot()
 	if (g_Client.isMouseEnabled())
 		return;
 
-	const bool shouldAim = (g_Options.Legit.Aimbot.AutoAim ? true : GetAsyncKeyState(VK_LBUTTON) & KEY_DOWN);
+	bool shouldAim = (g_Options.Legit.Aimbot.AutoAim ? true : GetAsyncKeyState(VK_LBUTTON) & KEY_DOWN);
 	if (!shouldAim)
 		return;
 
 	CWeaponEntity weapon = g_LocalPlayer.getActiveWeapon();
-	if ((weapon == NULL) || (!weapon.isGun()))
+	if ((!weapon.exists()) || (!weapon.isGun()))
 		return;
 
 	CEntity entity = getClosestEnemy();
-	if (entity == NULL)
+	if (!entity.exists())
 		return;
 
 	Vector3 targetPos = entity.getBoneById(g_Options.Legit.Aimbot.TargetBone + 3);

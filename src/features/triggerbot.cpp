@@ -8,9 +8,9 @@ CEntity getPlayerInCrosshair()
 	CEntity entity{};
 
 	// Check if target is a player
-	const int crosshairId = g_LocalPlayer.getCrosshairId();
-	if (crosshairId < 1 || crosshairId > 64)
-		return NULL;
+	int crosshairId = g_LocalPlayer.getCrosshairId();
+	if ((crosshairId < 1) || (crosshairId > 64))
+		return -1;
 
 	return g_Client.getEntityFromList(crosshairId - 1);
 }
@@ -18,7 +18,7 @@ CEntity getPlayerInCrosshair()
 void Shoot(CEntity& entity)
 {
 	CWeaponEntity weapon = g_LocalPlayer.getActiveWeapon();
-	const float distance = g_LocalPlayer.getOrigin().to(entity.getOrigin()).mag();
+	float distance = g_LocalPlayer.getOrigin().to(entity.getOrigin()).mag();
 
 	// Decide to shoot if we got the right gun and conditions
 	if ((weapon.isGun()) && (!g_Options.Legit.Triggerbot.ExcludeGuns))
@@ -50,12 +50,12 @@ void features::legit::triggerbot()
 	if (g_Client.isMouseEnabled())
 		return;
 
-	const bool canShoot = (g_Options.Legit.Triggerbot.AutoFire ? true : GetAsyncKeyState(VK_MENU) & KEY_DOWN);
+	bool canShoot = (g_Options.Legit.Triggerbot.AutoFire ? true : GetAsyncKeyState(VK_MENU) & KEY_DOWN);
 	if (!canShoot)
 		return;
 
 	CEntity entity = getPlayerInCrosshair();
-	if (entity == NULL)
+	if (entity == -1)
 		return;
 
 	if ((!entity.isAlive()) || (entity.isDormant()))

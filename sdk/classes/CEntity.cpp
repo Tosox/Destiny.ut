@@ -13,6 +13,11 @@ CEntity::CEntity(std::uintptr_t address)
 	m_Address = address;
 }
 
+bool CEntity::exists()
+{
+	return m_Address != NULL;
+}
+
 bool CEntity::isAlive()
 {
 	return getHealth() > 0;

@@ -11,6 +11,8 @@ public:
 	CEntity();
 	CEntity(std::uintptr_t address);
 
+	bool exists();
+
 	bool isAlive();
 	bool isDefusing();
 	bool isDormant();

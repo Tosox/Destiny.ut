@@ -8,7 +8,7 @@ void features::misc::thirdperson()
 	if (!g_Options.Misc.Helpers.Thirdperson)
 		return;
 
-	if (g_LocalPlayer == NULL)
+	if (!g_LocalPlayer.exists())
 		return;
 
 	g_LocalPlayer.setObserverMode(GetAsyncKeyState(VK_MBUTTON) & KEY_DOWN);

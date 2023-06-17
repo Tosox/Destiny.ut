@@ -25,4 +25,3 @@ public:
 private:
 	std::uintptr_t m_Address{};
 };
-

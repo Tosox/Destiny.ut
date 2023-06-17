@@ -3,7 +3,7 @@
 
 void features::visuals::brightness()
 {
-	static float prevBrightness = NULL;
+	static float prevBrightness = FLT_MAX;
 
 	if (prevBrightness != g_Options.Visuals.World.Brightness)
 	{

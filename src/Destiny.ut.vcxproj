@@ -76,7 +76,7 @@
     <ClInclude Include="..\sdk\sdk.hpp" />
     <ClInclude Include="..\sdk\structs\ClrRender.hpp" />
     <ClInclude Include="..\sdk\structs\Color.hpp" />
-    <ClInclude Include="..\sdk\structs\DefEnums.hpp" />
+    <ClInclude Include="..\sdk\structs\Definitions.hpp" />
     <ClInclude Include="..\sdk\structs\GlowStruct.hpp" />
     <ClInclude Include="..\sdk\structs\Vector2.hpp" />
     <ClInclude Include="..\sdk\structs\Vector3.hpp" />

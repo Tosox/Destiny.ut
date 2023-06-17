@@ -224,7 +224,7 @@
     <ClInclude Include="..\sdk\structs\Color.hpp">
       <Filter>sdk\structs</Filter>
     </ClInclude>
-    <ClInclude Include="..\sdk\structs\DefEnums.hpp">
+    <ClInclude Include="..\sdk\structs\Definitions.hpp">
       <Filter>sdk\structs</Filter>
     </ClInclude>
     <ClInclude Include="..\sdk\structs\GlowStruct.hpp">

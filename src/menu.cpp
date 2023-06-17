@@ -251,12 +251,12 @@ void gui::render()
 				{
 					ImGui::Text("Glow");
 					ImGui::Separator();
-					ImGui::ColorEdit3("Teammates###GlowTeammates", reinterpret_cast<float*>(&g_Options.Colors.Glow.Teammates), ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Enemies###GlowEnemy", reinterpret_cast<float*>(&g_Options.Colors.Glow.Enemies), ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Enemies Visible###GlowEnemiesVisible", reinterpret_cast<float*>(&g_Options.Colors.Glow.EnemiesVisible), ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Defusing###GlowDefusing", reinterpret_cast<float*>(&g_Options.Colors.Glow.Defusing), ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Scoped###GlowScoped", reinterpret_cast<float*>(&g_Options.Colors.Glow.Scoped), ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Flashed###GlowFlashed", reinterpret_cast<float*>(&g_Options.Colors.Glow.Flashed), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Teammates###GlowTeammates", (float*)(&g_Options.Colors.Glow.Teammates), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies###GlowEnemy", (float*)(&g_Options.Colors.Glow.Enemies), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies Visible###GlowEnemiesVisible", (float*)(&g_Options.Colors.Glow.EnemiesVisible), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Defusing###GlowDefusing", (float*)(&g_Options.Colors.Glow.Defusing), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Scoped###GlowScoped", (float*)(&g_Options.Colors.Glow.Scoped), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Flashed###GlowFlashed", (float*)(&g_Options.Colors.Glow.Flashed), ImGuiColorEditFlags_NoInputs);
 				}
 				ImGui::EndChild();
 
@@ -266,8 +266,8 @@ void gui::render()
 				{
 					ImGui::Text("Color Chams");
 					ImGui::Separator();
-					ImGui::ColorEdit3("Teammates###ChamsTeammates", reinterpret_cast<float*>(&g_Options.Colors.Chams.Teammates), ImGuiColorEditFlags_NoInputs);
-					ImGui::ColorEdit3("Enemies###ChamsEnemies", reinterpret_cast<float*>(&g_Options.Colors.Chams.Enemies), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Teammates###ChamsTeammates", (float*)(&g_Options.Colors.Chams.Teammates), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit3("Enemies###ChamsEnemies", (float*)(&g_Options.Colors.Chams.Enemies), ImGuiColorEditFlags_NoInputs);
 				}
 				ImGui::EndChild();
 			}

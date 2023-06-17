@@ -1,7 +1,7 @@
 #include "CWeaponEntity.hpp"
 #include "../src/helpers/offsets.hpp"
 #include "../src/settings/globals.hpp"
-#include "../structs/DefEnums.hpp"
+#include "../structs/Definitions.hpp"
 
 CWeaponEntity::CWeaponEntity()
 {
@@ -11,6 +11,11 @@ CWeaponEntity::CWeaponEntity()
 CWeaponEntity::CWeaponEntity(std::uintptr_t address)
 {
 	m_Address = address;
+}
+
+bool CWeaponEntity::exists()
+{
+	return m_Address != NULL;
 }
 
 short CWeaponEntity::getItemId()

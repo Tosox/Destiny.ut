@@ -10,7 +10,7 @@ void features::visuals::loop()
 	{
 		CEntity entity = g_Client.getEntityFromList(i);
 
-		if ((entity == NULL) || (entity == g_LocalPlayer))
+		if ((!entity.exists()) || (entity == g_LocalPlayer))
 			continue;
 
 		if ((!entity.isAlive()) || (entity.isDormant()))

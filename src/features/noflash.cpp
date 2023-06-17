@@ -6,7 +6,7 @@ void features::misc::noflash()
 	if (!g_Options.Misc.Helpers.NoFlash)
 		return;
 
-	if (g_LocalPlayer == NULL)
+	if (!g_LocalPlayer.exists())
 		return;
 
 	if (g_LocalPlayer.getFlashDuration() <= 0.f)
