@@ -16,10 +16,13 @@ void offsets::initialize()
 	// Check offsets file
 	std::ifstream input_file{ "offsets.json" };
 	if (!input_file.good())
-		throw std::invalid_argument("Invalid offsets.json file");
+	{
+		MessageBox(NULL, "Invalid 'offsets.json' file", "Error", MB_ICONERROR);
+		exit(1);
+	}
 
 	nlohmann::json json{};
-	json.parse(input_file);
+	json = nlohmann::json::parse(input_file);
 
 	readValue(json["signatures"]["dwLocalPlayer"], offsets::signatures::dwLocalPlayer);
 	readValue(json["signatures"]["dwMouseEnable"], offsets::signatures::dwMouseEnable);

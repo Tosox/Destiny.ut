@@ -10,7 +10,7 @@ CEntity getPlayerInCrosshair()
 	// Check if target is a player
 	int crosshairId = g_LocalPlayer.getCrosshairId();
 	if ((crosshairId < 1) || (crosshairId > 64))
-		return -1;
+		return NULL;
 
 	return g_Client.getEntityFromList(crosshairId - 1);
 }
@@ -55,7 +55,7 @@ void features::legit::triggerbot()
 		return;
 
 	CEntity entity = getPlayerInCrosshair();
-	if (entity == -1)
+	if (entity == NULL)
 		return;
 
 	if ((!entity.isAlive()) || (entity.isDormant()))

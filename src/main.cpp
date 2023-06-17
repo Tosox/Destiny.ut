@@ -11,11 +11,17 @@ int main(int argc, char** argv)
 {
 	const bool isTargetRunning = utils::isTargetRunning();
 	if (!isTargetRunning)
-		console::throwErrorAndExit(std::format("[!] CS:GO is not running yet (Errorcode: {})", GetLastError()));
+	{
+		MessageBox(NULL, "CS:GO is not running yet", "Error", MB_ICONERROR);
+		exit(1);
+	}
 
 	const bool isWindowGenerated = gui::generateWindow();
 	if (!isWindowGenerated)
-		console::throwErrorAndExit(std::format("[!] Could not generate process window"));
+	{
+		MessageBox(NULL, "Could not generate process window", "Error", MB_ICONERROR);
+		exit(1);
+	}
 
 	gui::initilize();
 
@@ -24,12 +30,12 @@ int main(int argc, char** argv)
 	HRESULT result = URLDownloadToFileA(nullptr, url, "offsets.json", 0, nullptr);
 	if (result != S_OK)
 	{
-		console::throwWarning("[!] Could not update offsets. Falling back to blazedumper's offsets");
+		// console::throwWarning("[!] Could not update offsets. Falling back to blazedumper's offsets");
 
 		url = "https://raw.githubusercontent.com/Akandesh/blazedumper/master/csgo.json";
 		result = URLDownloadToFileA(nullptr, url, "offsets.json", 0, nullptr);
-		if (result != S_OK)
-			console::throwWarning("[!] Could not update offsets. Falling back to old offsets file");
+		// if (result != S_OK)
+			// console::throwWarning("[!] Could not update offsets. Falling back to old offsets file");
 	}
 
 	offsets::initialize();

@@ -123,9 +123,6 @@
     <ClCompile Include="features\aimbot.cpp">
       <Filter>src\features</Filter>
     </ClCompile>
-    <ClCompile Include="helpers\Console.cpp">
-      <Filter>src\helpers</Filter>
-    </ClCompile>
     <ClCompile Include="helpers\math.cpp">
       <Filter>src\helpers</Filter>
     </ClCompile>
@@ -207,9 +204,6 @@
       <Filter>src\settings</Filter>
     </ClInclude>
     <ClInclude Include="helpers\Memory.hpp">
-      <Filter>src\helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="helpers\Console.hpp">
       <Filter>src\helpers</Filter>
     </ClInclude>
     <ClInclude Include="..\res\resource.h">
