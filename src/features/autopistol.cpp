@@ -1,6 +1,8 @@
 #include "Features.hpp"
 #include "../settings/globals.hpp"
 
+#define KEY_DOWN 0x8000
+
 void features::misc::autopistol()
 {
 	if (!g_Options.Misc.Helpers.AutoPistol)
@@ -16,7 +18,7 @@ void features::misc::autopistol()
 	if ((!weapon.exists()) || (!weapon.isPistol()))
 		return;
 
-	if (!GetAsyncKeyState(VK_LBUTTON))
+	if (!(GetAsyncKeyState(VK_LBUTTON) & KEY_DOWN))
 		return;
 
 	g_Client.doForceAttack();
