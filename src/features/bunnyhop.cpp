@@ -8,7 +8,7 @@ void features::misc::bunnyhop()
 	if (!g_Options.Misc.Helpers.Bunnyhop)
 		return;
 
-	if (g_LocalPlayer.exists())
+	if (!g_LocalPlayer.exists())
 		return;
 
 	if (g_Client.isMouseEnabled())
