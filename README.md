@@ -7,6 +7,11 @@
 
 > This is not a ready-to-use cheat and as such it is highly recommended that you do not use this
 
+## Notes
+> **Note**
+> Working on this project has been a lot of fun, and I learned a lot in the process.
+> My knowledge and my code style has improved notably since I started with this project, so thank you to everyone who helped me.
+
 ## Disclaimer
 This program is for educational purposes only!
 
@@ -30,12 +35,6 @@ Copyright Disclaimer under section 107 of the Copyright Act 1976, allowance is m
 [<img src="readme-res/misc.png" height="400" />](readme-res/misc.png)
 
 </div>
-
-## FAQ
-
-### Will the cheat be updated in the future?
-- There will most likely be no new features introduced, 
-but bug fixes and code improvements can be expected
 
 ## Known Issues
 - The aimbot doesn't manage to aim on the target before firing
