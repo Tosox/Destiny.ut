@@ -1,9 +1,9 @@
 # Destiny.ut
 [![](https://img.shields.io/badge/Language-C%2B%2B-%23f34b7d.svg?style=flat)](https://en.wikipedia.org/wiki/C%2B%2B) 
 [![](https://img.shields.io/badge/Game-CS%3AGO-yellow.svg?style=flat)](https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/) 
-[![](https://img.shields.io/github/languages/code-size/TosoxDev/Destiny.ut?color=blue&label=Code%20size&style=flat)](https://github.com/TosoxDev/Destiny.ut)
-[![](https://img.shields.io/tokei/lines/github/TosoxDev/Destiny.ut?color=red&label=Total%20lines&style=flat)](https://github.com/TosoxDev/Destiny.ut)
-[![](https://img.shields.io/github/downloads/TosoxDev/Destiny.ut/total?color=green&label=Downloads&style=flat)](https://github.com/TosoxDev/Destiny.ut/releases)
+[![](https://img.shields.io/github/languages/code-size/Tosox/Destiny.ut?color=blue&label=Code%20size&style=flat)](https://github.com/Tosox/Destiny.ut)
+[![](https://img.shields.io/tokei/lines/github/Tosox/Destiny.ut?color=red&label=Total%20lines&style=flat)](https://github.com/Tosox/Destiny.ut)
+[![](https://img.shields.io/github/downloads/Tosox/Destiny.ut/total?color=green&label=Downloads&style=flat)](https://github.com/Tosox/Destiny.ut/releases)
 
 > This is not a ready-to-use cheat and as such it is highly recommended that you do not use this
 
