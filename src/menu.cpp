@@ -280,7 +280,7 @@ void gui::render()
 					ImGui::Text("Source code:");
 					ImGui::SameLine();
 					if (ImGui::Button("GitHub", ImVec2(100.f, 17.5f)))
-						ShellExecuteA(nullptr, nullptr, "https://www.github.com/TosoxDev/Destiny.ut", nullptr, nullptr, SW_SHOW);
+						ShellExecuteA(nullptr, nullptr, "https://www.github.com/Tosox/Destiny.ut", nullptr, nullptr, SW_SHOW);
 					ImGui::Spacing();
 					ImGui::Text("Credits");
 					ImGui::Separator();
