@@ -7,11 +7,6 @@
 
 > This is not a ready-to-use cheat and as such it is highly recommended that you do not use this
 
-## Notes
-> **Note**
-> Working on this project has been a lot of fun, and I learned a lot in the process.
-> My knowledge and my code style has improved notably since I started with this project, so thank you to everyone who helped me.
-
 ## Disclaimer
 This program is for educational purposes only!
 
